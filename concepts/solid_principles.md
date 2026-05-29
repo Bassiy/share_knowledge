@@ -5,17 +5,26 @@
 
 ## 理解したこと
 
-| 原則 | 正式名 | 一言 |
+| 原則 | 正式名 | 一言（自分の言葉） |
 |--|--|--|
-| S | 単一責任（SRP） | 1つのものは1つのことだけやれ |
-| O | 開放閉鎖（OCP） | 拡張には開いて、修正には閉じろ |
-| L | リスコフ置換（LSP） | 親クラスは子クラスで置き換えられるべき |
-| I | インタフェース分離（ISP） | 使わないものに依存させるな |
-| D | 依存性逆転（DIP） | 具体ではなく抽象に依存しろ |
+| S | 単一責任（SRP） | 修正時の影響範囲を最小限にするための、クラスの切り分けの話 |
+| O | 開放閉鎖（OCP） | 最小限の変更で拡張できるようにしろ。手段はコンポジション×インターフェース |
+| L | リスコフ置換（LSP） | 拡張ではなく塗り替えをするな。Is-a でも使い方の約束を守れ |
+| I | インターフェース分離（ISP） | インターフェースは細切れにしろ。盛り込んだら具体クラスと変わらん |
+| D | 依存性逆転（DIP） | プロパティの型をクラス型ではなくインターフェース型にして、柔軟に付け替えられるようにしろ |
 
 - 最初から完璧に適用しなくていい
 - 「なんか関数が複雑になってきたな」と感じたときに参照する
-- 今すぐ意識したい2つ：**SRP**（状態と性質を分ける）と**DRY**（同じコードを書くな）
+
+### OCPとDIPの関係
+似ているが焦点が異なる。
+
+| | 何の話か | 焦点 |
+|---|---|---|
+| OCP | 設計の目標 | 既存コードを変えずに拡張できる状態にしろ |
+| DIP | 依存の方向 | 具体ではなく抽象に依存しろ |
+
+DIP は OCP を実現するための手段の1つ。「インターフェース型で持つ（DIP）」をやった結果として「新しい実装を追加しても既存コードを変えなくていい（OCP）」が手に入る。
 
 ### SRPの本質：「長時間露光で見る原則」
 よくある誤解は「1クラス1機能」という静止画的な解釈。
@@ -35,15 +44,73 @@ OrderService の例
 - 「機能の数」で分割するのではなく「変更を要求してくる人の種類」で分割する
 - CQRSのCommand/Query分離もSRPで正当化できる（変更理由が違う）
 
+### OCPの本質：拡張に開いて、修正に閉じる
+新しい機能を追加するとき、既存コードを変えなくていい状態にしろという原則。
+
+```csharp
+// Laser を追加しても Turret も foreach も変えなくていい
+class Laser : IAttackable {
+    public void Attack() { Console.WriteLine("レーザー発射！"); }
+}
+new Turret(new Laser());
+```
+
+実現手段はコンポジション×インターフェース。インターフェースで型を統一しておくことで、新しい実装を追加するだけで拡張できる。
+
+### LSPの本質：約束を守れ
+子クラスは親クラスの代わりに使っても壊れてはいけない。Is-a の関係があっても、呼び出し側の期待まで守れていなければLSP違反。
+
+```csharp
+Rectangle r = new Square();
+r.Width = 4;
+r.Height = 5;
+Console.WriteLine(r.Area());  // 20 を期待 → 25 が返る（塗り替えが起きている）
+```
+
+Square は数学的には Rectangle の一種だが、Width を変えると Height も変わるという**親にはなかったルールを上書き**してしまった。継承の本来の目的は「拡張」であり、「塗り替え」ではない。
+
+### ISPの本質：インターフェースは細切れにしろ
+使わないメソッドを実装させるな。盛り込みすぎたインターフェースは具体クラスと変わらない。
+
+```csharp
+// ❌ 太りすぎ
+interface IWorker { void Work(); void Eat(); void Sleep(); }
+class Robot : IWorker {
+    public void Work() { ... }
+    public void Eat() { throw new NotImplementedException(); }
+    public void Sleep() { throw new NotImplementedException(); }
+}
+
+// ✅ 細切れにする
+interface IWorkable { void Work(); }
+class Robot : IWorkable { public void Work() { ... } }
+```
+
+### DIPの本質：抽象に依存しろ
+プロパティの型をクラス型ではなくインターフェース型にすることで、上位が下位の具体を知らなくていい状態にする。
+
+```csharp
+// ❌ 具体に依存
+private Sword _weapon;
+
+// ✅ 抽象に依存
+private readonly IAttackable _attacker;
+```
+
+詳細 → [dependency_inversion.md](dependency_inversion.md)
+
 ## 関連概念
-- state_vs_property.md（SRPの具体例）
+- composition（OCPとDIPの実現手段）
+- oop_interface（ISPとDIPの土台）
 - dependency_inversion.md（DIPの詳細）
+- state_vs_property.md（SRPの具体例）
 - separation_of_concerns.md（SRPの基盤となる考え方）
 - cqrs.md（SRPの観点でCommand/Query分離を正当化できる）
 
 ## ソース
 - 2026-03-06・会話から
 - 2026-03-17・会話から（SRPのアクターベース理解を追記）
+- 2026-05-30・会話から（O・L・I・D の深掘りを追記）
 
 ## タグ
 設計原則, SOLID, オブジェクト指向, ソフトウェア設計
