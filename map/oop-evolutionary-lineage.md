@@ -140,3 +140,11 @@ SOLIDは後付けの命名であり、OOPの実践から自然に浮かび上が
 
 ## ソース
 - 2026-05-30：/study → /connect での壁打ちから発見
+
+## 関連概念
+- [oop_encapsulation.md](../concepts/oop_encapsulation.md) — OOP（カプセル化）
+- [inheritance.md](../concepts/inheritance.md) — OOP（継承）
+- [composition.md](../concepts/composition.md) — OOP（コンポジション）
+- [oop_interface.md](../concepts/oop_interface.md) — OOP（インターフェース）
+- [polymorphism.md](../concepts/polymorphism.md) — OOP（ポリモーフィズム）
+- [solid_principles.md](../concepts/solid_principles.md) — 設計原則
