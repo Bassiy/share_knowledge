@@ -116,10 +116,38 @@ sequenceDiagram
     hero-->>caller: 完了
 ```
 
+## 継承の問題点
+
+**① いらないものがついてくる**
+親クラスのメソッドはすべて子に引き継がれる。必要なものだけ選ぶことはできない。
+
+```csharp
+class Turret : Character {
+    // Attack() が欲しいだけなのに
+    // Move(), Eat(), Sleep() もついてくる — 消せない
+}
+```
+
+**② 親の変更が子を壊す（密結合）**
+子のコードを一行も変えていないのに、親を変えるだけで子の挙動が変わる。
+
+```csharp
+class Character {
+    public virtual void Attack() {
+        Move();       // ← 後から追加
+        DealDamage();
+    }
+}
+// Turret は変更なし → でも Attack() を呼ぶと Move() が走る → 想定外の挙動
+```
+
+これらが問題になる場合は → [composition.md](composition.md)
+
 ## 関連概念
 - oop_interface
 - polymorphism
 - oop_encapsulation
+- composition
 
 ## ソース
 - 2026-05-17：会話ベースの整理（C# .NET を題材に）
