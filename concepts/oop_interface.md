@@ -108,7 +108,6 @@ foreach (IUsable item in items) {
 ## 関連概念
 - inheritance
 - polymorphism
-- dependency_inversion
 
 ## ソース
 - 2026-05-17：会話ベースの整理（C# .NET を題材に）

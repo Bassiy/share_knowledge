@@ -29,7 +29,6 @@ Infrastructure層（DB・外部API）← Repository実装・SQL
 ## 関連概念
 - cqrs.md（読み取りの限界をCQRSで補う）
 - solid_principles.md（DIPがRepository設計の基盤）
-- dependency_inversion.md（Repository I/FをDomain層に置く理由）
 - separation_of_concerns.md
 
 ## ソース
