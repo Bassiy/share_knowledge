@@ -6,7 +6,7 @@
 ## 図
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["① カプセル化\nデータと操作をまとめる"]
     --> B["② 継承 Is-a\n共通部分を親クラスに"]
     B -->|"密結合・不要な引き継ぎ"| C
