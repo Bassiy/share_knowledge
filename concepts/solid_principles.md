@@ -97,7 +97,22 @@ private Sword _weapon;
 private readonly IAttackable _attacker;
 ```
 
-詳細 → [dependency_inversion.md](dependency_inversion.md)
+**依存の方向：**
+```
+上位 → 抽象（インターフェース） ← 具体実装A
+                               ← 具体実装B
+```
+上位と具体の両方が抽象を向く。これが「逆転」という名前の由来。
+
+**テスト文脈での強み：**
+インターフェース型で受け取る設計にしておくと、本番用オブジェクトとフェイク（テスト用の簡易実装）を自由に差し替えられる。
+
+```csharp
+// 本番
+var service = new OrderService(new EmailNotifier());
+// テスト（メールが飛ばない）
+var service = new OrderService(new FakeNotifier());
+```
 
 ## 関連概念
 - composition（OCPとDIPの実現手段）
