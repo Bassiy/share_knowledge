@@ -65,7 +65,6 @@ graph TD
 ## 関連概念
 - ddd.md（DDDをやると自然にCQRSが必要になる）
 - solid_principles.md（SRPの観点でもCommand/Query分離は正当化できる）
-- dependency_inversion.md（QueryService I/FをApplication層に置く理由）
 
 ## ソース
 - 2026-03-17・https://zenn.dev/135yshr/articles/9e3ec9a7d52c98
