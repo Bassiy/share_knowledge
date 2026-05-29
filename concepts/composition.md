@@ -57,7 +57,6 @@ class Turret {
 - inheritance
 - oop_interface
 - polymorphism
-- dependency_inversion
 
 ## ソース
 - 2026-05-30：会話ベースの整理（C# .NET を題材に）

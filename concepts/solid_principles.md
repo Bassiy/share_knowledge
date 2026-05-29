@@ -117,7 +117,6 @@ var service = new OrderService(new FakeNotifier());
 ## 関連概念
 - composition（OCPとDIPの実現手段）
 - oop_interface（ISPとDIPの土台）
-- dependency_inversion.md（DIPの詳細）
 - state_vs_property.md（SRPの具体例）
 - separation_of_concerns.md（SRPの基盤となる考え方）
 - cqrs.md（SRPの観点でCommand/Query分離を正当化できる）
