@@ -25,7 +25,6 @@ def can_convert(file_type, state):
 
 ## 関連概念
 - solid_principles.md（SRP：単一責任の原則）
-- dependency_inversion.md
 
 ## ソース
 - 2026-03-06・Zenn「状態と性質を区別して考える」
