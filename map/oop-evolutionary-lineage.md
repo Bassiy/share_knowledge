@@ -23,7 +23,6 @@ flowchart TD
 - [oop_interface.md](../concepts/oop_interface.md) — OOP（インターフェース）
 - [polymorphism.md](../concepts/polymorphism.md) — OOP（ポリモーフィズム）
 - [solid_principles.md](../concepts/solid_principles.md) — 設計原則
-- [dependency_inversion.md](../concepts/dependency_inversion.md) — 設計原則（DIP）
 
 ## 構造
 
