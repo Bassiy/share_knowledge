@@ -27,14 +27,6 @@ flowchart TD
 | ⑥ ポリモーフィズム | 呼び出し側が実体を知らなくていい | ⑤の結果として自然に手に入る性質 |
 | ⑦ SOLID | 経験の形式化 | 実践の知恵を原則として言語化した |
 
-## 関連概念
-- [oop_encapsulation.md](../concepts/oop_encapsulation.md) — OOP（カプセル化）
-- [inheritance.md](../concepts/inheritance.md) — OOP（継承）
-- [composition.md](../concepts/composition.md) — OOP（コンポジション）
-- [oop_interface.md](../concepts/oop_interface.md) — OOP（インターフェース）
-- [polymorphism.md](../concepts/polymorphism.md) — OOP（ポリモーフィズム）
-- [solid_principles.md](../concepts/solid_principles.md) — 設計原則
-
 ## 構造
 
 ### ① オブジェクト（クラス） — 出発点
