@@ -125,6 +125,7 @@ var service = new OrderService(new FakeNotifier());
 - 2026-03-06・会話から
 - 2026-03-17・会話から（SRPのアクターベース理解を追記）
 - 2026-05-30・会話から（O・L・I・D の深掘りを追記）
+- 2026-05-30・https://qiita.com/baby-degu/items/d058a62f145235a0f007
 
 ## タグ
 設計原則, SOLID, オブジェクト指向, ソフトウェア設計
