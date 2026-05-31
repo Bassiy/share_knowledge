@@ -79,10 +79,10 @@ CPU・メモリ・ストレージには圧倒的な速度格差がある。メ�
 概念ER図は「現実の関係性を整理したもの」、論理ER図は「それをDBに乗せられる形に翻訳したもの」。翻訳なので内容は変わらず、言葉だけが変わる。
 
 ## 関連概念
-- dbms
-- normalization
-- database_models
-- three_layer_schema
+- dbms（物理設計はDBMS固有のDDLに最も依存する）
+- normalization（論理設計で正規化し、物理設計でそのトレードオフを判断する）
+- database_models（RDB/NoSQLの選択が論理設計の構造に影響する）
+- three_layer_schema（概念・論理・物理の各ステップがそれぞれのスキーマ層に対応する）
 
 ## ソース
 - 2026-05-24：達人DB 第1章
