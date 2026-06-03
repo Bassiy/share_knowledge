@@ -125,8 +125,8 @@ flowchart LR
     dp["パリティp Dp"]
   end
 
-  classDef parityP fill:#f9c,stroke:#c66
-  classDef parityQ fill:#adf,stroke:#36c
+  classDef parityP fill:#f9c,stroke:#c66,color:#000
+  classDef parityQ fill:#adf,stroke:#36c,color:#000
   class ap,bp,cp,dp parityP
   class aq,bq,cq,dq parityQ
 ```
