@@ -41,12 +41,12 @@ SSDの内部素子はNANDフラッシュメモリだが、役割としては補�
 ```mermaid
 flowchart LR
   subgraph D1["Disk 1"]
-    a1["A1"]
-    b1["B1"]
+    a1["データ A1"]
+    b1["データ B1"]
   end
   subgraph D2["Disk 2"]
-    a2["A2"]
-    b2["B2"]
+    a2["データ A2"]
+    b2["データ B2"]
   end
 ```
 
@@ -57,12 +57,12 @@ flowchart LR
 ```mermaid
 flowchart LR
   subgraph D1["Disk 1"]
-    a1["A"]
-    b1["B"]
+    a1["データ A"]
+    b1["データ B"]
   end
   subgraph D2["Disk 2"]
-    a2["A"]
-    b2["B"]
+    a2["データ A"]
+    b2["データ B"]
   end
 ```
 
@@ -75,19 +75,19 @@ flowchart LR
 ```mermaid
 flowchart LR
   subgraph D1["Disk 1"]
-    a1["A1"]
-    b1["B1"]
-    cp["Cp"]
+    a1["データ A1"]
+    b1["データ B1"]
+    cp["パリティ Cp"]
   end
   subgraph D2["Disk 2"]
-    a2["A2"]
-    bp["Bp"]
-    c1["C1"]
+    a2["データ A2"]
+    bp["パリティ Bp"]
+    c1["データ C1"]
   end
   subgraph D3["Disk 3"]
-    ap["Ap"]
-    b2["B2"]
-    c2["C2"]
+    ap["パリティ Ap"]
+    b2["データ B2"]
+    c2["データ C2"]
   end
 
   classDef parity fill:#f9c,stroke:#c66
@@ -101,28 +101,28 @@ RAID5のパリティを2本分（p・q）に増やした構成。2本同時故�
 ```mermaid
 flowchart LR
   subgraph D1["Disk 1"]
-    a1["A1"]
-    b1["B1"]
-    cp["Cp"]
-    dq["Dq"]
+    a1["データ A1"]
+    b1["データ B1"]
+    cp["パリティp Cp"]
+    dq["パリティq Dq"]
   end
   subgraph D2["Disk 2"]
-    a2["A2"]
-    bp["Bp"]
-    cq["Cq"]
-    d1["D1"]
+    a2["データ A2"]
+    bp["パリティp Bp"]
+    cq["パリティq Cq"]
+    d1["データ D1"]
   end
   subgraph D3["Disk 3"]
-    ap["Ap"]
-    bq["Bq"]
-    c1["C1"]
-    d2["D2"]
+    ap["パリティp Ap"]
+    bq["パリティq Bq"]
+    c1["データ C1"]
+    d2["データ D2"]
   end
   subgraph D4["Disk 4"]
-    aq["Aq"]
-    b2["B2"]
-    c2["C2"]
-    dp["Dp"]
+    aq["パリティq Aq"]
+    b2["データ B2"]
+    c2["データ C2"]
+    dp["パリティp Dp"]
   end
 
   classDef parityP fill:#f9c,stroke:#c66
@@ -140,18 +140,18 @@ flowchart LR
   subgraph RAID0["RAID0（ストライピング）"]
     subgraph G1["RAID1 グループ1"]
       subgraph D1["Disk 1"]
-        a1["A"]
+        a1["データ A"]
       end
       subgraph D2["Disk 2"]
-        a2["A"]
+        a2["データ A"]
       end
     end
     subgraph G2["RAID1 グループ2"]
       subgraph D3["Disk 3"]
-        b1["B"]
+        b1["データ B"]
       end
       subgraph D4["Disk 4"]
-        b2["B"]
+        b2["データ B"]
       end
     end
   end
