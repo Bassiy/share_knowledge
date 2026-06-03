@@ -36,12 +36,24 @@ graph TD
     Test -->|成功| Build
 ```
 
+## セキュリティリスク（TanStack事件より）
+CI/CDパイプライン自体が攻撃対象になりうる。特にキャッシュは「信頼境界をまたぐ」ため危険。
+
+| リスク | 内容 | 対策 |
+|--------|------|------|
+| pull_request_target の悪用 | fork PR でも secret にアクセスできるトリガー。マージ前でも実行される | fork PR では secret を渡さない設計にする |
+| キャッシュ汚染 | untrusted な PR ビルドのキャッシュが release ビルドに流用されると悪性コードが混入 | PR用とrelease用でキャッシュキーを分離する |
+| 権限の過剰付与 | `id-token: write` を全 job に付与すると OIDC トークンをどの job でも奪取可能 | publish job のみに限定する |
+
 ## 関連概念
 - cloud_infrastructure
 - harness_engineering（自動化・フィードバックループの思想が共通）
+- github_actions_security（GitHub Actions 固有のセキュリティ詳細）
+- supply_chain_attack（CI/CDが踏み台になるワーム型攻撃）
 
 ## ソース
 - 2026-03-08・https://zenn.dev/so_engineer/articles/728f4336a0aac4
+- 2026-06-03・https://zenn.dev/trknhr/articles/69c01c843329d0
 
 ## タグ
-CI/CD, 自動化, デプロイ, Cloud Build, GitHub Actions, 開発フロー
+CI/CD, 自動化, デプロイ, Cloud Build, GitHub Actions, 開発フロー, セキュリティ
