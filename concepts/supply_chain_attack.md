@@ -18,15 +18,30 @@
 | ワーム型（最新） | CI/CDを踏み台に正規パスで公開→感染端末から次のパッケージへ自己増殖（TanStack 2026/05） | キャッシュ分離・権限最小化・依存遅延更新 |
 
 ### TanStack事件（Mini Shai-Hulud）の攻撃フロー
-```
-fork PR 送信（悪性スクリプト入り）
-  → pull_request_target で CI 実行（secret アクセスあり）
-  → pnpm キャッシュを汚染 → actions/cache に保存
-  → release workflow が汚染キャッシュを復元
-  → マルウェア発火 → OIDC トークン奪取
-  → 正規の trusted publishing で悪性パッケージを npm 公開
-  → npm install したユーザーの認証情報を窃取
-  → 盗んだトークンで別パッケージにも感染（ワーム化）
+
+```mermaid
+flowchart TD
+    subgraph P1["Phase 1：侵入・汚染（公式リポジトリ側）"]
+        A["攻撃者\nfork PR 送信（悪性スクリプト入り）"]
+        --> B["pull_request_target で CI 実行\n本体の secret にアクセス可・マージ不要"]
+        --> C["pnpm キャッシュを悪性コードで上書き\nactions/cache に保存"]
+        --> D["release workflow が\n汚染キャッシュを復元"]
+        --> E["マルウェア発火\nOIDC エンドポイントに正規リクエスト"]
+        --> F["OIDC トークン奪取\n正規トークンを攻撃者へ送信"]
+    end
+
+    subgraph P2["Phase 2：公開（npm）"]
+        F --> G["悪性パッケージを npm 公開\n正規署名（SLSA）付き・公式ページに掲載"]
+    end
+
+    subgraph P3["Phase 3：感染・ワーム化（ユーザー側）"]
+        G --> H["開発者が npm install\nGit 履歴は正常・署名も正規"]
+        H --> I["postinstall / import 時にマルウェア発火\nAWSキー・GitHubトークン・SSH秘密鍵を窃取"]
+        I --> J["盗んだトークンで\n被害者の別パッケージにも同じマルウェアを仕込む"]
+        J --> K["次の被害者へ自動増殖\n無限連鎖"]
+    end
+
+    K -->|"ワーム化"| A
 ```
 
 ### 「信頼の連鎖が武器にされた」構造
