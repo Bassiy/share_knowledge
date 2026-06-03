@@ -41,10 +41,12 @@ SSDの内部素子はNANDフラッシュメモリだが、役割としては補�
 ```mermaid
 flowchart LR
   subgraph D1["Disk 1"]
+    direction TB
     a1["データ A1"]
     b1["データ B1"]
   end
   subgraph D2["Disk 2"]
+    direction TB
     a2["データ A2"]
     b2["データ B2"]
   end
@@ -57,10 +59,12 @@ flowchart LR
 ```mermaid
 flowchart LR
   subgraph D1["Disk 1"]
+    direction TB
     a1["データ A"]
     b1["データ B"]
   end
   subgraph D2["Disk 2"]
+    direction TB
     a2["データ A"]
     b2["データ B"]
   end
@@ -75,16 +79,19 @@ flowchart LR
 ```mermaid
 flowchart LR
   subgraph D1["Disk 1"]
+    direction TB
     a1["データ A1"]
     b1["データ B1"]
     cp["パリティ Cp"]
   end
   subgraph D2["Disk 2"]
+    direction TB
     a2["データ A2"]
     bp["パリティ Bp"]
     c1["データ C1"]
   end
   subgraph D3["Disk 3"]
+    direction TB
     ap["パリティ Ap"]
     b2["データ B2"]
     c2["データ C2"]
@@ -101,24 +108,28 @@ RAID5のパリティを2本分（p・q）に増やした構成。2本同時故�
 ```mermaid
 flowchart LR
   subgraph D1["Disk 1"]
+    direction TB
     a1["データ A1"]
     b1["データ B1"]
     cp["パリティp Cp"]
     dq["パリティq Dq"]
   end
   subgraph D2["Disk 2"]
+    direction TB
     a2["データ A2"]
     bp["パリティp Bp"]
     cq["パリティq Cq"]
     d1["データ D1"]
   end
   subgraph D3["Disk 3"]
+    direction TB
     ap["パリティp Ap"]
     bq["パリティq Bq"]
     c1["データ C1"]
     d2["データ D2"]
   end
   subgraph D4["Disk 4"]
+    direction TB
     aq["パリティq Aq"]
     b2["データ B2"]
     c2["データ C2"]
@@ -140,17 +151,21 @@ flowchart LR
   subgraph RAID0["RAID0（ストライピング）"]
     subgraph G1["RAID1 グループ1"]
       subgraph D1["Disk 1"]
+        direction TB
         a1["データ A"]
       end
       subgraph D2["Disk 2"]
+        direction TB
         a2["データ A"]
       end
     end
     subgraph G2["RAID1 グループ2"]
       subgraph D3["Disk 3"]
+        direction TB
         b1["データ B"]
       end
       subgraph D4["Disk 4"]
+        direction TB
         b2["データ B"]
       end
     end
