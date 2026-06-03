@@ -90,7 +90,7 @@ flowchart LR
     c2["データ C2"]
   end
 
-  classDef parity fill:#f9c,stroke:#c66
+  classDef parity fill:#f9c,stroke:#c66,color:#000
   class ap,bp,cp parity
 ```
 
