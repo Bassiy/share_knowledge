@@ -6,30 +6,38 @@ GitHub Actions の設計ミスや誤設定が、CI/CDパイプライン全体を
 ## 理解したこと
 
 ### pull_request_target の危険性
-```
-通常の pull_request トリガー：
-  fork PR のコードを隔離環境で実行 → secret にアクセスできない（安全）
 
-pull_request_target トリガー：
-  fork PR でも本体の secret にアクセスしながら実行できる（危険）
-  → fork 側の悪性コードが本体の権限で動く
-```
-「マージしていないから安全」という前提が崩れる。
+| | `pull_request` | `pull_request_target` |
+|--|--|--|
+| fork PR の実行環境 | 隔離（本体と切り離し） | 本体の権限で実行 |
+| secret へのアクセス | 不可（安全） | 可能（危険） |
+| マージ前でも発火するか | する | する |
+
+「マージしていないから安全」という前提が崩れる。fork 側の悪性コードが本体の権限で動く。
 
 ### キャッシュ汚染（Cache Poisoning）
-```
-1. fork PR の CI 実行時に pnpm/npm キャッシュを悪性コードで上書き
-2. actions/cache に保存（キャッシュキーが同じなら release workflow も参照する）
-3. release workflow がキャッシュを復元 → 悪性バイナリが混入
-4. ビルド中にマルウェア発火
-```
+
 **原則：キャッシュは信頼境界をまたぐ。untrusted な PR と release で絶対に共有しない。**
 
+```mermaid
+flowchart LR
+    A["fork PR の CI 実行\n悪性スクリプトが起動"]
+    --> B["pnpm/npm キャッシュを\n悪性コードで上書き"]
+    --> C["actions/cache に保存\n（キャッシュキーが共通）"]
+    --> D["release workflow が\n同じキャッシュを復元"]
+    --> E["ビルド中に\nマルウェア発火"]
+```
+
 ### OIDC Trusted Publishing の悪用
-- 本来：GitHub Actions の OIDC トークンで npm/PyPI へパスワードなしで publish できる安全な仕組み
-- 悪用：パイプライン内でマルウェアが OIDC エンドポイントに正規リクエストを投げてトークンを取得し、悪性パッケージを「公式」として publish
+
+| | 本来の用途 | 悪用パターン |
+|--|--|--|
+| 何をするか | GitHub Actions の ID で npm/PyPI に publish | マルウェアが OIDC エンドポイントに正規リクエストを投げトークン取得 |
+| パスワード | 不要（安全な設計） | 不要（攻撃者にとっても不要） |
+| 結果 | 正規パッケージの安全な公開 | 悪性パッケージを「公式」として publish |
 
 ### SLSA Provenance の限界
+
 | SLSA が保証すること | SLSA が保証しないこと |
 |--------------------|----------------------|
 | どのリポジトリ・ワークフローでビルドされたか | ビルド環境が健全であること |
