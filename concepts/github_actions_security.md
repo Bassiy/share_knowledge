@@ -20,7 +20,7 @@ GitHub Actions の設計ミスや誤設定が、CI/CDパイプライン全体を
 **原則：キャッシュは信頼境界をまたぐ。untrusted な PR と release で絶対に共有しない。**
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["fork PR の CI 実行\n悪性スクリプトが起動"]
     --> B["pnpm/npm キャッシュを\n悪性コードで上書き"]
     --> C["actions/cache に保存\n（キャッシュキーが共通）"]
