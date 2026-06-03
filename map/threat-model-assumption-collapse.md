@@ -3,12 +3,7 @@
 ## 捉えるもの
 セキュリティ設計は「想定した攻撃者像・攻撃手段・攻撃速度」の範囲内でしか有効でない。その前提が技術の進化や環境の変化によって崩れると、正しく設計されたはずの仕組みが無効化される。
 
-## 関連概念
-- [short_lived_token.md](../concepts/short_lived_token.md) — 人間スケールの漏洩を前提とした設計
-- [github_actions_security.md](../concepts/github_actions_security.md) — 機械スケールの攻撃で前提が崩れた事例
-- [supply_chain_attack.md](../concepts/supply_chain_attack.md) — 信頼の連鎖が武器になったパターン
-
-## 構造
+## 前提崩壊のパターン
 
 ### 共通パターン
 
@@ -37,7 +32,7 @@
 | 前提を再設計する | 「前提が崩れること」を前提にする | ゼロトラスト（内側でも検証する） |
 | 多層防御にする | 一つの前提に依存しない | short_lived_token + IP制限 + 最小権限の3点セット |
 
-## 図
+### フロー
 
 ```mermaid
 flowchart TD
@@ -48,3 +43,14 @@ flowchart TD
     C --> E["再設計\n（崩れを前提に組み込む）"]
     C --> F["多層防御\n（一つの前提に依存しない）"]
 ```
+
+## ソース
+- 2026-06-03・/deep-dive → /connect での壁打ちから発見
+
+## 関連概念
+- [short_lived_token.md](../concepts/short_lived_token.md) — 人間スケールの漏洩を前提とした設計
+- [github_actions_security.md](../concepts/github_actions_security.md) — 機械スケールの攻撃で前提が崩れた事例
+- [supply_chain_attack.md](../concepts/supply_chain_attack.md) — 信頼の連鎖が武器になったパターン
+
+## タグ
+セキュリティ, 脅威モデル, 設計思想, ゼロトラスト, 多層防御, サプライチェーン攻撃
