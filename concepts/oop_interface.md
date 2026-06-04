@@ -64,12 +64,18 @@ ISpeakable dog = new Dog() // OK。型はISpeakable、実体はDog
 
 ### 型で見える範囲が決まる
 
-`ISpeakable` 型の変数は `Speak()` しか見えない。実体が `Dog` で `Fetch()` を持っていても呼べない。
+変数の型がアクセスできる範囲を決める。実体が何かは関係ない。
 
 ```csharp
-ISpeakable dog = new Dog();
-dog.Speak();  // OK
-dog.Fetch();  // コンパイルエラー。ISpeakableにFetch()は定義されていない
+Dog dog1        = new Dog(); // 変数の型: Dog       → Speak()もFetch()も見える
+ISpeakable dog2 = new Dog(); // 変数の型: ISpeakable → Speak()しか見えない
+```
+
+実体は同じ `Dog` のインスタンス。型が違うだけで見える世界が変わる。
+
+```csharp
+dog2.Speak();  // OK
+dog2.Fetch();  // コンパイルエラー。ISpeakableにFetch()は定義されていない
 ```
 
 ---
