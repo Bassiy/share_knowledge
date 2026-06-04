@@ -4,6 +4,12 @@ class Program
 {
     static void Main()
     {
+        // ❌ 誤解しやすい：ISpeakable 型の変数に Dog インスタンスは代入できない
+        // ✅ 正しくは：できる。変数の型が ISpeakable なだけで、実体は Dog のまま
+        //    ISpeakable dog = new Dog(); → 型: ISpeakable、実体: Dog
+        //    Dog dog        = new Dog(); → 型: Dog、       実体: Dog
+        //    同じ実体でも、型が違うだけで見えるメソッドが変わる
+
         // 「実装する」と「型として使う」は別の話
         // 実装する  → クラスが「この型の仲間です」と登録する行為（作る側）
         // 型として使う → 「仲間ならまとめて扱える入れ物」を作る行為（使う側）
