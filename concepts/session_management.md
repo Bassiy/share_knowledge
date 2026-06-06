@@ -125,9 +125,9 @@ if (HttpContext.Session.GetString("login") != "ok")
 ---
 
 ### 外部セッションストア（分散環境での推奨解決策）
-分散環境でのセッション消失問題と解決策1（IPハッシュ）は `load_balancer.md` を参照。
 
-ステートレス設計に移行し、全サーバー共通の外部ストアにセッション情報を保存する。実装・SPOF問題・対策の詳細は `redis.md` を参照。
+- セッション消失問題・解決策1（IPハッシュ）→ `load_balancer.md`
+- 外部ストアの実装・SPOF問題・対策 → `redis.md`
 
 ---
 
