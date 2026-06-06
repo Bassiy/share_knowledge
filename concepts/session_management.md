@@ -43,10 +43,31 @@ sequenceDiagram
 
 セッションIDはサーバーが生成し、`Set-Cookie` ヘッダーでブラウザに渡す。ブラウザはもらったIDを保管して送り返すだけ。
 
-```
-① ページにアクセス → サーバーが abc123 を生成 → Set-Cookie でブラウザに渡す（中身は空）
-② ログイン成功    → セッションストアにユーザー情報を書き込む（紐づけ）
-③ 次のリクエスト  → ブラウザが abc123 を自動送信 → サーバーがストアを引く
+```mermaid
+sequenceDiagram
+    box ブラウザ
+        participant B as ブラウザ
+    end
+    box サーバー
+        participant S as アプリ
+        participant St as セッションストア
+    end
+
+    Note over B,St: ① ページにアクセス（ログイン前）
+    B->>S: GET /home
+    S->>St: abc123 を生成（中身は空）
+    S-->>B: Set-Cookie: session_id=abc123
+
+    Note over B,St: ② ログイン成功
+    B->>S: POST /login（ユーザー名＋パスワード）
+    S->>St: abc123 に user_name="田中" を書き込む
+    S-->>B: ログイン成功
+
+    Note over B,St: ③ 次のリクエスト
+    B->>S: GET /mypage（Cookie: session_id=abc123）
+    S->>St: abc123 を照会
+    St-->>S: { user_name: 田中 }
+    S-->>B: マイページを返す
 ```
 
 セッションIDはログイン前から存在するが、**ユーザー情報と紐づいた abc123** をブラウザが持つのはログイン成功後。
