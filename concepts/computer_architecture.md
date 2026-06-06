@@ -23,8 +23,6 @@ flowchart TB
     subgraph 入力系
         IN[入力装置]
     end
-
-    
 ```
 
 処理の主戦場は **主記憶装置（RAM）↔ CPU** の2つ。
