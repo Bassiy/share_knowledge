@@ -127,45 +127,7 @@ if (HttpContext.Session.GetString("login") != "ok")
 ### 外部セッションストア（分散環境での推奨解決策）
 分散環境でのセッション消失問題と解決策1（IPハッシュ）は `load_balancer.md` を参照。
 
-ステートレス設計に移行し、セッション情報を全サーバーから共通アクセスできる外部ストア（Redis等）に保存する。
-
-```mermaid
-sequenceDiagram
-    box ユーザー
-        participant U as ブラウザ
-    end
-    box インフラ
-        participant LB as ロードバランサー
-    end
-    box サーバー
-        participant A as サーバーA
-        participant B as サーバーB
-        participant R as Redis
-    end
-
-    Note over U,R: ① ログイン
-    U->>LB: ログインリクエスト
-    LB->>A: 振り分け
-    A->>R: セッション書き込み（session_id=abc123）
-    A-->>U: Set-Cookie: session_id=abc123
-
-    Note over U,R: ② 次のリクエスト（別サーバーに振られる）
-    U->>LB: リクエスト（Cookie: session_id=abc123）
-    LB->>B: 振り分け
-    B->>R: セッションID照会
-    R-->>B: ログイン済み確認
-    B-->>U: ページ表示
-```
-
----
-
-### RedisのSPOF（単一障害点）問題
-Redisが停止すると全ユーザーのセッション情報が消え、全員強制ログアウトになる。
-
-対策：
-- **レプリケーション**：スレーブRedisを用意し、メイン障害時に切り替える
-- **Redis Cluster**：データを複数ノードに分散し、1台停止でもカバーできる
-- **マネージドサービス**：AWS ElastiCache等を使うとクラウド側が冗長化を管理してくれる
+ステートレス設計に移行し、全サーバー共通の外部ストアにセッション情報を保存する。実装・SPOF問題・対策の詳細は `redis.md` を参照。
 
 ---
 
