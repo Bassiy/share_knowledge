@@ -15,6 +15,7 @@ flowchart TB
 
     subgraph 処理系
         subgraph CPU
+            detection TB
             ALU[演算装置]
             CTL[制御装置]
         end
