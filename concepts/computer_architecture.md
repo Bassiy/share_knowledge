@@ -17,6 +17,7 @@ flowchart TB
         subgraph CPU
             ALU[演算装置]
             CTL[制御装置]
+            CTL ~~~ ALU
         end
         MEM[主記憶装置]
         AUX[補助記憶装置]
