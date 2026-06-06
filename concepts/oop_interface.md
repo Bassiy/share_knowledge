@@ -137,6 +137,11 @@ foreach (var r in runners) { r.Run(); }
 
 C#では `I` プレフィックス＋PascalCaseが規約。形は2種類：
 
+| 用語 | 意味 | 例 |
+|---|---|---|
+| `I` プレフィックス | Interface の I。名前の先頭に付けて「インターフェースである」と示す | `ISpeakable` の `I` |
+| PascalCase | 単語の先頭を大文字にする命名規則 | `Speakable`、`UserService`、`MyClass` |
+
 | パターン | 使う場面 | 例 |
 |---|---|---|
 | `I + 動詞able` | 能力・機能を表す | IDisposable, IEnumerable, IComparable |
