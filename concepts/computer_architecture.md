@@ -14,8 +14,10 @@ flowchart TB
     end
 
     subgraph 処理系
-        ALU[演算装置]
-        CTL[制御装置]
+        subgraph CPU
+            ALU[演算装置]
+            CTL[制御装置]
+        end
         MEM[主記憶装置]
         AUX[補助記憶装置]
     end
