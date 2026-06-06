@@ -9,8 +9,8 @@
 
 ```mermaid
 flowchart TB
-    subgraph 入力系
-        IN[入力装置]
+    subgraph 出力系
+        OUT[出力装置]
     end
 
     subgraph 処理系
@@ -20,9 +20,11 @@ flowchart TB
         AUX[補助記憶装置]
     end
 
-    subgraph 出力系
-        OUT[出力装置]
+    subgraph 入力系
+        IN[入力装置]
     end
+
+    
 ```
 
 処理の主戦場は **主記憶装置（RAM）↔ CPU** の2つ。
