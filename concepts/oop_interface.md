@@ -164,6 +164,9 @@ IDisposable   d = new UserService(); // 破棄できるもののポジション
 - inheritance（継承は縦のIs-a関係。インターフェースの横のCan-do関係と対をなす）
 - polymorphism（インターフェースはポリモーフィズムの前提条件。型を統一することで実体が何かを意識せず扱える）
 
+## 関連実装
+- [csharp_interface](../coding/csharp_interface/) — C#でインターフェースを実際に実装して動作確認
+
 ## ソース
 - 2026-05-17：会話ベースの整理（C# .NET を題材に）
 - 2026-06-04：/code セッション（csharp_interface）
