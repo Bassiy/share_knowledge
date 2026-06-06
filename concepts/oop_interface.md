@@ -1,7 +1,3 @@
----
-coding: coding/csharp_interface
----
-
 # インターフェース（OOP）
 
 ## 概要
