@@ -139,8 +139,14 @@ foreach (var r in runners) { r.Run(); }
 
 ### 命名慣習
 
-`I + 動詞able` の形が慣習（`ISpeakable`, `IRunnable`, `IUsable`）。
-`IAnimal` のような名詞形はスーパークラスっぽく見えるのでNG。
+C#では `I` プレフィックス＋PascalCaseが規約。形は2種類：
+
+| パターン | 使う場面 | 例 |
+|---|---|---|
+| `I + 動詞able` | 能力・機能を表す | IDisposable, IEnumerable, IComparable |
+| `I + 名詞` | 役割・抽象型を表す | IRepository, ILogger, IService |
+
+現場（ASP.NET Core等）では名詞形のほうが頻出。`IAnimal` は教材例として使われるが、`IRepository` のような役割名が実際の使い方に近い。
 
 ---
 
