@@ -3,7 +3,9 @@
 ## 概要
 「AはBの一種（Is-a関係）」を表す仕組み。親クラスのプロパティ・メソッドをサブクラスが引き継ぐ。C# は単一継承のみ（親クラスは1つ）。
 
-## 継承ツリー
+## 理解したこと
+
+### 継承ツリー
 
 ```mermaid
 classDiagram
@@ -23,7 +25,9 @@ classDiagram
     }
 ```
 
-## クラスの種類
+---
+
+### クラスの種類
 
 | | 通常クラス | 抽象クラス | インターフェース |
 |---|---|---|---|
@@ -32,7 +36,9 @@ classDiagram
 | 親の数 | 1つ | 1つ | 複数可 |
 | 関係性 | Is-a | Is-a | Can-do |
 
-## virtual vs abstract
+---
+
+### virtual vs abstract
 
 | | virtual | abstract |
 |---|---|---|
@@ -40,7 +46,9 @@ classDiagram
 | override | 任意 | 強制 |
 | インスタンス化 | 可 | 不可 |
 
-## メソッド呼び出しの流れ（virtual / override）
+---
+
+### メソッド呼び出しの流れ（virtual / override）
 
 ```mermaid
 flowchart TD
@@ -49,7 +57,9 @@ flowchart TD
     B -->|No| D["Character の virtual Attack() を実行"]
 ```
 
-## base キーワード
+---
+
+### base キーワード
 
 親のコンストラクタを子クラスから呼ぶ仕組み。共通の初期化処理を親に一箇所まとめられる。
 
@@ -69,7 +79,9 @@ class Hero : Character {
 }
 ```
 
-## インスタンスのイメージ
+---
+
+### インスタンスのイメージ
 
 継承したインスタンスは「親を先に生成し、子で包む」構造になっている。
 サブクラス視点では、自分全体が `this`、内包する親が `base`。
@@ -86,7 +98,9 @@ flowchart TD
     end
 ```
 
-## コンストラクタの実行順
+---
+
+### コンストラクタの実行順
 
 `new Hero()` を呼んだとき、`base`（親）から順に初期化が走る。
 
@@ -100,7 +114,9 @@ sequenceDiagram
     h-->>caller: Hero インスタンス完成
 ```
 
-## base.メソッド名() による親処理の活用
+---
+
+### base.メソッド名() による親処理の活用
 
 `override` の中で `base.Attack()` を呼ぶと、親の実装を活かしつつ子固有の処理を追加できる。
 
@@ -116,9 +132,10 @@ sequenceDiagram
     hero-->>caller: 完了
 ```
 
-## 継承の問題点
+---
 
-**① いらないものがついてくる**
+### 継承の問題①：不要なメソッドがついてくる
+
 親クラスのメソッドはすべて子に引き継がれる。必要なものだけ選ぶことはできない。
 
 ```csharp
@@ -128,7 +145,10 @@ class Turret : Character {
 }
 ```
 
-**② 親の変更が子を壊す（密結合）**
+---
+
+### 継承の問題②：親の変更が子を壊す（密結合）
+
 子のコードを一行も変えていないのに、親を変えるだけで子の挙動が変わる。
 
 ```csharp
@@ -143,14 +163,16 @@ class Character {
 
 これらが問題になる場合は → [composition.md](composition.md)
 
+---
+
 ## 関連概念
-- oop_interface
-- polymorphism
-- oop_encapsulation
-- composition
+- oop_interface（継承は縦のIs-a関係。インターフェースの横のCan-do関係と対をなす）
+- polymorphism（virtual/overrideによる振る舞いの切り替えがポリモーフィズムを実現する）
+- oop_encapsulation（継承によりサブクラスがアクセス修飾子の影響を受ける。protectedの意味が生まれる）
+- composition（継承の問題点を解決する代替設計）
 
 ## ソース
-- 2026-05-17：会話ベースの整理（C# .NET を題材に）
+- 2026-05-17・会話ベースの整理（C# .NET を題材に）
 
 ## タグ
 継承, OOP, C#, abstract, virtual, override, base, Is-a, this
