@@ -148,6 +148,20 @@ C#では `I` プレフィックス＋PascalCaseが規約。形は2種類：
 
 現場（ASP.NET Core等）では名詞形のほうが頻出。`IAnimal` は教材例として使われるが、`IRepository` のような役割名が実際の使い方に近い。
 
+名詞系インターフェースの本質は「ポジションの絞り込み」。
+大元のオブジェクトに複数の名詞系インターフェースを実装することで、オブジェクトが一つでありながら複数のポジションとして振る舞える。
+見るべき実装は大元のクラスに集約されていて、インターフェースはそこへの「見え方の窓口」でしかない。
+
+```csharp
+class UserService : IUserService, IDisposable
+{
+    // 実装はすべてここに集約
+}
+
+IUserService  s = new UserService(); // ユーザー操作のポジション
+IDisposable   d = new UserService(); // 破棄できるもののポジション
+```
+
 ---
 
 ## 関連概念
