@@ -26,13 +26,13 @@
 JSON は「データ交換フォーマット（書き方のルール）」であり DBMSではない。ドキュメント型DBがJSON/BSON形式でデータを保存するのとは区別する。
 
 ## 関連概念
-- dbms
-- normalization
-- impedance_mismatch
+- dbms（各DBモデルにはそれぞれ対応したDBMSが存在する）
+- normalization（正規化理論はリレーショナルモデルに基づく）
+- impedance_mismatch（正規化されたRDB構造とオブジェクト指向の構造のミスマッチを生む）
 
 ## ソース
-- 2026-05-20：達人DB 第1章
-- 2026-05-22：達人DB 第1章（/study セッションによる補完）
+- 2026-05-20・達人DB 第1章
+- 2026-05-22・達人DB 第1章（/study セッションによる補完）
 
 ## タグ
 データベースモデル, RDB, OODB, NoSQL, ドキュメント型, 階層型, JSON, ACID, スキーマ
