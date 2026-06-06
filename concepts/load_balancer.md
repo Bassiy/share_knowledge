@@ -45,6 +45,7 @@ graph TD
 
 ## 関連概念
 - session_management.md（セッション消失問題の解決策2以降：外部ストア・Redis・JWTの設計）
+- redis.md（セッション消失問題の解決策2で使う外部ストア）
 - ssl_tls.md
 
 ## ソース
