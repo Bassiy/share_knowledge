@@ -41,7 +41,7 @@ sequenceDiagram
     box サーバー
         participant A as サーバーA
         participant B as サーバーB
-        participant R as Redis
+        participant R as Redisサーバ
     end
 
     U->>LB: リクエスト（Cookie: session_id=abc123）
