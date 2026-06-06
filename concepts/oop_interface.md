@@ -168,8 +168,8 @@ IDisposable   d = new UserService(); // 破棄できるもののポジション
 - [csharp_interface](../coding/csharp_interface/) — C#でインターフェースを実際に実装して動作確認
 
 ## ソース
-- 2026-05-17：会話ベースの整理（C# .NET を題材に）
-- 2026-06-04：/code セッション（csharp_interface）
+- 2026-05-17・会話ベースの整理（C# .NET を題材に）
+- 2026-06-04・/code セッション（csharp_interface）
 
 ## タグ
 インターフェース, OOP, C#, Can-do, Is-a, 依存性, ポリモーフィズム, 抽象型
