@@ -27,10 +27,6 @@ flowchart TB
         IN[入力装置]
     end
 
-    IN --> MEM
-    MEM <--> ALU
-    MEM --> OUT
-    MEM <--> AUX
 ```
 
 処理の主戦場は **主記憶装置（RAM）↔ CPU** の2つ。
