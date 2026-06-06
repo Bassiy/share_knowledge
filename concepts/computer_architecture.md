@@ -8,14 +8,12 @@
 ### 構成と役割
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph 入力系
-        direction TB
         IN[入力装置]
     end
 
     subgraph 処理系
-        direction TB
         ALU[演算装置]
         CTL[制御装置]
         MEM[主記憶装置]
@@ -23,7 +21,6 @@ flowchart LR
     end
 
     subgraph 出力系
-        direction TB
         OUT[出力装置]
     end
 ```
