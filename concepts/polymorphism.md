@@ -4,7 +4,9 @@
 同じ命令（メソッド呼び出し）を送っても、受け手の実体によって振る舞いが自動的に変わる性質。
 語源：ギリシャ語「多くの（poly）」＋「形態（morphic）」
 
-## 実現方法
+## 理解したこと
+
+### 実現方法
 
 | | インターフェース経由 | 抽象クラス経由 | 通常継承（virtual）経由 |
 |---|---|---|---|
@@ -13,7 +15,9 @@
 | 関係性 | Can-do（横） | Is-a（縦） | Is-a（縦） |
 | 例 | `Potion` も `Bomb` も `Use()` | `Hero` / `Monster` が `Attack()` を必ず実装 | `Hero` が `Character.Attack()` を上書き |
 
-## ポリモーフィズムなし vs あり
+---
+
+### ポリモーフィズムなし vs あり
 
 **なし（型を毎回チェックする必要がある）**
 ```csharp
@@ -31,7 +35,9 @@ foreach (IUsable item in items) {
 }
 ```
 
-## 呼び出しの流れ
+---
+
+### 呼び出しの流れ
 
 ```mermaid
 sequenceDiagram
@@ -47,7 +53,9 @@ sequenceDiagram
     s-->>caller: 魔法発動
 ```
 
-## コンパイル時 vs 実行時の型
+---
+
+### コンパイル時 vs 実行時の型
 
 ```mermaid
 flowchart LR
@@ -66,13 +74,15 @@ flowchart LR
 
 `List<IUsable>` と宣言することで「Use() が使える」とコンパイル時に保証し、実行時には中身が何であれ正しいメソッドが呼ばれる。
 
+---
+
 ## 関連概念
-- oop_interface
-- inheritance
-- oop_encapsulation
+- oop_interface（インターフェースはポリモーフィズムの前提。型を統一することで実体を意識せずに扱える）
+- inheritance（virtual/overrideを通じてポリモーフィズムの一形態を実現する）
+- oop_encapsulation（内部実装を隠しながら統一インターフェースで扱う組み合わせ）
 
 ## ソース
-- 2026-05-17：会話ベースの整理（C# .NET を題材に）
+- 2026-05-17・会話ベースの整理（C# .NET を題材に）
 
 ## タグ
 ポリモーフィズム, OOP, C#, 多態性, virtual, override, interface, 型
