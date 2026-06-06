@@ -9,21 +9,19 @@
 
 ```mermaid
 flowchart TD
-    IN[入力装置]
-    OUT[出力装置]
-    MEM[主記憶装置\nRAM / ROM]
-    AUX[補助記憶装置\nSSD / HDD]
+    IN[入力装置] --> MEM
+    MEM --> OUT[出力装置]
+    MEM[主記憶装置\nRAM / ROM] <--> AUX[補助記憶装置\nSSD / HDD]
 
     subgraph CPU
-        CTL[制御装置]
+        CTL[制御装置\n司令塔]
         ALU[演算装置]
         REG[レジスタ]
     end
 
-    IN --> CTL
-    CTL --> OUT
     CTL <--> MEM
     CTL <--> AUX
+    CTL --- ALU
     MEM <--> ALU
     ALU <--> REG
 ```
