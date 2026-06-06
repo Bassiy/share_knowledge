@@ -8,22 +8,21 @@
 ### 構成と役割
 
 ```mermaid
-flowchart TD
-    IN[入力装置] --> MEM
-    MEM --> OUT[出力装置]
-    MEM[主記憶装置\nRAM / ROM] <--> AUX[補助記憶装置\nSSD / HDD]
-
-    subgraph CPU
-        CTL[制御装置\n司令塔]
-        ALU[演算装置]
-        REG[レジスタ]
+flowchart LR
+    subgraph 入力系
+        IN[入力装置]
     end
 
-    CTL <--> MEM
-    CTL <--> AUX
-    CTL --- ALU
-    MEM <--> ALU
-    ALU <--> REG
+    subgraph 処理系
+        ALU[演算装置]
+        CTL[制御装置]
+        MEM[主記憶装置]
+        AUX[補助記憶装置]
+    end
+
+    subgraph 出力系
+        OUT[出力装置]
+    end
 ```
 
 処理の主戦場は **主記憶装置（RAM）↔ CPU** の2つ。
