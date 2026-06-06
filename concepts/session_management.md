@@ -92,6 +92,14 @@ sequenceDiagram
 
 ---
 
+### HttpContext.Session とセッションストアの関係（ASP.NET Core）
+
+`HttpContext.Session` はサーバーRAMへのアクセス窓口（オブジェクト）。
+
+裏側の置き場所（セッションストア）は `AddDistributedMemoryCache()` で設定され、デフォルトはサーバー自身のRAM。
+
+---
+
 ### ログインフラグパターン（ASP.NET Core）
 
 入門的な実装では、ユーザー名とは別に明示的なログインフラグを持つことがある：
