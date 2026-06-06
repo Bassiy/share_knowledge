@@ -50,6 +50,7 @@ SSH鍵認証と混同しやすい（どちらも「安全な認証」という�
 - personal_access_token.md
 - cloud_infrastructure.md（GCPでの権限借用の実例）
 - threat-model-assumption-collapse（人間スケールの漏洩前提が機械スケール攻撃で崩れた事例）
+- session_management.md（JWTの無効化問題でセッション管理と繋がる）
 
 ## ソース
 - 2026-03-08・Zenn「「.env見るな」は通じない－AI時代のシークレット管理術」
