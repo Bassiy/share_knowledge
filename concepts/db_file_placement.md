@@ -49,11 +49,35 @@ DBのファイルはすべてディスク（補助記憶装置）に置く。
 
 理想はファイル種別ごとに専用ディスクを1本ずつ用意することだが、コスト制約のある現実では優先度に基づき妥協する。
 
-| 優先度 | 配置方針 | 理由 |
-|---|---|---|
-| 分散優先 | データ・インデックスは個別ディスク | クエリのたびにアクセス集中 |
-| 同居可能 | システム＋ログを同じディスク | どちらもI/Oが相対的に少ない |
-| 妥協（影響大） | インデックス＋一次ファイルを同じディスク | 両方ともクエリのたびに頻繁アクセス |
+```mermaid
+flowchart LR
+  subgraph ideal["理想（5本）"]
+    direction TB
+    a1["Disk 1\nデータ"]
+    a2["Disk 2\nインデックス"]
+    a3["Disk 3\n一次"]
+    a4["Disk 4\nシステム"]
+    a5["Disk 5\nログ"]
+  end
+
+  subgraph comp1["妥協①（4本）影響小"]
+    direction TB
+    b1["Disk 1\nデータ"]
+    b2["Disk 2\nインデックス"]
+    b3["Disk 3\n一次"]
+    b4["Disk 4\nシステム＋ログ"]
+  end
+
+  subgraph comp2["妥協②（3本）影響大"]
+    direction TB
+    c1["Disk 1\nデータ"]
+    c2["Disk 2\nインデックス＋一次"]
+    c3["Disk 3\nシステム＋ログ"]
+  end
+
+  classDef merged fill:#f9c,stroke:#c66,color:#000
+  class b4,c2,c3 merged
+```
 
 ---
 
