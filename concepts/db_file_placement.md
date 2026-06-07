@@ -27,6 +27,20 @@ DBのファイルはすべてディスク（補助記憶装置）に置く。
 
 ディスクが1本しかなければ、同時アクセスが集中したとき**順番待ち**が発生しボトルネックになる。複数の物理ディスクに分散させることで、このI/Oを並列化する。
 
+```mermaid
+flowchart LR
+  subgraph bad["1本 → 順番待ち"]
+    direction TB
+    bq["クエリA / B / C"] --> bd[("Disk")]
+  end
+  subgraph good["複数 → 並列"]
+    direction TB
+    ga["クエリA"] --> gd1[("Disk 1")]
+    gb["クエリB"] --> gd2[("Disk 2")]
+    gc["クエリC"] --> gd3[("Disk 3")]
+  end
+```
+
 ---
 
 ### 論理分離 ≠ 物理分散
