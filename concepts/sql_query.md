@@ -234,6 +234,64 @@ GO
 
 ---
 
+### サンプルテーブル
+
+このファイルの例をすべて実行できる仮テーブル。
+
+```sql
+CREATE TABLE m_post (
+    post_id   INT PRIMARY KEY,
+    post_name TEXT NOT NULL
+);
+
+CREATE TABLE m_company (
+    company_id   INT PRIMARY KEY,
+    company_name TEXT NOT NULL,
+    area_id      INT,
+    area_name    TEXT
+);
+
+CREATE TABLE m_person (
+    person_id    SERIAL PRIMARY KEY,
+    person_lname TEXT NOT NULL,
+    dept_id      INT,
+    status       TEXT,
+    company_id   INT REFERENCES m_company(company_id),
+    post_id      INT REFERENCES m_post(post_id),
+    age          INT
+);
+```
+
+```sql
+INSERT INTO m_post VALUES
+    (1, '社員'),
+    (2, '主任'),
+    (3, '部長'),
+    (6, '相談役');   -- UPDATE例で '顧問' に変更される
+
+INSERT INTO m_company VALUES
+    (1, '東京株式会社',       1, '東京'),
+    (2, '株式会社B',          1, '東京'),
+    (3, '大阪商事株式会社',   2, '大阪'),
+    (4, '関西株式会社',       2, '大阪'),
+    (5, 'テスト株式会社',     2, '大阪'),
+    (6, '中部株式会社',       3, '名古屋'),
+    (7, '名古屋物産株式会社', 3, '名古屋'),
+    (8, '九州株式会社',       4, '福岡');
+
+INSERT INTO m_person (person_lname, dept_id, status, company_id, post_id, age) VALUES
+    ('田中', 3, '在籍中', 1, 1, 28),
+    ('鈴木', 3, '在籍中', 2, 2, 30),
+    ('佐藤', 3, '退職',   3, 1, 42),
+    ('高橋', 5, '在籍中', 4, 3, 25),
+    ('伊藤', 5, '在籍中', 5, 2, 35),
+    ('渡辺', 5, '在籍中', 6, 1, 29),
+    ('山本', 1, '在籍中', 7, 3, 38),
+    ('中村', 2, '在籍中', 8, 1, 22);
+```
+
+---
+
 ### 用語早見表
 
 | 用語 | 意味 |
