@@ -69,13 +69,17 @@ LIKE のパターン：
 
 ```sql
 -- 昇順（デフォルト）
-ORDER BY person_lname ASC;
+ORDER BY
+    person_lname ASC;
 
 -- 降順
-ORDER BY person_lname DESC;
+ORDER BY
+    person_lname DESC;
 
 -- 複数フィールドで指定
-ORDER BY dept_id ASC, person_lname DESC;
+ORDER BY
+    dept_id ASC,
+    person_lname DESC;
 ```
 
 ---
