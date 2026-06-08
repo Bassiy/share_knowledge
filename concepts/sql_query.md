@@ -94,12 +94,19 @@ ORDER BY
 | `HAVING` | グループ化**後** | 集計結果を絞り込む |
 
 ```sql
-SELECT dept_id, COUNT(*) AS 社員数
-FROM m_person
-WHERE status = '在籍中'
-GROUP BY dept_id
-HAVING COUNT(*) >= 2
-ORDER BY COUNT(*) DESC;
+SELECT
+    dept_id,
+    COUNT(*) AS 社員数
+FROM
+    m_person
+WHERE
+    status = '在籍中'
+GROUP BY
+    dept_id
+HAVING
+    COUNT(*) >= 2
+ORDER BY
+    COUNT(*) DESC;
 ```
 
 ---
