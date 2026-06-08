@@ -55,22 +55,31 @@ FROM
 | `LIKE` | あいまい検索 | `company_name LIKE '%株式会社%'` |
 
 ```sql
-SELECT
-    person_lname
-FROM
-    m_person
-WHERE
-    dept_id = 3 AND status = '在籍中';
+-- 基本
+SELECT person_lname FROM m_person WHERE dept_id = 3;
+
+-- 比較演算子（!= と <> は同じ）
+WHERE age != 30
+WHERE age <> 30
+
+-- 論理演算子
+WHERE dept_id = 3 AND status = '在籍中'
+WHERE dept_id = 3 OR dept_id = 5
+WHERE NOT post_id = 3
+
+-- IN演算子（複数候補のどれかと一致）
+WHERE company_id IN (2, 5);
+
+-- BETWEEN演算子（範囲指定、両端を含む）
+WHERE company_id BETWEEN 4 AND 8;
+
+-- LIKE演算子（あいまい検索）
+WHERE company_name LIKE '%株式会社%';
+--   'A%'    : Aで始まる
+--   '%A'    : Aで終わる
+--   '%A%'   : Aを含む
+--   'B%A%'  : Bで始まり、Aを含む
 ```
-
-LIKE のパターン：
-
-| パターン | 意味 |
-|---|---|
-| `'A%'` | Aで始まる |
-| `'%A'` | Aで終わる |
-| `'%A%'` | Aを含む |
-| `'B%A%'` | Bで始まり、Aを含む |
 
 ---
 
