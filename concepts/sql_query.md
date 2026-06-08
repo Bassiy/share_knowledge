@@ -54,6 +54,15 @@ FROM
 | `BETWEEN` | 範囲指定（両端含む） | `company_id BETWEEN 4 AND 8` |
 | `LIKE` | あいまい検索 | `company_name LIKE '%株式会社%'` |
 
+```sql
+SELECT
+    person_lname
+FROM
+    m_person
+WHERE
+    dept_id = 3 AND status = '在籍中';
+```
+
 LIKE のパターン：
 
 | パターン | 意味 |
