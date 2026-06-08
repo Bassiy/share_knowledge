@@ -32,9 +32,9 @@ FROM
 
 -- エイリアス（ヘッダ名を変える）
 SELECT
-    person_lname AS 苗字
+    title AS タイトル
 FROM
-    m_person;
+    m_album;
 
 -- ※ SELECT * は原則NG（重くなる・後から追加した列の影響を受ける）
 --   COUNT(*) の * は例外（行数を数えるための決まり文句）
@@ -48,33 +48,33 @@ FROM
 
 | 演算子 | 用途 | 例 |
 |---|---|---|
-| `=` `!=` `<>` | 一致・不一致（`!=` と `<>` は同じ） | `age != 30` |
-| `AND` `OR` `NOT` | 論理演算 | `dept_id = 3 AND status = '在籍中'` |
-| `IN` | 複数候補のどれかと一致 | `company_id IN (2, 5)` |
-| `BETWEEN` | 範囲指定（両端含む） | `company_id BETWEEN 4 AND 8` |
-| `LIKE` | あいまい検索 | `company_name LIKE '%株式会社%'` |
+| `=` `!=` `<>` | 一致・不一致（`!=` と `<>` は同じ） | `price != 3000` |
+| `AND` `OR` `NOT` | 論理演算 | `label_id = 3 AND status = '販売中'` |
+| `IN` | 複数候補のどれかと一致 | `artist_id IN (2, 5)` |
+| `BETWEEN` | 範囲指定（両端含む） | `artist_id BETWEEN 4 AND 8` |
+| `LIKE` | あいまい検索 | `artist_name LIKE '%Band%'` |
 
 ```sql
 -- 基本
-SELECT person_lname FROM m_person WHERE dept_id = 3;
+SELECT title FROM m_album WHERE label_id = 3;
 
 -- 比較演算子（!= と <> は同じ）
-WHERE age != 30
-WHERE age <> 30
+WHERE price != 3000
+WHERE price <> 3000
 
 -- 論理演算子
-WHERE dept_id = 3 AND status = '在籍中'
-WHERE dept_id = 3 OR dept_id = 5
-WHERE NOT post_id = 3
+WHERE label_id = 3 AND status = '販売中'
+WHERE label_id = 3 OR label_id = 5
+WHERE NOT genre_id = 3
 
 -- IN演算子（複数候補のどれかと一致）
-WHERE company_id IN (2, 5);
+WHERE artist_id IN (2, 5);
 
 -- BETWEEN演算子（範囲指定、両端を含む）
-WHERE company_id BETWEEN 4 AND 8;
+WHERE artist_id BETWEEN 4 AND 8;
 
 -- LIKE演算子（あいまい検索）
-WHERE company_name LIKE '%株式会社%';
+WHERE artist_name LIKE '%Band%';
 --   'A%'    : Aで始まる
 --   '%A'    : Aで終わる
 --   '%A%'   : Aを含む
@@ -88,16 +88,16 @@ WHERE company_name LIKE '%株式会社%';
 ```sql
 -- 昇順（デフォルト）
 ORDER BY
-    person_lname ASC;
+    title ASC;
 
 -- 降順
 ORDER BY
-    person_lname DESC;
+    title DESC;
 
 -- 複数フィールドで指定
 ORDER BY
-    dept_id ASC,
-    person_lname DESC;
+    label_id ASC,
+    title DESC;
 ```
 
 ---
@@ -113,31 +113,31 @@ ORDER BY
 
 ```sql
 -- COUNT（レコード数を数える）
-SELECT COUNT(*) AS cnt FROM m_company;
+SELECT COUNT(*) AS cnt FROM m_artist;
 ```
 
 ```sql
 -- GROUP BY（グループ化してからCOUNT）
 SELECT
-    area_id,
-    area_name,
+    country_id,
+    country_name,
     COUNT(*) AS cnt
 FROM
-    m_company
+    m_artist
 GROUP BY
-    area_id, area_name;
+    country_id, country_name;
 ```
 
 ```sql
 -- HAVING（グループ化した結果をさらに絞り込む）
 SELECT
-    area_id,
-    area_name,
+    country_id,
+    country_name,
     COUNT(*) AS cnt
 FROM
-    m_company
+    m_artist
 GROUP BY
-    area_id, area_name
+    country_id, country_name
 HAVING
     COUNT(*) >= 2;
 ```
@@ -157,26 +157,26 @@ HAVING
 ```sql
 -- 2テーブル結合
 SELECT
-    t1.person_lname,
-    t2.company_name
+    t1.title,
+    t2.artist_name
 FROM
-    m_person t1
+    m_album t1
 INNER JOIN
-    m_company t2 ON t1.company_id = t2.company_id;
+    m_artist t2 ON t1.artist_id = t2.artist_id;
 ```
 
 ```sql
 -- 3テーブル結合
 SELECT
-    t1.person_lname,
-    t2.company_name,
-    t3.post_name
+    t1.title,
+    t2.artist_name,
+    t3.genre_name
 FROM
-    m_person t1
+    m_album t1
 INNER JOIN
-    m_company t2 ON t1.company_id = t2.company_id
+    m_artist t2 ON t1.artist_id = t2.artist_id
 INNER JOIN
-    m_post t3 ON t1.post_id = t3.post_id;
+    m_genre t3 ON t1.genre_id = t3.genre_id;
 ```
 
 ---
@@ -187,12 +187,12 @@ SELECT文を `()` で括って入れ子にする。複数の処理を1つの命�
 
 ```sql
 SELECT
-    company_id,
-    company_name
+    artist_id,
+    artist_name
 FROM
-    m_company
+    m_artist
 WHERE
-    company_id IN (SELECT company_id FROM m_person);
+    artist_id IN (SELECT artist_id FROM m_album);
 ```
 
 ---
@@ -206,6 +206,17 @@ DELETE/UPDATE の前に同じ WHERE 条件で SELECT して対象を確認する
 | INSERT | `INSERT INTO テーブル(col1, col2) VALUES(val1, val2);` |
 | UPDATE | `UPDATE テーブル SET col = val WHERE 条件;` |
 | DELETE | `DELETE FROM テーブル WHERE 条件;` |
+
+```sql
+-- INSERT（レコード挿入）
+INSERT INTO m_genre(genre_id, genre_name) VALUES(4, 'Jazz');
+
+-- UPDATE（レコード更新）
+UPDATE m_genre SET genre_name = 'Ambient' WHERE genre_id = 6;
+
+-- DELETE（レコード削除）
+DELETE FROM m_genre WHERE genre_id = 4;
+```
 
 ---
 
@@ -238,91 +249,91 @@ GO
 
 このファイルの例をすべて実行できる仮テーブル。
 
-**m_post**
+**m_genre**
 
-| post_id | post_name |
-|---------|-----------|
-| 1 | 社員 |
-| 2 | 主任 |
-| 3 | 部長 |
-| 6 | 相談役 |
+| genre_id | genre_name |
+|----------|------------|
+| 1 | Pop |
+| 2 | Rock |
+| 3 | Classical |
+| 6 | Electronic |
 
-**m_company**
+**m_artist**
 
-| company_id | company_name | area_id | area_name |
-|------------|--------------|---------|-----------|
-| 1 | 東京株式会社 | 1 | 東京 |
-| 2 | 株式会社B | 1 | 東京 |
-| 3 | 大阪商事株式会社 | 2 | 大阪 |
-| 4 | 関西株式会社 | 2 | 大阪 |
-| 5 | テスト株式会社 | 2 | 大阪 |
-| 6 | 中部株式会社 | 3 | 名古屋 |
-| 7 | 名古屋物産株式会社 | 3 | 名古屋 |
-| 8 | 九州株式会社 | 4 | 福岡 |
+| artist_id | artist_name | country_id | country_name |
+|-----------|-------------|------------|--------------|
+| 1 | Echo Band | 1 | 日本 |
+| 2 | Luna Project | 1 | 日本 |
+| 3 | Nova Sound | 2 | アメリカ |
+| 4 | Sky Orchestra | 2 | アメリカ |
+| 5 | Deep Groove | 2 | アメリカ |
+| 6 | Frost Music | 3 | ドイツ |
+| 7 | Amber Wave | 3 | ドイツ |
+| 8 | Coral Beats | 4 | フランス |
 
-**m_person**
+**m_album**
 
-| person_id | person_lname | dept_id | status | company_id | post_id | age |
-|-----------|-------------|---------|--------|------------|---------|-----|
-| 1 | 田中 | 3 | 在籍中 | 1 | 1 | 28 |
-| 2 | 鈴木 | 3 | 在籍中 | 2 | 2 | 30 |
-| 3 | 佐藤 | 3 | 退職 | 3 | 1 | 42 |
-| 4 | 高橋 | 5 | 在籍中 | 4 | 3 | 25 |
-| 5 | 伊藤 | 5 | 在籍中 | 5 | 2 | 35 |
-| 6 | 渡辺 | 5 | 在籍中 | 6 | 1 | 29 |
-| 7 | 山本 | 1 | 在籍中 | 7 | 3 | 38 |
-| 8 | 中村 | 2 | 在籍中 | 8 | 1 | 22 |
+| album_id | title | label_id | status | artist_id | genre_id | price |
+|----------|-------|----------|--------|-----------|----------|-------|
+| 1 | Sunrise | 3 | 販売中 | 1 | 1 | 2800 |
+| 2 | Moonlight | 3 | 販売中 | 2 | 2 | 3000 |
+| 3 | Dark Matter | 3 | 廃盤 | 3 | 1 | 3500 |
+| 4 | Aurora | 5 | 販売中 | 4 | 3 | 2500 |
+| 5 | Nebula | 5 | 販売中 | 5 | 2 | 3200 |
+| 6 | Glacier | 5 | 販売中 | 6 | 1 | 2900 |
+| 7 | Storm | 1 | 販売中 | 7 | 3 | 3800 |
+| 8 | Tide | 2 | 販売中 | 8 | 1 | 2200 |
 
 ```sql
-CREATE TABLE m_post (
-    post_id   INT PRIMARY KEY,
-    post_name TEXT NOT NULL
+CREATE TABLE m_genre (
+    genre_id   INT PRIMARY KEY,
+    genre_name TEXT NOT NULL
 );
 
-CREATE TABLE m_company (
-    company_id   INT PRIMARY KEY,
-    company_name TEXT NOT NULL,
-    area_id      INT,
-    area_name    TEXT
+CREATE TABLE m_artist (
+    artist_id   INT PRIMARY KEY,
+    artist_name TEXT NOT NULL,
+    country_id  INT,
+    country_name TEXT
 );
 
-CREATE TABLE m_person (
-    person_id    SERIAL PRIMARY KEY,
-    person_lname TEXT NOT NULL,
-    dept_id      INT,
-    status       TEXT,
-    company_id   INT REFERENCES m_company(company_id),
-    post_id      INT REFERENCES m_post(post_id),
-    age          INT
+CREATE TABLE m_album (
+    album_id  SERIAL PRIMARY KEY,
+    title     TEXT NOT NULL,
+    label_id  INT,
+    status    TEXT,
+    artist_id INT REFERENCES m_artist(artist_id),
+    genre_id  INT REFERENCES m_genre(genre_id),
+    price     INT
 );
 ```
 
 ```sql
-INSERT INTO m_post VALUES
-    (1, '社員'),
-    (2, '主任'),
-    (3, '部長'),
-    (6, '相談役');   -- UPDATE例で '顧問' に変更される
+INSERT INTO m_genre VALUES
+    (1, 'Pop'),
+    (2, 'Rock'),
+    (3, 'Classical'),
+    (6, 'Electronic');   -- UPDATE例で 'Ambient' に変更される
 
-INSERT INTO m_company VALUES
-    (1, '東京株式会社',       1, '東京'),
-    (2, '株式会社B',          1, '東京'),
-    (3, '大阪商事株式会社',   2, '大阪'),
-    (4, '関西株式会社',       2, '大阪'),
-    (5, 'テスト株式会社',     2, '大阪'),
-    (6, '中部株式会社',       3, '名古屋'),
-    (7, '名古屋物産株式会社', 3, '名古屋'),
-    (8, '九州株式会社',       4, '福岡');
+INSERT INTO m_artist VALUES
+    (1, 'Echo Band',      1, '日本'),
+    (2, 'Luna Project',   1, '日本'),
+    (3, 'Nova Sound',     2, 'アメリカ'),
+    (4, 'Sky Orchestra',  2, 'アメリカ'),
+    (5, 'Deep Groove',    2, 'アメリカ'),
+    (6, 'Frost Music',    3, 'ドイツ'),
+    (7, 'Amber Wave',     3, 'ドイツ'),
+    (8, 'Coral Beats',    4, 'フランス');
 
-INSERT INTO m_person (person_lname, dept_id, status, company_id, post_id, age) VALUES
-    ('田中', 3, '在籍中', 1, 1, 28),
-    ('鈴木', 3, '在籍中', 2, 2, 30),
-    ('佐藤', 3, '退職',   3, 1, 42),
-    ('高橋', 5, '在籍中', 4, 3, 25),
-    ('伊藤', 5, '在籍中', 5, 2, 35),
-    ('渡辺', 5, '在籍中', 6, 1, 29),
-    ('山本', 1, '在籍中', 7, 3, 38),
-    ('中村', 2, '在籍中', 8, 1, 22);
+INSERT INTO m_album (title, label_id, status, artist_id, genre_id, price) VALUES
+    ('Sunrise',     3, '販売中', 1, 1, 2800),
+    ('Moonlight',   3, '販売中', 2, 2, 3000),
+    ('Dark Matter', 3, '廃盤',   3, 1, 3500),
+    ('Aurora',      5, '販売中', 4, 3, 2500),
+    ('Nebula',      5, '販売中', 5, 2, 3200),
+    ('Glacier',     5, '販売中', 6, 1, 2900),
+    ('Storm',       1, '販売中', 7, 3, 3800),
+    ('Tide',        2, '販売中', 8, 1, 2200);
 ```
 
 ---
