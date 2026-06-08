@@ -114,7 +114,9 @@ ORDER BY
 ```sql
 -- COUNT（レコード数を数える）
 SELECT COUNT(*) AS cnt FROM m_company;
+```
 
+```sql
 -- GROUP BY（グループ化してからCOUNT）
 SELECT
     area_id,
@@ -124,7 +126,9 @@ FROM
     m_company
 GROUP BY
     area_id, area_name;
+```
 
+```sql
 -- HAVING（グループ化した結果をさらに絞り込む）
 SELECT
     area_id,
