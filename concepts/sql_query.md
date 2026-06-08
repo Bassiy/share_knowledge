@@ -123,15 +123,25 @@ ORDER BY
 
 ```sql
 -- 2テーブル結合
-SELECT t1.person_lname, t2.company_name
-FROM m_person t1
-INNER JOIN m_company t2 ON t1.company_id = t2.company_id;
+SELECT
+    t1.person_lname,
+    t2.company_name
+FROM
+    m_person t1
+INNER JOIN
+    m_company t2 ON t1.company_id = t2.company_id;
 
 -- 3テーブル結合
-SELECT t1.person_lname, t2.company_name, t3.post_name
-FROM m_person t1
-INNER JOIN m_company t2 ON t1.company_id = t2.company_id
-INNER JOIN m_post t3 ON t1.post_id = t3.post_id;
+SELECT
+    t1.person_lname,
+    t2.company_name,
+    t3.post_name
+FROM
+    m_person t1
+INNER JOIN
+    m_company t2 ON t1.company_id = t2.company_id
+INNER JOIN
+    m_post t3 ON t1.post_id = t3.post_id;
 ```
 
 ---
