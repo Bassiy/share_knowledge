@@ -163,7 +163,9 @@ FROM
     m_person t1
 INNER JOIN
     m_company t2 ON t1.company_id = t2.company_id;
+```
 
+```sql
 -- 3テーブル結合
 SELECT
     t1.person_lname,
