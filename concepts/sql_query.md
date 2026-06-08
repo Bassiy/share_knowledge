@@ -151,9 +151,13 @@ INNER JOIN
 SELECT文を `()` で括って入れ子にする。複数の処理を1つの命令にまとめられる。
 
 ```sql
-SELECT company_id, company_name
-FROM m_company
-WHERE company_id IN (SELECT company_id FROM m_person);
+SELECT
+    company_id,
+    company_name
+FROM
+    m_company
+WHERE
+    company_id IN (SELECT company_id FROM m_person);
 ```
 
 ---
