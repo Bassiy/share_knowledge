@@ -24,10 +24,17 @@
 
 ```sql
 -- 基本
-SELECT フィールド名1, フィールド名2 FROM テーブル名;
+SELECT
+    フィールド名1,
+    フィールド名2
+FROM
+    テーブル名;
 
 -- エイリアス（ヘッダ名を変える）
-SELECT person_lname AS 苗字 FROM m_person;
+SELECT
+    person_lname AS 苗字
+FROM
+    m_person;
 
 -- ※ SELECT * は原則NG（重くなる・後から追加した列の影響を受ける）
 --   COUNT(*) の * は例外（行数を数えるための決まり文句）
