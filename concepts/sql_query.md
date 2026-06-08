@@ -112,19 +112,30 @@ ORDER BY
 | `HAVING` | グループ化**後** | 集計結果を絞り込む |
 
 ```sql
+-- COUNT（レコード数を数える）
+SELECT COUNT(*) AS cnt FROM m_company;
+
+-- GROUP BY（グループ化してからCOUNT）
 SELECT
-    dept_id,
-    COUNT(*) AS 社員数
+    area_id,
+    area_name,
+    COUNT(*) AS cnt
 FROM
-    m_person
-WHERE
-    status = '在籍中'
+    m_company
 GROUP BY
-    dept_id
+    area_id, area_name;
+
+-- HAVING（グループ化した結果をさらに絞り込む）
+SELECT
+    area_id,
+    area_name,
+    COUNT(*) AS cnt
+FROM
+    m_company
+GROUP BY
+    area_id, area_name
 HAVING
-    COUNT(*) >= 2
-ORDER BY
-    COUNT(*) DESC;
+    COUNT(*) >= 2;
 ```
 
 ---
