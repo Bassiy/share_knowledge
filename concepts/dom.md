@@ -119,7 +119,7 @@ Document（ツリー全体の根）
 
 ### プロトタイプチェーンとの接点
 
-DOMの継承階層はJavaScriptのプロトタイプチェーンとして公開される。
+DOMの継承ツリーはJavaScriptのプロトタイプチェーンとして公開される。
 
 ```javascript
 const p = document.querySelector('p')
