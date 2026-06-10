@@ -24,6 +24,27 @@ flowchart LR
 
 ---
 
+### DAO と Entity の役割
+
+研修のプロジェクト構成では、Model内のDB関連処理をさらに分離している。
+
+| ディレクトリ | 役割 |
+|---|---|
+| `DAO/` | DBアクセス処理（SELECT・INSERT等）を担当するクラス群 |
+| `Entity/` | DBのレコードに対応するクラス定義。データの入れ物 |
+
+処理の流れ（パターンA）：
+
+```mermaid
+flowchart LR
+    C[Controller] --> D[DAO]
+    D --> E[Entity]
+    E --> D
+    D --> C
+```
+
+---
+
 ### ECサイトで見るMVC構造
 
 Modelは「1つの機能だけを担当するクラス（ServiceClass）」ではなく、**複数の機能を内包する大枠**。
