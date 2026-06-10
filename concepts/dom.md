@@ -58,7 +58,7 @@ flowchart TD
 
 ---
 
-### Node継承階層
+### 継承ツリー
 
 全オブジェクトは `Node` を継承しているため、`parentElement` や `children` などの共通プロパティが全タグで使える。
 
