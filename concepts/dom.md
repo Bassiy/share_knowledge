@@ -20,7 +20,7 @@ JavaScriptがDOMを**使う**、という関係。
 
 ### HTMLからDOMへの流れ
 
-HTMLファイルは変わらない。DOMはメモリ上の別物。
+HTMLファイルは変わらない。DOMはブラウザのRAM上に展開される別物。
 
 ```mermaid
 flowchart TD
