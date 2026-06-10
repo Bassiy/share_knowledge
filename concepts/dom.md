@@ -117,6 +117,20 @@ Document（ツリー全体の根）
 
 ---
 
+### DOM操作の起点はElementが基本
+
+現代のDOM操作はElementを起点にするのが基本で、AttrノードをDOM APIで直接触ることはほぼない。
+
+| アプローチ | コード例 | 使われ方 |
+|---|---|---|
+| Attrノードを直接触る | `element.attributes[0]` | 古い・ほぼ使わない |
+| Elementのメソッド経由 | `element.getAttribute('href')` | 現代の主流 |
+| Elementのプロパティ経由 | `element.id`, `element.className` | 現代の主流 |
+
+流れとしては「Documentを起点にElementを探し、そのプロパティでAttrの値を読む」。AttrはElementにくっついているものとして扱う。
+
+---
+
 ### プロトタイプチェーンとの接点
 
 DOMの継承ツリーはJavaScriptのプロトタイプチェーンとして公開される。
