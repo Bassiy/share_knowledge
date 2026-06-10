@@ -67,8 +67,8 @@ ECサイトのシステム
 │         └── ProductEntity  … 商品テーブルのレコードに対応するクラス
 │
 └── View（画面）
-     ├── product_detail.html  … 商品詳細画面
-     └── cart_list.html       … カート中身の一覧画面
+     ├── product_detail.cshtml  … 商品詳細画面
+     └── cart_list.cshtml       … カート中身の一覧画面
 ```
 
 ---
