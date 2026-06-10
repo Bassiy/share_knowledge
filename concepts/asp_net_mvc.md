@@ -58,15 +58,13 @@ ECサイトのシステム
 ├── Model（ロジックの集まり）
 │    ├── CartService    … カートに商品を追加する「計算・チェック」のクラス
 │    ├── StockManager   … 在庫を減らす「処理」のクラス
-│    └── CartData       … カート内の「データ」そのもの
-│
-├── DAO（DBアクセス）
-│    ├── CartDAO        … カート情報のDB操作
-│    └── ProductDAO     … 商品情報のDB操作
-│
-├── Entity（レコードの入れ物）
-│    ├── CartEntity     … カートテーブルのレコードに対応するクラス
-│    └── ProductEntity  … 商品テーブルのレコードに対応するクラス
+│    ├── CartData       … カート内の「データ」そのもの
+│    ├── DAO/
+│    │    ├── CartDAO        … カート情報のDB操作
+│    │    └── ProductDAO     … 商品情報のDB操作
+│    └── Entity/
+│         ├── CartEntity     … カートテーブルのレコードに対応するクラス
+│         └── ProductEntity  … 商品テーブルのレコードに対応するクラス
 │
 └── View（画面）
      ├── product_detail.html  … 商品詳細画面
