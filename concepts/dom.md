@@ -93,8 +93,9 @@ Element → HTMLElement → HTMLParagraphElement（<p>）
 Document（ツリー全体の根）
   └─ html（Element）
        └─ body（Element）
-            └─ div（Element）
-                 └─ p（Element）
+            └─ p（Element）
+                 ├─ class="note"（Attr）
+                 └─ "Hello"（Text）
 ```
 
 | 関係の種類 | 具体例 |
