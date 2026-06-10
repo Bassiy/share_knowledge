@@ -201,11 +201,19 @@ MVCは「操作する」というより「勝手に連鎖する」イメージ�
 
 ASP.NET MVCはSSRのフレームワーク。`.cshtml` はサーバー側で動き、完成したHTMLをブラウザに届ける。
 
-```
-【サーバー側（C#）】HTMLを組み立てて出荷
-        │
-        ▼（インターネット経由）
-【ブラウザ側（HTML/JS）】受け取ったHTMLをそのまま実行
+```mermaid
+sequenceDiagram
+    box ブラウザ
+        participant B as ブラウザ
+    end
+    box サーバー
+        participant S as ASP.NET MVC
+    end
+
+    B->>S: リクエスト
+    Note over S: C#でHTMLを組み立て
+    S-->>B: 完成済みHTML
+    Note over B: 受け取ったHTMLをそのまま実行
 ```
 
 JSONをブラウザに渡してブラウザ側でHTMLを組み立てるSPA（React等）との対比が明確。
