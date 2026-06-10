@@ -24,8 +24,9 @@ HTMLファイルは変わらない。DOMはブラウザのRAM上に展開され�
 
 ```mermaid
 flowchart TD
-    A["HTMLファイル（静的・変わらない）"]
-    -->|パース（一方通行）| B
+    subgraph サーバー
+        A["HTMLファイル（静的・変わらない）"]
+    end
 
     subgraph ブラウザ
         B["DOMツリー（RAM上・動的）"]
@@ -33,6 +34,8 @@ flowchart TD
         D -->|読み書き| B
         B -->|現在状態をもとに| C["描画（画面）"]
     end
+
+    A -->|取得・パース（一方通行）| B
 ```
 
 ---
