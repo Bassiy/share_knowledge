@@ -27,6 +27,7 @@ sequenceDiagram
 - application_layer_protocols（HTTPなどコンテンツを配信するプロトコルが属する層）
 - client_server_vs_p2p（静的・動的コンテンツはクライアント/サーバーモデルで配信される）
 - url（リクエスト先を特定するための識別子）
+- dom（サーバーから受け取ったHTMLをブラウザがDOMとして解釈・構築する）
 
 ## ソース
 - 2026-05-01：イラスト図解式ネットワークの基本 第5章
