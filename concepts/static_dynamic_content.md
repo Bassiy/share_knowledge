@@ -5,43 +5,61 @@ Webサーバーがクライアントに返すコンテンツの生成方式の�
 
 ## 理解したこと
 
-### 静的 vs 動的
+### 静的コンテンツ
 
-```mermaid
-sequenceDiagram
-    participant C as クライアント
-    participant S as サーバー
-
-    C->>S: リクエスト
-    Note over S: 静的：ファイルをそのまま返す
-    S-->>C: HTML・画像など
-
-    C->>S: リクエスト
-    Note over S: 動的：プログラムが動いて生成する
-    S-->>C: 検索結果・ログイン後の画面
-```
-
----
-
-### SSR vs SPA
-
-「どこでHTMLを組み立てるか」の違い。
+あらかじめ作ってあるファイルをそのまま返す。
 
 ```mermaid
 sequenceDiagram
     participant B as ブラウザ
     participant S as サーバー
 
-    Note over B,S: SSR（ASP.NET MVC等）
     B->>S: リクエスト
-    Note over S: サーバーでHTMLを組み立て
-    S-->>B: 完成済みHTML
+    Note over S: ファイルをそのまま返す
+    S-->>B: HTML・画像など
+```
 
-    Note over B,S: SPA（React等）
+---
+
+### 動的コンテンツ（SSR）
+
+リクエストのたびにサーバー側でHTMLを組み立てて返す。
+
+```mermaid
+sequenceDiagram
+    participant B as ブラウザ
+    participant S as サーバー
+
+    B->>S: リクエスト
+    Note over S: プログラムが動いてHTMLを生成
+    S-->>B: 完成済みHTML
+```
+
+---
+
+### 動的コンテンツ（SPA）
+
+サーバーはJSONのみ返し、ブラウザ側でHTMLを組み立てる。
+
+```mermaid
+sequenceDiagram
+    participant B as ブラウザ
+    participant S as サーバー
+
     B->>S: リクエスト
     S-->>B: JSON（データのみ）
-    Note over B: ブラウザ側でHTMLを組み立て
+    Note over B: JSONからHTMLを組み立て
 ```
+
+---
+
+### まとめ
+
+| | サーバーが返すもの | HTMLの組み立て場所 | 例 |
+|---|---|---|---|
+| 静的 | 事前作成済みファイル | なし | 画像・固定ページ |
+| 動的（SSR） | 完成済みHTML | サーバー | ASP.NET MVC |
+| 動的（SPA） | JSON | ブラウザ | React, Vue |
 
 ---
 
@@ -53,6 +71,7 @@ sequenceDiagram
 
 ## ソース
 - 2026-05-01：イラスト図解式ネットワークの基本 第5章
+- 会話ベース 2026-06-10
 
 ## タグ
-静的コンテンツ, 動的コンテンツ, Web, サーバー
+静的コンテンツ, 動的コンテンツ, SSR, SPA, Web, サーバー, React
