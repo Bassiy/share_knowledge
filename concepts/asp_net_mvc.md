@@ -60,6 +60,14 @@ ECサイトのシステム
 │    ├── StockManager   … 在庫を減らす「処理」のクラス
 │    └── CartData       … カート内の「データ」そのもの
 │
+├── DAO（DBアクセス）
+│    ├── CartDAO        … カート情報のDB操作
+│    └── ProductDAO     … 商品情報のDB操作
+│
+├── Entity（レコードの入れ物）
+│    ├── CartEntity     … カートテーブルのレコードに対応するクラス
+│    └── ProductEntity  … 商品テーブルのレコードに対応するクラス
+│
 └── View（画面）
      ├── product_detail.html  … 商品詳細画面
      └── cart_list.html       … カート中身の一覧画面
