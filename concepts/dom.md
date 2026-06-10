@@ -111,7 +111,7 @@ Document（ツリー全体の根）
 | 関係の種類 | 具体例 |
 |---|---|
 | 継承（is-a） | HTMLParagraphElement は Element である |
-| 包含（has-a） | Document は Elementツリーを**持っている** |
+| 包含（has-a） | Document は DOMツリーを**持っている** |
 
 `document.querySelector('p')` はDocumentを起点にツリーを辿って探す。
 
