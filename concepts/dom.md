@@ -74,6 +74,14 @@ Element → HTMLElement → HTMLParagraphElement（<p>）
 
 `document` がツリー全体の根っこであり入口。
 
+```
+Document（ツリー全体の根）
+  └─ html（Element）
+       └─ body（Element）
+            └─ div（Element）
+                 └─ p（Element）
+```
+
 | 関係の種類 | 具体例 |
 |---|---|
 | 継承（is-a） | HTMLParagraphElement は Element である |
