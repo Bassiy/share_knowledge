@@ -7,13 +7,20 @@ Microsoft が提供する Webアプリケーションフレームワーク。MVC
 
 ### MVCの3つの役割
 
-処理の流れは `C → M → C → V`。
-
 | 役割 | 担当 | 内容 |
 |------|------|------|
 | M（Model） | ビジネスロジックの大枠 | データの処理・計算・DBとのやり取り |
 | V（View） | 画面表示 | ユーザーが見る画面のUI・出力 |
 | C（Controller） | 全体の制御 | ユーザーの入力を受け付け、M と V へ指示を出す |
+
+```mermaid
+flowchart LR
+    U([ユーザー]) --> C[Controller]
+    C --> M[Model]
+    M --> C
+    C --> V[View]
+    V --> U
+```
 
 ---
 
