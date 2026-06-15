@@ -6,7 +6,8 @@ PostgreSQL を使って SQL の基本クエリ（SELECT / WHERE / JOIN など）
 ## ファイル構成
 sql_basic_query/
 ├── README.md
-└── schema.md       # テーブル仕様・データ一覧
+├── schema.md       # テーブル仕様・データ一覧
+└── queries.md      # 練習問題と正解クエリ
 
 ## 学び
 - Docker + PostgreSQL でローカルDBサーバを立てる流れを体験した
