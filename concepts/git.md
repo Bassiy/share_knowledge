@@ -128,7 +128,6 @@ detached HEAD はブランチを経由しないため、そこからコミット
 - pull_request（コードレビューとマージのフロー）
 - ci_cd（pushをトリガーにした自動テスト・デプロイ）
 - git_branch（ブランチ戦略とマージの詳細）
-- git_history（reset・revert・rebase による歴史操作）
 
 ## ソース
 - 2026-05-17：MIXI25卒Git研修資料（https://www.youtube.com/watch?v=DTY3RBkXQBA&t=536s）
