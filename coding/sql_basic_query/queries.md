@@ -6,6 +6,9 @@
 # コンテナ起動
 docker run --name pg_sql_basic -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres:16
 
+# コンテナ再起動（2回目以降）
+docker start pg_sql_basic
+
 # psql に接続
 docker exec -it pg_sql_basic psql -U postgres
 
