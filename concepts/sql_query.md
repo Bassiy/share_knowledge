@@ -5,9 +5,7 @@ SQL でデータを取得するための基本クエリ。SELECT・FROM・WHERE�
 
 ## 理解したこと
 
-### 実行順序
-
-記述順と実行順は異なる。「何を見せるか（SELECT）」を最初に書くが、実際にはデータソースを決めてから絞り込んでいく。
+### 実行順序チートシート
 
 | 記述順 | 句 | 実行順 | 役割 |
 |---|---|---|---|
@@ -18,7 +16,14 @@ SQL でデータを取得するための基本クエリ。SELECT・FROM・WHERE�
 | 5 | [`HAVING`](sql_aggregation.md#group-by--having) | 4 | グループをさらに絞り込む |
 | 6 | [`ORDER BY`](#order-by句並び替え) | 6 | 最終結果を並び替える |
 
-**書くときのイメージ：**
+```
+書く順：  SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY
+実行順：  FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY
+```
+
+---
+
+### 書くときのイメージ
 
 ```
 SELECT   → 表示したい項目を指定する
@@ -29,7 +34,7 @@ HAVING   → グループをさらに条件で絞り込む
 ORDER BY → 結果を並び替える
 ```
 
-ただし DB はこの順番では処理しない。実行順は `FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY`。頭の中では SELECT から考えていいが、DB は FROM から動いている。
+頭の中では SELECT から考えていいが、DB は FROM から動いている。
 
 ---
 
