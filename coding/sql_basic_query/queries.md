@@ -51,3 +51,13 @@ SELECT user_id, SUM(price) FROM orders GROUP BY user_id HAVING SUM(price) >= 300
 ```
 
 ---
+
+## Q6. 注文一覧にユーザー名を付けて出す（INNER JOIN）
+
+```sql
+SELECT users.name, orders.item, orders.price
+FROM users
+INNER JOIN orders ON users.id = orders.user_id;
+```
+
+---
