@@ -21,6 +21,28 @@ SQL でデータを取得するための基本クエリ。SELECT・FROM・WHERE�
 実行順：  FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY
 ```
 
+```sql
+-- GROUP BY（グループ化してからCOUNT）
+SELECT
+    グループ列,
+    COUNT(*) AS cnt
+FROM
+    テーブル名
+GROUP BY
+    グループ列;
+
+-- HAVING（グループ化した結果をさらに絞り込む）
+SELECT
+    グループ列,
+    COUNT(*) AS cnt
+FROM
+    テーブル名
+GROUP BY
+    グループ列
+HAVING
+    COUNT(*) >= 2;
+```
+
 ---
 
 ### 書くときのイメージ
