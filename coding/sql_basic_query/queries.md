@@ -15,7 +15,11 @@ docker exec -it pg_sql_basic psql -U postgres
 ## Q1. 全ユーザーを取得する
 
 ```sql
-SELECT * FROM users;
+SELECT
+    *
+FROM
+    users
+;
 ```
 
 ---
@@ -23,7 +27,13 @@ SELECT * FROM users;
 ## Q2. 年齢が25以上のユーザーを取得する
 
 ```sql
-SELECT * FROM users WHERE age >= 25;
+SELECT
+    *
+FROM
+    users
+WHERE
+    age >= 25
+;
 ```
 
 ---
@@ -31,7 +41,13 @@ SELECT * FROM users WHERE age >= 25;
 ## Q3. id が 1 または 3 のユーザーを取得する
 
 ```sql
-SELECT * FROM users WHERE id IN (1, 3);
+SELECT
+    *
+FROM
+    users
+WHERE
+    id IN (1, 3)
+;
 ```
 
 ---
@@ -39,7 +55,16 @@ SELECT * FROM users WHERE id IN (1, 3);
 ## Q4. ユーザーごとの注文合計金額を出す（user_id 昇順）
 
 ```sql
-SELECT user_id, SUM(price) FROM orders GROUP BY user_id ORDER BY user_id ASC;
+SELECT
+    user_id,
+    SUM(price)
+FROM
+    orders
+GROUP BY
+    user_id
+ORDER BY
+    user_id ASC
+;
 ```
 
 ---
@@ -47,7 +72,16 @@ SELECT user_id, SUM(price) FROM orders GROUP BY user_id ORDER BY user_id ASC;
 ## Q5. 合計金額が300以上のユーザーだけ出す
 
 ```sql
-SELECT user_id, SUM(price) FROM orders GROUP BY user_id HAVING SUM(price) >= 300;
+SELECT
+    user_id,
+    SUM(price)
+FROM
+    orders
+GROUP BY
+    user_id
+HAVING
+    SUM(price) >= 300
+;
 ```
 
 ---
@@ -55,9 +89,15 @@ SELECT user_id, SUM(price) FROM orders GROUP BY user_id HAVING SUM(price) >= 300
 ## Q6. 注文一覧にユーザー名を付けて出す（INNER JOIN）
 
 ```sql
-SELECT users.name, orders.item, orders.price
-FROM users
-INNER JOIN orders ON users.id = orders.user_id;
+SELECT
+    users.name,
+    orders.item,
+    orders.price
+FROM
+    users
+INNER JOIN
+    orders ON users.id = orders.user_id
+;
 ```
 
 ---
