@@ -1,3 +1,5 @@
+-- ここを書き換えて練習する
+
 SELECT 
     t1.name,
     t2.item,
