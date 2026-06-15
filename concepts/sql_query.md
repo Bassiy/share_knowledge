@@ -1,7 +1,7 @@
 # SQL クエリ基礎
 
 ## 概要
-リレーショナルDBに対してデータを取得・操作するための言語。SELECT/INSERT/UPDATE/DELETE が基本。
+SQL でデータを取得するための基本クエリ。SELECT・FROM・WHERE・ORDER BY が中心。
 
 ## 理解したこと
 
@@ -14,8 +14,8 @@
 | 1 | [`SELECT`](#select文) | 5 | 表示する列を決定・関数を計算 |
 | 2 | `FROM` | 1 | 対象テーブルを決める |
 | 3 | [`WHERE`](#where句での絞り込み) | 2 | 集計前に不要な行を除去 |
-| 4 | [`GROUP BY`](#group-by--having) | 3 | 残ったデータをグループに小分け |
-| 5 | [`HAVING`](#group-by--having) | 4 | グループをさらに絞り込む |
+| 4 | [`GROUP BY`](sql_aggregation.md#group-by--having) | 3 | 残ったデータをグループに小分け |
+| 5 | [`HAVING`](sql_aggregation.md#group-by--having) | 4 | グループをさらに絞り込む |
 | 6 | [`ORDER BY`](#order-by句並び替え) | 6 | 最終結果を並び替える |
 
 **書くときのイメージ：**
@@ -112,165 +112,6 @@ ORDER BY
 
 ---
 
-### 集計関数
-
-GROUP BY と組み合わせて、グループ内の値を集計する。
-
-| 関数 | 役割 |
-|---|---|
-| `COUNT(*)` | 行数を数える |
-| `SUM(列)` | 合計を出す |
-| `AVG(列)` | 平均を出す |
-| `MAX(列)` | 最大値を出す |
-| `MIN(列)` | 最小値を出す |
-
-```sql
-SELECT
-    グループ列,
-    COUNT(*) AS cnt,
-    SUM(数値列) AS 合計,
-    AVG(数値列) AS 平均
-FROM
-    テーブル名
-GROUP BY
-    グループ列;
-```
-
----
-
-### GROUP BY + HAVING
-
-`WHERE` と `HAVING` は実行タイミングが違う。
-
-| 句 | 実行タイミング | 用途 |
-|---|---|---|
-| `WHERE` | グループ化**前** | 行を絞り込む |
-| `HAVING` | グループ化**後** | 集計結果を絞り込む |
-
-**誤解しやすいポイント：**
-
-「WHERE は行を処理、GROUP BY は列を処理」→ **どちらも行を処理している**。
-
-| 句 | 何を処理するか | 操作 |
-|---|---|---|
-| `WHERE` | 行 | 条件に合わない行を**捨てる** |
-| `GROUP BY` | 行 | 同じ値の行を**束ねる** |
-| `HAVING` | グループ（束） | 条件に合わないグループを**捨てる** |
-
-GROUP BY は「列の値が同じ行をひとまとめにする」操作。列ではなく行が対象。
-
-流れのイメージ：
-
-WHERE で行を捨てる → GROUP BY で行を束ねる → HAVING で束を捨てる
-
-```
-全レコード
-  ↓ WHERE（余計な行を捨てる）
-残った行
-  ↓ GROUP BY（同じ行を束ねる）
-グループ
-  ↓ HAVING（グループを取捨選択する）
-絞り込まれたグループ
-```
-
-```sql
--- GROUP BY（グループ化してからCOUNT）
-SELECT
-    グループ列,
-    COUNT(*) AS cnt
-FROM
-    テーブル名
-GROUP BY
-    グループ列;
-
--- HAVING（グループ化した結果をさらに絞り込む）
-SELECT
-    グループ列,
-    COUNT(*) AS cnt
-FROM
-    テーブル名
-GROUP BY
-    グループ列
-HAVING
-    COUNT(*) >= 2;
-```
-
----
-
-### JOIN（テーブル結合）
-
-複数テーブルを共通フィールド（FK）で結合する。外部キーを持つ方を `FROM`、主キーのある方を `JOIN` に書く。
-
-| 種類 | 動作 |
-|---|---|
-| `INNER JOIN` | 両テーブルに一致するレコードのみ取得。`INNER` は省略可能 |
-| `LEFT OUTER JOIN` | 左テーブルを全件取得。右に一致なければ NULL |
-| `RIGHT OUTER JOIN` | 右テーブルを全件取得。左に一致なければ NULL |
-
-```sql
--- 2テーブル結合
-SELECT
-    t1.列名,
-    t2.列名
-FROM
-    テーブルA t1
-INNER JOIN
-    テーブルB t2 ON t1.キー = t2.キー;
-
--- 3テーブル結合
-SELECT
-    t1.列名,
-    t2.列名,
-    t3.列名
-FROM
-    テーブルA t1
-INNER JOIN
-    テーブルB t2 ON t1.キー = t2.キー
-INNER JOIN
-    テーブルC t3 ON t1.キー = t3.キー;
-```
-
----
-
-### サブクエリ
-
-SELECT文を `()` で括って入れ子にする。複数の処理を1つの命令にまとめられる。
-
-```sql
-SELECT
-    列名1,
-    列名2
-FROM
-    テーブルA
-WHERE
-    キー IN (SELECT キー FROM テーブルB);
-```
-
----
-
-### DML（データ操作）
-
-DELETE/UPDATE の前に同じ WHERE 条件で SELECT して対象を確認するのが定石。
-
-| 操作 | 構文 |
-|---|---|
-| INSERT | `INSERT INTO テーブル(col1, col2) VALUES(val1, val2);` |
-| UPDATE | `UPDATE テーブル SET col = val WHERE 条件;` |
-| DELETE | `DELETE FROM テーブル WHERE 条件;` |
-
-```sql
--- INSERT
-INSERT INTO テーブル名(列1, 列2) VALUES(値1, 値2);
-
--- UPDATE
-UPDATE テーブル名 SET 列名 = 新しい値 WHERE 条件;
-
--- DELETE
-DELETE FROM テーブル名 WHERE 条件;
-```
-
----
-
 ### sqlcmd（SQL Server 固有の接続ツール）
 
 Microsoft SQL Server に接続・操作するための CLI ツール。PostgreSQL の `psql` に相当する。
@@ -314,6 +155,9 @@ GO
 - dbms（SQLはDBMSへの問い合わせ言語。実行はDBMSが担う）
 - normalization（正規化されたテーブル設計があってこそJOINが意味を持つ）
 - db_design（テーブル設計・主キー・外部キーの概念）
+- sql_aggregation（GROUP BY・HAVING・集計関数）
+- sql_join（テーブル結合・サブクエリ）
+- sql_dml（INSERT・UPDATE・DELETE）
 
 ## 関連実装
 - [sql_basic_query](../coding/sql_basic_query/) — PostgreSQLでWHERE・IN・GROUP BYを実際に動かした
@@ -322,4 +166,4 @@ GO
 - 2026-06-08・/study + /code セッションでの壁打ちから整理
 
 ## タグ
-SQL, SELECT, WHERE, GROUP BY, JOIN, DML, サブクエリ, sqlcmd, PostgreSQL, SQL Server, リレーショナルDB
+SQL, SELECT, WHERE, ORDER BY, sqlcmd, PostgreSQL, SQL Server, リレーショナルDB
