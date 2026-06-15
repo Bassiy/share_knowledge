@@ -23,34 +23,6 @@ SQL でデータを取得するための基本クエリ。SELECT・FROM・WHERE�
 
 ---
 
-### GROUP BY + HAVING
-
-```sql
--- GROUP BY（グループ化してからCOUNT）
-SELECT
-    グループ列,
-    COUNT(*) AS cnt
-FROM
-    テーブル名
-GROUP BY
-    グループ列;
-
--- HAVING（グループ化した結果をさらに絞り込む）
-SELECT
-    グループ列,
-    COUNT(*) AS cnt
-FROM
-    テーブル名
-GROUP BY
-    グループ列
-HAVING
-    COUNT(*) >= 2;
-```
-
-詳細・誤解ポイントは [sql_aggregation](sql_aggregation.md) を参照。
-
----
-
 ### 書くときのイメージ
 
 ```
