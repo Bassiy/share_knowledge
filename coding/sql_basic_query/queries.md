@@ -9,8 +9,8 @@ docker run --name pg_sql_basic -e POSTGRES_PASSWORD=password -d -p 5432:5432 pos
 # psql に接続
 docker exec -it pg_sql_basic psql -U postgres
 
-# sample.sql を一括実行
-docker exec -i pg_sql_basic psql -U postgres < sample.sql
+# sample.sql を一括実行（info/ から実行）
+docker exec -i pg_sql_basic psql -U postgres < knowledge/coding/sql_basic_query/sample.sql
 ```
 
 ---
