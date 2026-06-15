@@ -5,6 +5,8 @@
 
 ## 理解したこと
 
+### CI と CD の違い
+
 | | 説明 |
 |--|--|
 | CI（継続的インテグレーション） | コードをpushするたびに自動でテストを実行する |
@@ -12,16 +14,10 @@
 
 手動デプロイのミスや漏れをなくし、常に最新のコードが動いている状態を保つ。
 
-## ツール選定のポイント（GCPの例）
+---
 
-| ツール | 特徴 |
-|--|--|
-| Cloud Build | GCP内で完結。IAM権限だけでセキュア。外部サービスに鍵を渡さなくていい |
-| GitHub Actions | 汎用的。GCPへの認証設定が必要になる |
+### 構成図
 
-## 構成図
-
-<!-- 2026-03-30 -->
 ```mermaid
 graph TD
     Dev["開発者<br/>コードを書く"] -->|git push| GitHub
@@ -33,7 +29,19 @@ graph TD
     Test -->|成功| Build
 ```
 
-## セキュリティリスク（TanStack事件より）
+---
+
+### ツール選定のポイント（GCPの例）
+
+| ツール | 特徴 |
+|--|--|
+| Cloud Build | GCP内で完結。IAM権限だけでセキュア。外部サービスに鍵を渡さなくていい |
+| GitHub Actions | 汎用的。GCPへの認証設定が必要になる |
+
+---
+
+### セキュリティリスク（TanStack事件より）
+
 CI/CDパイプライン自体が攻撃対象になりうる。特にキャッシュは「信頼境界をまたぐ」ため危険。
 
 | リスク | 内容 | 対策 |
@@ -42,8 +50,11 @@ CI/CDパイプライン自体が攻撃対象になりうる。特にキャッシ
 | キャッシュ汚染 | untrusted な PR ビルドのキャッシュが release ビルドに流用されると悪性コードが混入 | PR用とrelease用でキャッシュキーを分離する |
 | 権限の過剰付与 | `id-token: write` を全 job に付与すると OIDC トークンをどの job でも奪取可能 | publish job のみに限定する |
 
+---
+
 ## 関連概念
-- cloud_infrastructure
+- git（git push がCI/CDのトリガーになる）
+- cloud_infrastructure（デプロイ先のインフラ基盤）
 - harness_engineering（自動化・フィードバックループの思想が共通）
 - github_actions_security（GitHub Actions 固有のセキュリティ詳細）
 - supply_chain_attack（CI/CDが踏み台になるワーム型攻撃）
