@@ -147,6 +147,18 @@ flowchart TD
 - そこから本格的に作業するなら必ず `git checkout -b <ブランチ名>` でブランチを作ってから
 - detached HEAD のまま作業して別ブランチに移動すると、積んだコミットへの参照がなくなって消える
 
+```
+【detached中にコミット】
+A ← B ← C  ← main
+    ↑
+    D  ← HEAD（直接）
+
+【git checkout main すると】
+A ← B ← C  ← main ← HEAD
+    ↑
+    D  （参照なし → 辿れなくなる）
+```
+
 ---
 
 ### stash：未完成の作業を一時退避
