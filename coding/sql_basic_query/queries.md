@@ -36,10 +36,10 @@ SELECT * FROM users WHERE id IN (1, 3);
 
 ---
 
-## Q4. ユーザーごとの注文合計金額を出す
+## Q4. ユーザーごとの注文合計金額を出す（user_id 昇順）
 
 ```sql
-SELECT user_id, SUM(price) FROM orders GROUP BY user_id;
+SELECT user_id, SUM(price) FROM orders GROUP BY user_id ORDER BY user_id ASC;
 ```
 
 ---
