@@ -1,38 +1,53 @@
 # テーブル仕様
 
-## users
+## 概要
 
-| カラム | 型 | 説明 |
-|--------|----|------|
-| id | SERIAL PRIMARY KEY | 自動採番 |
-| name | TEXT NOT NULL | ユーザー名 |
-| age | INT | 年齢 |
-
-### データ
-
-| id | name | age |
-|----|------|-----|
-| 1 | Alice | 25 |
-| 2 | Bob | 30 |
-| 3 | Charlie | 22 |
+ユーザーが商品を注文する、シンプルな EC のデータモデル。
+`users` と `orders` が 1対多の関係になっている。
 
 ---
 
-## orders
+## テーブル定義
 
-| カラム | 型 | 説明 |
-|--------|----|------|
-| id | SERIAL PRIMARY KEY | 自動採番 |
-| user_id | INT REFERENCES users(id) | 外部キー |
-| item | TEXT NOT NULL | 商品名 |
-| price | INT | 価格 |
+### users
 
-### データ
+```sql
+CREATE TABLE users (
+  id   SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  age  INT
+);
+```
 
-| id | user_id | item | price |
-|----|---------|------|-------|
-| 1 | 1 | Apple | 100 |
-| 2 | 1 | Banana | 200 |
-| 3 | 2 | Cherry | 150 |
-| 4 | 3 | Apple | 100 |
-| 5 | 3 | Durian | 500 |
+### orders
+
+```sql
+CREATE TABLE orders (
+  id      SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(id),
+  item    TEXT NOT NULL,
+  price   INT
+);
+```
+
+---
+
+## 実データ
+
+### users
+
+| id | name    | age |
+|----|---------|-----|
+| 1  | Alice   | 25  |
+| 2  | Bob     | 30  |
+| 3  | Charlie | 22  |
+
+### orders
+
+| id | user_id | item   | price |
+|----|---------|--------|-------|
+| 1  | 1       | Apple  | 100   |
+| 2  | 1       | Banana | 200   |
+| 3  | 2       | Cherry | 150   |
+| 4  | 3       | Apple  | 100   |
+| 5  | 3       | Durian | 500   |
