@@ -16,7 +16,12 @@ sql_basic_query/
 ## 学び
 - Docker + PostgreSQL でローカルDBサーバを立てる流れを体験した
 - `WHERE` で条件絞り込み、`IN` で複数値マッチができる
-- `GROUP BY` + `SUM` でユーザーごとの集計ができる（今日は途中）
+- `GROUP BY` + `SUM` でユーザーごとの合計を集計できる
+- `ORDER BY` で結果を昇順・降順に並び替えられる（`ASC` / `DESC`）
+- `HAVING` でグループを条件で絞り込める
+- `INNER JOIN` で複数テーブルを外部キーで結合できる
+- `GROUP BY` は「列を処理」ではなく「同じ値の行を束ねる」操作
+- `WHERE`・`GROUP BY`・`HAVING` の違い：行を捨てる → 行を束ねる → グループを捨てる
 
 ## 関連concept
 - [sql_query](../../concepts/sql_query.md) — SELECT / WHERE / JOIN などの基本クエリ構文
