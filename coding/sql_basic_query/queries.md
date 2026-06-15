@@ -1,5 +1,17 @@
 # 練習問題と正解クエリ
 
+## 環境起動
+
+```bash
+# コンテナ起動
+docker run --name pg_sql_basic -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres:16
+
+# psql に接続
+docker exec -it pg_sql_basic psql -U postgres
+```
+
+---
+
 ## Q1. 全ユーザーを取得する
 
 ```sql
