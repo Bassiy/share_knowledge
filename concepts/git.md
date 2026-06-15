@@ -110,11 +110,7 @@ detached HEAD はブランチを経由しないため、そこからコミット
 | `git diff ID1 ID2` | 2つのコミット間の差分を表示（`^`で1つ前、`HEAD`で現在） |
 | `git checkout / git switch --detach` | 別のコミットに移動 |
 | `git restore -s コミットID` | 特定ファイルを指定コミット時点に戻す |
-| `git revert コミットID` | 逆のコミットを追加して打ち消す |
-| `git reset コミットID` | ブランチのポインタをずらす |
-| `git rebase ブランチ名` | ブランチの根元を指定ブランチの先端に植え替える |
 | `git tag タグ名 コミットID` | コミットに目印をつける |
-| `git reflog` | HEADの移動履歴を表示（操作ミス時の復旧に使う） |
 
 ---
 
@@ -132,6 +128,7 @@ detached HEAD はブランチを経由しないため、そこからコミット
 - pull_request（コードレビューとマージのフロー）
 - ci_cd（pushをトリガーにした自動テスト・デプロイ）
 - git_branch（ブランチ戦略とマージの詳細）
+- git_history（reset・revert・rebase による歴史操作）
 
 ## ソース
 - 2026-05-17：MIXI25卒Git研修資料（https://www.youtube.com/watch?v=DTY3RBkXQBA&t=536s）
