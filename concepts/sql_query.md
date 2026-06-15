@@ -18,6 +18,11 @@
 | 5 | [`HAVING`](#group-by--having) | 4 | グループをさらに絞り込む |
 | 6 | [`ORDER BY`](#order-by句並び替え) | 6 | 最終結果を並び替える |
 
+**書くときのイメージ：**
+まず SELECT で表示したい項目を指定する。次に FROM で使用するテーブルを決める。WHERE で余計な行を弾く。その上で GROUP BY で残った行を束ねてグループを作る。その後 HAVING でグループをさらに条件で絞り込む。最後に ORDER BY で結果を並び替える。
+
+ただし DB はこの順番では処理しない。実行順は FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY。頭の中では SELECT から考えていいが、DB は FROM から動いている。
+
 ---
 
 ### SELECT文
