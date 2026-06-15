@@ -174,9 +174,6 @@ WHERE で行を捨てる → GROUP BY で行を束ねる → HAVING で束を捨
 ```
 
 ```sql
--- COUNT（レコード数を数える）
-SELECT COUNT(*) AS cnt FROM テーブル名;
-
 -- GROUP BY（グループ化してからCOUNT）
 SELECT
     グループ列,
