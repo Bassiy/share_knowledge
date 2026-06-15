@@ -15,4 +15,4 @@ sql_basic_query/
 - `GROUP BY` + `SUM` でユーザーごとの集計ができる（今日は途中）
 
 ## 関連concept
-（セッション終了後に追記）
+- [sql_query](../../concepts/sql_query.md) — SELECT / WHERE / JOIN などの基本クエリ構文
