@@ -25,16 +25,16 @@
 ```sql
 -- 基本
 SELECT
-    フィールド名1,
-    フィールド名2
+    列名1,
+    列名2
 FROM
     テーブル名;
 
 -- エイリアス（ヘッダ名を変える）
 SELECT
-    title AS タイトル
+    列名 AS 別名
 FROM
-    m_album;
+    テーブル名;
 
 -- ※ SELECT * は原則NG（重くなる・後から追加した列の影響を受ける）
 --   COUNT(*) の * は例外（行数を数えるための決まり文句）
@@ -49,32 +49,29 @@ FROM
 | 演算子 | 用途 | 例 |
 |---|---|---|
 | `=` `!=` `<>` | 一致・不一致（`!=` と `<>` は同じ） | `price != 3000` |
-| `AND` `OR` `NOT` | 論理演算 | `label_id = 3 AND status = '販売中'` |
-| `IN` | 複数候補のどれかと一致 | `artist_id IN (2, 5)` |
-| `BETWEEN` | 範囲指定（両端含む） | `artist_id BETWEEN 4 AND 8` |
-| `LIKE` | あいまい検索 | `artist_name LIKE '%Band%'` |
+| `AND` `OR` `NOT` | 論理演算 | `col1 = 1 AND col2 = '値'` |
+| `IN` | 複数候補のどれかと一致 | `id IN (1, 2)` |
+| `BETWEEN` | 範囲指定（両端含む） | `id BETWEEN 4 AND 8` |
+| `LIKE` | あいまい検索 | `name LIKE '%文字%'` |
 
 ```sql
--- 基本
-SELECT title FROM m_album WHERE label_id = 3;
-
 -- 比較演算子（!= と <> は同じ）
 WHERE price != 3000
 WHERE price <> 3000
 
 -- 論理演算子
-WHERE label_id = 3 AND status = '販売中'
-WHERE label_id = 3 OR label_id = 5
-WHERE NOT genre_id = 3
+WHERE col1 = 1 AND col2 = '値'
+WHERE col1 = 1 OR col1 = 2
+WHERE NOT col1 = 3
 
--- IN演算子（複数候補のどれかと一致）
-WHERE artist_id IN (2, 5);
+-- IN（複数候補のどれかと一致）
+WHERE id IN (1, 2);
 
--- BETWEEN演算子（範囲指定、両端を含む）
-WHERE artist_id BETWEEN 4 AND 8;
+-- BETWEEN（範囲指定、両端を含む）
+WHERE id BETWEEN 4 AND 8;
 
--- LIKE演算子（あいまい検索）
-WHERE artist_name LIKE '%Band%';
+-- LIKE（あいまい検索）
+WHERE name LIKE '%文字%';
 --   'A%'    : Aで始まる
 --   '%A'    : Aで終わる
 --   '%A%'   : Aを含む
@@ -88,16 +85,16 @@ WHERE artist_name LIKE '%Band%';
 ```sql
 -- 昇順（デフォルト）
 ORDER BY
-    title ASC;
+    列名 ASC;
 
 -- 降順
 ORDER BY
-    title DESC;
+    列名 DESC;
 
--- 複数フィールドで指定
+-- 複数列で指定
 ORDER BY
-    label_id ASC,
-    title DESC;
+    列名A ASC,
+    列名B DESC;
 ```
 
 ---
@@ -137,31 +134,25 @@ GROUP BY は「列の値が同じ行をひとまとめにする」操作。列�
 
 ```sql
 -- COUNT（レコード数を数える）
-SELECT COUNT(*) AS cnt FROM m_artist;
-```
+SELECT COUNT(*) AS cnt FROM テーブル名;
 
-```sql
 -- GROUP BY（グループ化してからCOUNT）
 SELECT
-    country_id,
-    country_name,
+    グループ列,
     COUNT(*) AS cnt
 FROM
-    m_artist
+    テーブル名
 GROUP BY
-    country_id, country_name;
-```
+    グループ列;
 
-```sql
 -- HAVING（グループ化した結果をさらに絞り込む）
 SELECT
-    country_id,
-    country_name,
+    グループ列,
     COUNT(*) AS cnt
 FROM
-    m_artist
+    テーブル名
 GROUP BY
-    country_id, country_name
+    グループ列
 HAVING
     COUNT(*) >= 2;
 ```
@@ -181,26 +172,24 @@ HAVING
 ```sql
 -- 2テーブル結合
 SELECT
-    t1.title,
-    t2.artist_name
+    t1.列名,
+    t2.列名
 FROM
-    m_album t1
+    テーブルA t1
 INNER JOIN
-    m_artist t2 ON t1.artist_id = t2.artist_id;
-```
+    テーブルB t2 ON t1.キー = t2.キー;
 
-```sql
 -- 3テーブル結合
 SELECT
-    t1.title,
-    t2.artist_name,
-    t3.genre_name
+    t1.列名,
+    t2.列名,
+    t3.列名
 FROM
-    m_album t1
+    テーブルA t1
 INNER JOIN
-    m_artist t2 ON t1.artist_id = t2.artist_id
+    テーブルB t2 ON t1.キー = t2.キー
 INNER JOIN
-    m_genre t3 ON t1.genre_id = t3.genre_id;
+    テーブルC t3 ON t1.キー = t3.キー;
 ```
 
 ---
@@ -211,12 +200,12 @@ SELECT文を `()` で括って入れ子にする。複数の処理を1つの命�
 
 ```sql
 SELECT
-    artist_id,
-    artist_name
+    列名1,
+    列名2
 FROM
-    m_artist
+    テーブルA
 WHERE
-    artist_id IN (SELECT artist_id FROM m_album);
+    キー IN (SELECT キー FROM テーブルB);
 ```
 
 ---
@@ -232,14 +221,14 @@ DELETE/UPDATE の前に同じ WHERE 条件で SELECT して対象を確認する
 | DELETE | `DELETE FROM テーブル WHERE 条件;` |
 
 ```sql
--- INSERT（レコード挿入）
-INSERT INTO m_genre(genre_id, genre_name) VALUES(4, 'Jazz');
+-- INSERT
+INSERT INTO テーブル名(列1, 列2) VALUES(値1, 値2);
 
--- UPDATE（レコード更新）
-UPDATE m_genre SET genre_name = 'Ambient' WHERE genre_id = 6;
+-- UPDATE
+UPDATE テーブル名 SET 列名 = 新しい値 WHERE 条件;
 
--- DELETE（レコード削除）
-DELETE FROM m_genre WHERE genre_id = 4;
+-- DELETE
+DELETE FROM テーブル名 WHERE 条件;
 ```
 
 ---
@@ -265,99 +254,6 @@ USE testdb
 
 -- 実行（sqlcmd内）
 GO
-```
-
----
-
-### サンプルテーブル
-
-このファイルの例をすべて実行できる仮テーブル。
-
-**m_genre**
-
-| genre_id | genre_name |
-|----------|------------|
-| 1 | Pop |
-| 2 | Rock |
-| 3 | Classical |
-| 6 | Electronic |
-
-**m_artist**
-
-| artist_id | artist_name | country_id | country_name |
-|-----------|-------------|------------|--------------|
-| 1 | Echo Band | 1 | 日本 |
-| 2 | Luna Project | 1 | 日本 |
-| 3 | Nova Sound | 2 | アメリカ |
-| 4 | Sky Orchestra | 2 | アメリカ |
-| 5 | Deep Groove | 2 | アメリカ |
-| 6 | Frost Music | 3 | ドイツ |
-| 7 | Amber Wave | 3 | ドイツ |
-| 8 | Coral Beats | 4 | フランス |
-
-**m_album**
-
-| album_id | title | label_id | status | artist_id | genre_id | price |
-|----------|-------|----------|--------|-----------|----------|-------|
-| 1 | Sunrise | 3 | 販売中 | 1 | 1 | 2800 |
-| 2 | Moonlight | 3 | 販売中 | 2 | 2 | 3000 |
-| 3 | Dark Matter | 3 | 廃盤 | 3 | 1 | 3500 |
-| 4 | Aurora | 5 | 販売中 | 4 | 3 | 2500 |
-| 5 | Nebula | 5 | 販売中 | 5 | 2 | 3200 |
-| 6 | Glacier | 5 | 販売中 | 6 | 1 | 2900 |
-| 7 | Storm | 1 | 販売中 | 7 | 3 | 3800 |
-| 8 | Tide | 2 | 販売中 | 8 | 1 | 2200 |
-
-```sql
-CREATE TABLE m_genre (
-    genre_id   INT PRIMARY KEY,
-    genre_name TEXT NOT NULL
-);
-
-CREATE TABLE m_artist (
-    artist_id   INT PRIMARY KEY,
-    artist_name TEXT NOT NULL,
-    country_id  INT,
-    country_name TEXT
-);
-
-CREATE TABLE m_album (
-    album_id  SERIAL PRIMARY KEY,
-    title     TEXT NOT NULL,
-    label_id  INT,
-    status    TEXT,
-    artist_id INT REFERENCES m_artist(artist_id),
-    genre_id  INT REFERENCES m_genre(genre_id),
-    price     INT
-);
-```
-
-```sql
-INSERT INTO m_genre VALUES
-    (1, 'Pop'),
-    (2, 'Rock'),
-    (3, 'Classical'),
-    (6, 'Electronic');   -- UPDATE例で 'Ambient' に変更される
-
-INSERT INTO m_artist VALUES
-    (1, 'Echo Band',      1, '日本'),
-    (2, 'Luna Project',   1, '日本'),
-    (3, 'Nova Sound',     2, 'アメリカ'),
-    (4, 'Sky Orchestra',  2, 'アメリカ'),
-    (5, 'Deep Groove',    2, 'アメリカ'),
-    (6, 'Frost Music',    3, 'ドイツ'),
-    (7, 'Amber Wave',     3, 'ドイツ'),
-    (8, 'Coral Beats',    4, 'フランス');
-
-INSERT INTO m_album (title, label_id, status, artist_id, genre_id, price) VALUES
-    ('Sunrise',     3, '販売中', 1, 1, 2800),
-    ('Moonlight',   3, '販売中', 2, 2, 3000),
-    ('Dark Matter', 3, '廃盤',   3, 1, 3500),
-    ('Aurora',      5, '販売中', 4, 3, 2500),
-    ('Nebula',      5, '販売中', 5, 2, 3200),
-    ('Glacier',     5, '販売中', 6, 1, 2900),
-    ('Storm',       1, '販売中', 7, 3, 3800),
-    ('Tide',        2, '販売中', 8, 1, 2200);
 ```
 
 ---
