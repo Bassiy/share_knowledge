@@ -11,14 +11,12 @@
 
 | 記述順 | 句 | 実行順 | 役割 |
 |---|---|---|---|
-| 1 | `SELECT` | 5 | 表示する列を決定・関数を計算 |
+| 1 | [`SELECT`](#select文) | 5 | 表示する列を決定・関数を計算 |
 | 2 | `FROM` | 1 | 対象テーブルを決める |
-| 3 | `WHERE` | 2 | 集計前に不要な行を除去 |
-| 4 | `GROUP BY` | 3 | 残ったデータをグループに小分け |
-| 5 | `HAVING` | 4 | グループをさらに絞り込む |
-| 6 | `ORDER BY` | 6 | 最終結果を並び替える |
-
-→ 各句の詳細：[SELECT文](#select文) / [WHERE](#where句での絞り込み) / [GROUP BY + HAVING](#group-by--having) / [ORDER BY](#order-by句並び替え) / [JOIN](#joinテーブル結合) / [サブクエリ](#サブクエリ) / [DML](#dmlデータ操作)
+| 3 | [`WHERE`](#where句での絞り込み) | 2 | 集計前に不要な行を除去 |
+| 4 | [`GROUP BY`](#group-by--having) | 3 | 残ったデータをグループに小分け |
+| 5 | [`HAVING`](#group-by--having) | 4 | グループをさらに絞り込む |
+| 6 | [`ORDER BY`](#order-by句並び替え) | 6 | 最終結果を並び替える |
 
 ---
 
