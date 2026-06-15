@@ -43,3 +43,11 @@ SELECT user_id, SUM(price) FROM orders GROUP BY user_id ORDER BY user_id ASC;
 ```
 
 ---
+
+## Q5. 合計金額が300以上のユーザーだけ出す
+
+```sql
+SELECT user_id, SUM(price) FROM orders GROUP BY user_id HAVING SUM(price) >= 300;
+```
+
+---
