@@ -21,6 +21,21 @@ Tree
 │    └── "main.py" → <BlobのSHA-1>
 ```
 
+4つのオブジェクトが組み合わさったコミット2つ分の全体像：
+
+```
+[Tag v1.0]
+    │
+    ↓
+[Commit abc123] ──parent──→ [Commit def456]
+    │ tree                       │ tree
+    ↓                            ↓
+[Tree ghi789]              [Tree jkl000]
+ ├─ "README.md" ─→ [Blob aaa111] ←─ "README.md"  ← 使い回し
+ └─ "src/" ──→ [Tree bbb222]
+                └─ "main.py" ─→ [Blob ccc333]
+```
+
 ---
 
 ### コンテンツアドレッシング
