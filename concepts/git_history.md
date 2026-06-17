@@ -69,6 +69,7 @@ push後に rebase すると、リモートには元の C があるのにロー�
 ## 関連概念
 - git（コミット構造・HEAD の理解が前提）
 - git_branch（rebase とブランチ操作の関係）
+- git_objects（reset・rebaseの動作が内部構造から理解できる）
 
 ## ソース
 - 2026-06-16：MIXI25卒Git研修資料（https://www.youtube.com/watch?v=DTY3RBkXQBA&t=868s）
