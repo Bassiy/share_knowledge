@@ -180,6 +180,7 @@ A ← B ← C  ← main ← HEAD
 ## 関連概念
 - git（コミット構造・HEAD の基礎）
 - git_history（rebase によるブランチの根元植え替え）
+- git_objects（detached HEADのコミットが消える理由が内部構造から理解できる）
 
 ## ソース
 - 2026-05-24：MIXI25卒Git研修資料（https://www.youtube.com/watch?v=DTY3RBkXQBA&t=868s）
