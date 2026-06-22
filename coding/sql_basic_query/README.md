@@ -3,6 +3,13 @@
 ## 目的
 PostgreSQL を使って SQL の基本クエリ（SELECT / WHERE / JOIN など）を実際に動かして体感する。
 
+## 実行方法
+```bash
+docker run --name shop-db -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
+psql -h localhost -U postgres -f setup.sql
+psql -h localhost -U postgres -d shop -f sample.sql
+```
+
 ## ファイル構成
 
 ```
