@@ -36,6 +36,6 @@ dog.Fetch(); // コンパイルエラー。ISpeakableにFetch()はない
 | `ISpeakable dog = new Dog()` という書き方はできない | できる。型が ISpeakable なだけで実体は Dog |
 | `IAnimal` のような名詞形の命名でOK | Can-do を表す `I + 動詞able`（ISpeakable）が慣習 |
 
-## 関連concept
+## 関連概念
 - [oop_interface.md](../../concepts/oop_interface.md) — このセッションで体感した概念の本体
 - [polymorphism.md](../../concepts/polymorphism.md) — インターフェースが実現する「実体によって振る舞いが変わる」仕組み
