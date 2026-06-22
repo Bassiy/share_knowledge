@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>予約フォーム</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="booking">
+    <h1>予約フォーム</h1>
+
+    <form id="booking-form">
+      <div class="field">
+        <label for="date">日付</label>
+        <!-- ← for="date" と input の id="date" が一致しているからこのlabelはこのinputに紐づく。
+             見た目の近さでは紐づかない。クリックでinputにフォーカスが当たるのもこの紐づきのおかげ -->
+        <input type="date" id="date" name="date" required>
+      </div>
+
+      <div class="field">
+        <label for="time">時間</label>
+        <input type="time" id="time" name="time" required>
+      </div>
+
+      <div class="field">
+        <label for="name">名前</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="field">
+        <label for="email">メールアドレス</label>
+        <input type="email" id="email" name="email" required>
+        <!-- ❌ 誤解しやすい：required や type="email" の入力チェックはJavaScriptが必要
+             ✅ 正しくは：ブラウザがHTML属性だけで標準のチェックをしてくれる（JS未着手の今でも空欄送信は止まる） -->
+      </div>
+
+      <button type="submit">予約する</button>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
