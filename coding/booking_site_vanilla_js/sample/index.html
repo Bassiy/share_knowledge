@@ -15,6 +15,10 @@
         <label for="date">日付</label>
         <!-- ← for="date" と input の id="date" が一致しているからこのlabelはこのinputに紐づく。
              見た目の近さでは紐づかない。クリックでinputにフォーカスが当たるのもこの紐づきのおかげ -->
+        <!-- ❌ 誤解しやすい：id と name は同じようなものを2回書いているだけ
+             ✅ 正しくは：id はページ内で一意な識別子（CSS/JS/labelのforが使う）。
+                name はフォーム送信時のキー名（サーバー送信・FormData・自動入力が使う）。役割が別。
+                このscript.jsではgetElementByIdしか使っていないのでnameは今は未使用（将来の送信用） -->
         <input type="date" id="date" name="date" required>
       </div>
 

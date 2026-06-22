@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>予約フォーム</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <main class="booking">
+            <h1>予約フォーム</h1>
+
+            <form id="booking-form">
+                
+                <div class="field">
+                    <label for="date">日付</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="field">
+                    <label for="time">時間</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+
+                <div class="field">
+                    <label for="name">名前</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="field">
+                    <label for="email">メールアドレス</label>
+                    <input for="text" id="email" name="email" required>
+                </div>
+
+                <button type="submit">予約する</button>
+            </form>
+
+            <p id="confirmation" class="confirmation hidden" role="status"><p>
+
+        </main>
+
+        <script src="script.js"></script>
+
+    </body>
+
+</html>

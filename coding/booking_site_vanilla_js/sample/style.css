@@ -29,6 +29,10 @@ h1 {
 }
 
 .field {
+  /* ❌ 誤解しやすい：同じクラスを複数のdivに繰り返すのはCSSの優先順位（specificity）の話
+     ✅ 正しくは：優先順位とは無関係。4つのdivは同じクラス＝同じ優先順位で競合していない。
+        分けている理由は構造：「label+inputの1組」をdivの境界で明示することで、
+        gap（組の中の余白）とmargin-bottom（組の間の余白）が正しく区別される */
   margin-bottom: 16px;
   display: flex;
   flex-direction: column;
@@ -53,6 +57,13 @@ input {
 input:focus {
   outline: none;
   border-color: #4a90d9;
+}
+
+/* ← :invalid を直接使わずJSで .error に変換しているのは、ネイティブの:invalidは
+     ページを開いた瞬間（まだ何も入力してない時点）から空欄の必須項目に効いてしまうため。
+     .errorはJSが「実際にsubmitして判定された後」だけ付けるので、最初から赤くならない */
+input.error {
+  border-color: #e0544c;
 }
 
 button {
