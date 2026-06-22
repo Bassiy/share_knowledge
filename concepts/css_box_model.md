@@ -48,7 +48,7 @@ borderは太さ・スタイル・色の3つを指定できる（`border-width`�
 - [booking_site_vanilla_js](../coding/booking_site_vanilla_js/) — input要素にwidth:100%+padding+borderを指定しつつ、box-sizing: border-boxで親要素からはみ出さないことを確認した
 
 ## ソース
-- 2026-06-22・Qiita「CSSのボックスモデル」https://qiita.com/thirai67/items/647a96801082c273e188（content/padding/border/marginの4層構造の説明）
+- 2026-06-22・Qiita「CSSのボックスモデル」https://qiita.com/thirai67/items/647a96801082c273e188   （content/padding/border/marginの4層構造の説明）
 - 2026-06-22・/codeセッションでの実装・対話から整理（box-sizing自体）
 
 ## タグ
