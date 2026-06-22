@@ -23,5 +23,5 @@ sql_basic_query/
 - `GROUP BY` は「列を処理」ではなく「同じ値の行を束ねる」操作
 - `WHERE`・`GROUP BY`・`HAVING` の違い：行を捨てる → 行を束ねる → グループを捨てる
 
-## 関連concept
+## 関連概念
 - [sql_query](../../concepts/sql_query.md) — SELECT / WHERE / JOIN などの基本クエリ構文
