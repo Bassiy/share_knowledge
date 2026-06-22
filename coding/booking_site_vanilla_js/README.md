@@ -9,7 +9,18 @@ HTML / CSS / JavaScript（フレームワークなし）だけで、1画面の�
 ビルドやサーバーは不要。`sample/index.html` または `work/index.html` をブラウザで直接開くだけで動作確認できる（`open sample/index.html` など）。
 
 ## ファイル構成
-（コードファイルが増えるたびに更新する）
+```
+booking_site_vanilla_js/
+├── README.md
+├── sample/        ← Claudeが書いた完成版の参考実装
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+└── work/          ← 自分で書く場所（空ファイル）
+    ├── index.html
+    ├── style.css
+    └── script.js
+```
 
 ## 学び
 （気づきが生まれた時点で都度追記する）
