@@ -163,9 +163,17 @@ prototype_oop のメモリ効率がDOMで実際に効いている場面。
 
 | メソッド | 動作 |
 |---|---|
-| `classList.add('active')` | 無条件に追加（既にあれば何も起きない） |
-| `classList.remove('active')` | 無条件に削除（無ければ何も起きない） |
-| `classList.toggle('active')` | あれば削除、なければ追加 |
+| `要素.classList.add('active')` | 無条件に追加（既にあれば何も起きない） |
+| `要素.classList.remove('active')` | 無条件に削除（無ければ何も起きない） |
+| `要素.classList.toggle('active')` | あれば削除、なければ追加 |
+
+```js
+const box = document.querySelector('#box');
+
+box.classList.add('active');    // 追加
+box.classList.remove('active'); // 削除
+box.classList.toggle('active'); // あれば削除、なければ追加
+```
 
 クリックごとに状態を反転させたい（ボタン1つでon/offを切り替える）場合は`toggle`、特定の条件で必ず付ける/外したい場合（送信成功時に必ず表示する、など）は`add`/`remove`を使う。
 
