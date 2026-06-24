@@ -76,6 +76,7 @@ borderは太さ・スタイル・色の3つを指定できる（`border-width`�
 ## ソース
 - 2026-06-22・Qiita「CSSのボックスモデル」https://qiita.com/thirai67/items/647a96801082c273e188
 - 2026-06-22・/codeセッションでの実装・対話から整理（box-sizing自体）
+- 2026-06-24・/studyセッションでの壁打ちから整理（4層構造の入れ子・div≠borderの混同整理）
 
 ## タグ
 CSS, ボックスモデル, box-sizing, レイアウト, padding, border, margin
