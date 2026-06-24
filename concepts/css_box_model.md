@@ -10,14 +10,40 @@ HTML要素は content・padding・border・marginの4層構造を持つ。
 ### 4層構造
 要素の見た目は「コンテンツ → パディング（内側余白） → ボーダー（境界線） → マージン（外側余白）」の4層が外側に向かって積み重なってできている。
 
+タグの中身そのものがcontentであり、タグ自体ではない。
+
+contentを中心に、外側へpadding → border → marginの順で領域が重なる。
+
+```
+margin（外側余白）
+└─ border（境界線）
+   └─ padding（内側余白）
+      └─ content（実際の内容）
+```
+
 | 層（外側から） | 役割 |
 |---|---|
 | margin | 要素の外側の余白 |
 | border | 境界線 |
 | padding | 内側の余白 |
-| content | 実際の内容（テキスト・画像） |
+| content | 実際の内容（テキスト・画像・子要素） |
 
 borderは太さ・スタイル・色の3つを指定できる（`border-width`・`border-style`・`border-color`、一括指定は`border: 太さ スタイル 色;`の順）。padding・marginは1〜4個の値で上下左右を指定する。
+
+---
+
+### 各タグが自分専用のboxを持つ（入れ子構造）
+4層構造はページ全体で1つではなく、**タグ（要素）ひとつひとつ**が個別に持つ。
+
+```html
+<div class="wrapper">
+  <p>Hello</p>
+</div>
+```
+
+`wrapper`も`p`もそれぞれ独立したboxであり、`wrapper`のcontentは「中に入っている`<p>`要素（という別のbox）」になる。
+
+混同しやすいポイント：divはborderと同義ではない。divはbox全体（4層すべて）を持つ要素で、borderはそのうちの1層（境界線）にすぎない。`border-width: 0`（デフォルト）でも、divはboxとして機能する。
 
 ---
 
