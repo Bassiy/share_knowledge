@@ -8,7 +8,11 @@ HTML要素は content・padding・border・marginの4層構造を持つ。
 ## 理解したこと
 
 ### 要素とタグの違い
-要素＝content・padding・border・marginの4層を持つ実体。タグはその境界を示すマークアップの記法（開始タグ・終了タグ）であり、要素そのものではない。
+タグはその境界を示すマークアップの記法（開始タグ・終了タグ）であり、要素そのものではない。
+
+```
+要素 = content + padding + border + margin
+```
 
 | 用語 | 指すもの |
 |---|---|
