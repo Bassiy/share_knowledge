@@ -12,19 +12,27 @@ HTML要素は content・padding・border・marginの4層構造を持つ。
 
 タグの中身そのものがcontentであり、タグ自体ではない。
 
-margin・border・paddingは「領域（帯）」、contentはその内側の空間にある実体。さらに各領域はtop/right/bottom/leftの4方向に分かれていて、1〜4個の値で指定するショートハンドは時計回り（上→右→下→左）の順に対応する（下図の①→②→③→④）。
+margin・border・paddingは「領域（帯）」、contentはその内側の空間にある実体。
 
+```mermaid
+flowchart TD
+    subgraph M["margin"]
+        subgraph B["border"]
+            subgraph P["padding"]
+                C["content"]
+            end
+        end
+    end
 ```
-              ① top
-       ┌─ margin ──────────────┐
-       │ ┌─ border ───────────┐│
-       │ │ ┌─ padding ──────┐ ││
-④ left │ │ │    content     │ ││ ② right
-       │ │ └────────────────┘ ││
-       │ └─────────────────────┘│
-       └──────────────────────────┘
-              ③ bottom
-```
+
+さらに各領域はtop/right/bottom/leftの4方向に分かれていて、1〜4個の値で指定するショートハンドは時計回り（上→右→下→左）の順に対応する。
+
+| 順番 | 方向 |
+|---|---|
+| 1 | top |
+| 2 | right |
+| 3 | bottom |
+| 4 | left |
 
 | 層（外側から） | 役割 |
 |---|---|
@@ -37,7 +45,7 @@ borderは太さ・スタイル・色の3つを指定できる（`border-width`�
 
 ```css
 margin: 10px 20px 30px 40px;
-/*       ①top ②right ③bottom ④left */
+/* 1:top 2:right 3:bottom 4:left */
 ```
 
 ---
