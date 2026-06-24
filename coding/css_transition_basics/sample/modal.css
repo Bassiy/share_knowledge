@@ -1,0 +1,35 @@
+#overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* ❌ 誤解しやすい：display: none ⇄ display: block の切り替えでtransitionを付けようとする
+     ✅ 正しくは：opacity + pointer-events の組み合わせを使う
+     display: noneの間は要素がレンダリングされず「変化前の状態」自体が存在しないため、
+     そこからdisplay: blockに変えてもtransitionは発火しない（補間する元の値が無い）。
+     opacityなら常にレンダリングされたまま0↔1を動くので、補間が成立する。
+     pointer-eventsは非表示中のクリックを透過させるためだけのもので、これ自体はtransitionしない（一瞬で切り替わるが、opacity:0で見えないので問題ない）。 */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#modal {
+  background-color: #fff;
+  padding: 24px 32px;
+  border-radius: 8px;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+#overlay.open #modal {
+  transform: translateY(0);
+}
