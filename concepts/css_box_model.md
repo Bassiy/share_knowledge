@@ -99,6 +99,8 @@ margin: 10px 20px 30px 40px;
 
 全要素に`border-box`を一括適用しておくのが実用上の定石。これをしないと、`width: 100%`にpaddingやborderを追加した要素が親からはみ出す。
 
+marginはbox-sizingの設定に関わらず常にwidthの外側（除外される）。`border-box`という名前自体、「borderの外側のラインまでをboxの範囲とする」という意味に対応している。
+
 ---
 
 ## 関連概念
