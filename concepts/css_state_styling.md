@@ -76,6 +76,7 @@ input.error {
 - separation_of_concerns（JSが状態管理、CSSが見た目定義という役割分担の具体例）
 - dom（`classList`操作やイベントリスナーの仕組み自体はDOM APIの一部）
 - html_forms（ネイティブ検証`required`・`type`の見た目をカスタマイズする具体的な適用先）
+- css_transition（クラスが切り替わった後の見た目の変化を、瞬時ではなく滑らかに補間する続きの概念）
 
 ## 関連実装
 - [booking_site_vanilla_js](../coding/booking_site_vanilla_js/) — hidden（確認表示）とerror（入力検証）の両方を実装して比較した

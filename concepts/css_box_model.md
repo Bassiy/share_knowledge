@@ -105,6 +105,7 @@ marginはbox-sizingの設定に関わらず常にwidthの外側（除外され�
 
 ## 関連概念
 - css_flexbox（widthの計算がbox-sizingに依存する点で、レイアウト全体の前提になる）
+- css_position（boxの「形」を決めるのがbox_model、boxを「どこに置くか」を決めるのがposition）
 
 ## 関連実装
 - [booking_site_vanilla_js](../coding/booking_site_vanilla_js/) — input要素にwidth:100%+padding+borderを指定しつつ、box-sizing: border-boxで親要素からはみ出さないことを確認した
