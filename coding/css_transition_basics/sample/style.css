@@ -1,0 +1,18 @@
+#box {
+  width: 100px;
+  height: 100px;
+  background-color: #4a90d9;
+  transform: translateX(0);
+
+  /* ❌ 誤解しやすい：transitionは「動いた後の状態（.active）」に書くものではない
+     ✅ 正しくは：transitionは「基本セレクタ（#box）」に書く
+     ここに書くことで「#box のどのプロパティが変わっても0.4秒かけて補間する」というルールになり、
+     .activeが付く時もが外れる時も両方向に効く。
+     もし.activeの中だけに書くと、外れる瞬間はルール自体が消えるので瞬間移動になる。 */
+  transition: transform 0.4s ease, background-color 0.4s ease;
+}
+
+#box.active {
+  transform: translateX(300px);
+  background-color: #e0544c;
+}
