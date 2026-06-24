@@ -12,13 +12,18 @@ HTML要素は content・padding・border・marginの4層構造を持つ。
 
 タグの中身そのものがcontentであり、タグ自体ではない。
 
-contentを中心に、外側へpadding → border → marginの順で領域が重なる。
+margin・border・paddingは「領域（帯）」、contentはその内側の空間にある実体。さらに各領域はtop/right/bottom/leftの4方向に分かれていて、1〜4個の値で指定するショートハンドは時計回り（上→右→下→左）の順に対応する（下図の①→②→③→④）。
 
 ```
-margin（外側余白）
-└─ border（境界線）
-   └─ padding（内側余白）
-      └─ content（実際の内容）
+              ① top
+       ┌─ margin ──────────────┐
+       │ ┌─ border ───────────┐│
+       │ │ ┌─ padding ──────┐ ││
+④ left │ │ │    content     │ ││ ② right
+       │ │ └────────────────┘ ││
+       │ └─────────────────────┘│
+       └──────────────────────────┘
+              ③ bottom
 ```
 
 | 層（外側から） | 役割 |
@@ -28,7 +33,12 @@ margin（外側余白）
 | padding | 内側の余白 |
 | content | 実際の内容（テキスト・画像・子要素） |
 
-borderは太さ・スタイル・色の3つを指定できる（`border-width`・`border-style`・`border-color`、一括指定は`border: 太さ スタイル 色;`の順）。padding・marginは1〜4個の値で上下左右を指定する。
+borderは太さ・スタイル・色の3つを指定できる（`border-width`・`border-style`・`border-color`、一括指定は`border: 太さ スタイル 色;`の順）。
+
+```css
+margin: 10px 20px 30px 40px;
+/*       ①top ②right ③bottom ④left */
+```
 
 ---
 
