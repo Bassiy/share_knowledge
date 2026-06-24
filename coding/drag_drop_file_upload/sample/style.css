@@ -1,0 +1,32 @@
+#dropzone {
+  width: 300px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px dashed #999;
+  border-radius: 8px;
+  color: #666;
+  cursor: pointer;
+}
+
+#dropzone.dragover {
+  border-color: #3498db;
+  background-color: #eef6fc;
+  color: #3498db;
+}
+
+/* ← 子要素にpointer-eventsを切っておくと、マウスがpタグ上に乗っても
+   dragenter/dragleaveは常に#dropzone自身で発生する。
+   これが無いと「親→子へカーソル移動」のたびにdragleave(親)→dragenter(子)が
+   発生し、dragoverクラスが点滅（チラつく）原因になる */
+#dropzone p {
+  pointer-events: none;
+}
+
+#preview {
+  display: none;
+  max-width: 300px;
+  margin-top: 16px;
+}
