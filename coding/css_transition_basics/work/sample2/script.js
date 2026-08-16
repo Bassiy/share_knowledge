@@ -10,6 +10,8 @@ closeButton.addEventListener('click', () => {
   overlay.classList.remove('open');
 });
 
+/* クリックという動作がそもそも行われた瞬間に、その対象がoverlayであったかどうか */ 
+/* アロー関数と無名関数を合わせた書き方 */
 overlay.addEventListener('click', (event) => {
   // event.targetは実際にクリックされた要素そのもの。
   // #modal内をクリックした場合もイベントは#overlayまでバブリングしてくるので、

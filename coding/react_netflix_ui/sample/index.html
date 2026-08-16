@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<title>react_netflix_ui sample</title>
+<style>
+  /* インラインstyle（JSX側）ではpseudo-elementやscrollbar非表示が書けないので、ここだけ通常のCSSで補う */
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Helvetica Neue", Arial, sans-serif; background: #141414; }
+  .row-scroll::-webkit-scrollbar { display: none; }
+  .row-scroll { scrollbar-width: none; }
+</style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- CDNからReact本体を読み込む。npm installもビルドツールも不要 -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- JSXはブラウザが直接読めないので、Babelでその場（ブラウザ内）で変換する -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- type="text/babel" を付けたscriptだけがBabelの変換対象になる -->
+  <script type="text/babel" src="./app.jsx"></script>
+</body>
+</html>

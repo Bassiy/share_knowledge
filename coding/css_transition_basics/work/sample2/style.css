@@ -1,40 +1,31 @@
-#overlay {
-  position: fixed;   /*スクロールしても常に中央にいる*/
-  inset: 0;          /*上下左右が0*/
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#overlay{
+  position: fixed;                          /* 位置を固定 */
+  inset: 0;                                 /* 上下左右の位置指定（top, right, bottom, left）を、すべてまとめて 0 にする　= 画面全体に広がる */
+  background-color: rgba(0, 0, 0, 0.5);   /* 若干透ける感じ */
+  display: flex;                            /* 子要素を自動計算して配置する */
+  align-items: center;                      /* 子要素の縦を中央に揃える */
+  justify-content: center;                  /* 子要素の横を中央に揃える */
 
-  /* ❌ 誤解しやすい：display: none ⇄ display: block の切り替えでtransitionを付けようとする
-     ✅ 正しくは：opacity + pointer-events の組み合わせを使う
-     display: noneの間は要素がレンダリングされず「変化前の状態」自体が存在しないため、
-     そこからdisplay: blockに変えてもtransitionは発火しない（補間する元の値が無い）。
-     opacityなら常にレンダリングされたまま0↔1を動くので、補間が成立する。
-     pointer-eventsは非表示中のクリックを透過させるためだけのもので、これ自体はtransitionしない（一瞬で切り替わるが、opacity:0で見えないので問題ない）。 */
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  opacity: 0;                               /* 見えなくする */
+  pointer-events: none;                     /* 触れなくする*/
+  transition: opacity 0.3s ease;            /* 0.3sで変化する */
 }
 
+/* 後でDOMでopenクラスをつける */
 #overlay.open {
   opacity: 1;
   pointer-events: auto;
 }
 
-
-/*
-border-radius:こいつで角を丸めている。
-*/
 #modal {
   background-color: #fff;
   padding: 24px 32px;
-  border-radius: 8px;
+  border-radius: 8px;                      /* 角を丸くする */
   transform: translateY(20px);
   transition: transform 0.3s ease;
 }
 
-
+/* 子孫結合子 : overlayかつopenの中にあるid=modelを操作（この場合は、何階層下でもよい） */
 #overlay.open #modal {
   transform: translateY(0);
 }
