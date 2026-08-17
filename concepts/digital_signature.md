@@ -47,9 +47,9 @@ sequenceDiagram
 電子証明書は、この署名の仕組みをCAが使った実例。証明書の中身・CAによる信頼チェーンの詳細は [pki.md](pki.md) を参照。
 
 ## 関連概念
-- [pki.md](pki.md)
-- [encryption_methods.md](encryption_methods.md)
-- [ssl_tls.md](ssl_tls.md)
+- [pki.md](pki.md)（電子証明書という形でデジタル署名を実利用する仕組み）
+- [encryption_methods.md](encryption_methods.md)（同じ鍵ペアを暗号化に使う場合との対比）
+- [ssl_tls.md](ssl_tls.md)（証明書の検証にデジタル署名の仕組みが使われる）
 
 ## ソース
 - 書籍：イラスト図解式ネットワークの基礎　第6章（2026-05-15）
