@@ -69,9 +69,9 @@ graph TD
 HTTPSでは①PKIでサーバーを認証してから、②ユーザー認証が行われる。
 
 ## 関連概念
-- [ssl_tls.md](ssl_tls.md)
-- [oauth2.md](oauth2.md)
-- [https.md](https.md)
+- [ssl_tls.md](ssl_tls.md)（PKIが実際に使われる代表的なプロトコル）
+- [oauth2.md](oauth2.md)（サーバー認証（PKI）とユーザー認証（OAuth）の対比）
+- [https.md](https.md)（PKIによるサーバー認証を組み込んだプロトコル）
 
 ## ソース
 - 2026-05-11・会話での補足学習（イラスト図解式 ネットワークの基礎 第5章をきっかけに）
