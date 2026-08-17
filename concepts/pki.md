@@ -51,9 +51,24 @@ graph TD
 ---
 
 ### HTTPSにおけるPKIの役割
-1. サーバーがCA署名済みの証明書（公開鍵入り）をブラウザに送る
-2. ブラウザが証明書の署名を検証し「本物のサーバーだ」と確認する
-3. その公開鍵を使って共通鍵を安全に交換し、通信を暗号化する
+
+```mermaid
+sequenceDiagram
+    participant CA as CA
+    participant Server as サーバー
+    participant Browser as ブラウザ
+
+    Note over CA,Server: 事前（一度きり）
+    Server->>CA: 証明書発行申請（公開鍵を提出）
+    CA-->>Server: CAの秘密鍵で署名した証明書を発行
+
+    Note over Server,Browser: 通信のたびに
+    Server->>Browser: 証明書（公開鍵＋CA署名）を送付
+    Note over Browser: CAの公開鍵で署名を検証<br/>（CAへの問い合わせは不要）
+    Browser->>Server: 検証済みの公開鍵で共通鍵を暗号化して送付
+```
+
+CAが登場するのは最初の証明書発行のときだけで、以降の通信のたびにCAへ問い合わせることはない。
 
 ---
 
