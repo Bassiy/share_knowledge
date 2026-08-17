@@ -89,10 +89,10 @@ Googleなどの認証サーバーには論理的に2つの窓口がある。
 必要最小限の権限だけを渡すことで、事故時の被害を最小化する思想。OAuth2.0のスコープ設計はこの思想を体現している。APIを作る側になったとき「どの操作にどのスコープを割り当てるか」の判断基準になる。
 
 ## 関連概念
-- authentication_authorization.md（認証・認可の一般的な定義。OAuth2.0はこのうち認可を実装する具体例）
-- pop3_imap4.md（IMAPSと組み合わせてメール機能を実装する）
-- short_lived_token.md（短命トークンの概念と重なる）
-- sender_domain_auth.md
+- [authentication_authorization.md](authentication_authorization.md)（認証・認可の一般的な定義。OAuth2.0はこのうち認可を実装する具体例）
+- [pop3_imap4.md](pop3_imap4.md)（IMAPSと組み合わせてメール機能を実装する）
+- [short_lived_token.md](short_lived_token.md)（短命トークンの概念と重なる）
+- [sender_domain_auth.md](sender_domain_auth.md)
 
 ## ソース
 - 2026-05-05：イラスト図解式ネットワークの基本 第5章（補足含む）
