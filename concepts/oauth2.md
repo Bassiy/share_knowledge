@@ -24,6 +24,8 @@ sequenceDiagram
     Auth-->>App: トークンを発行
     App->>Server: ②トークンを送る
     Server->>Auth: ③トークンを問い合わせ・検証
+    Auth-->>Server: ④検証結果（有効）
+    Server-->>App: ⑤リクエストされたリソースを返す
 ```
 
 OAuth2.0では、パスワードは認証サーバにのみ渡し、アプリ・サーバ間はトークンだけをやり取りする。
