@@ -51,9 +51,19 @@ sequenceDiagram
 ### ハイブリッド暗号方式（実用）
 公開鍵暗号の「遅さ」と共通鍵の「鍵配送問題」を両方解決するための組み合わせ。
 
-```
-① 公開鍵暗号で共通鍵を安全に交換（遅いが安全）
-② 以降の通信は共通鍵で暗号化（速い）
+```mermaid
+sequenceDiagram
+    box 送信者
+        participant S as 送信者
+    end
+    box 受信者
+        participant R as 受信者
+    end
+
+    Note over S,R: ①公開鍵暗号で共通鍵を安全に交換（遅いが安全）
+    S->>R: 公開鍵で暗号化した共通鍵
+    Note over S,R: ②以降は共通鍵で暗号化通信（速い）
+    S->>R: 共通鍵で暗号化したデータ
 ```
 
 HTTPSなどの実際の通信はほぼこの方式で動いている。
@@ -69,9 +79,9 @@ HTTPSなどの実際の通信はほぼこの方式で動いている。
 | デジタル署名（本人証明） | 秘密鍵 | 公開鍵（誰でも検証できる） |
 
 ## 関連概念
-- [digital_signature.md](digital_signature.md)
-- [ssl_tls.md](ssl_tls.md)
-- [pki.md](pki.md)
+- [digital_signature.md](digital_signature.md)（同じ鍵ペアを「証明」に使う場合。暗号化との対比）
+- [ssl_tls.md](ssl_tls.md)（ハイブリッド暗号方式を実際に使うプロトコル）
+- [pki.md](pki.md)（公開鍵が本物かを保証する信頼の仕組み）
 
 ## ソース
 - 書籍：イラスト図解式ネットワークの基礎　第6章（2026-05-15）
