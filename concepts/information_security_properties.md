@@ -102,6 +102,8 @@ RSAは鍵サイズ(2048bit=256バイト)より大きいデータを直接暗号�
 
 ## 関連概念
 - [encryption_methods.md](encryption_methods.md)（真正性・機密性を支える暗号化方式の詳細はこちらを参照）
+- [digital_signature.md](digital_signature.md)（真正性を実現する署名の仕組み自体の詳細）
+- [hash.md](hash.md)（完全性を実現するハッシュの性質・限界の詳細）
 
 ## 関連実装
 - [hash_and_signature_basics](../coding/hash_and_signature_basics/) — ハッシュの決定論性・雪崩効果と、RSA署名による改ざん検知・なりすまし検知を実装して確認
