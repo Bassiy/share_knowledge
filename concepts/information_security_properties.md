@@ -64,13 +64,22 @@ DNSエントリが改ざんされると、正しいURLを入力しても攻撃�
 
 「ハッシュ化」と「署名」は別の処理。ハッシュ化に鍵は使わない。
 
-| ステップ | 処理 |
-|--|--|
-| 1 | messageをSHA256でハッシュ化(署名側) |
-| 2 | ハッシュ値を秘密鍵で暗号化 → これが署名(signature) |
-| 3 | messageをSHA256でハッシュ化(検証側、①と同じ処理) |
-| 4 | signatureを公開鍵で復号 → ハッシュ値を復元 |
-| 5 | ③と④のハッシュ値が一致するかを比較 |
+```mermaid
+sequenceDiagram
+    box 署名側
+        participant Signer as 署名者
+    end
+    box 検証側
+        participant Verifier as 検証者
+    end
+
+    Note over Signer: ①messageをSHA256でハッシュ化
+    Note over Signer: ②ハッシュ値を秘密鍵で暗号化<br/>→ これが署名(signature)
+    Signer->>Verifier: message + signature
+    Note over Verifier: ③messageをSHA256でハッシュ化<br/>（①と同じ処理）
+    Note over Verifier: ④signatureを公開鍵で復号<br/>→ ハッシュ値を復元
+    Note over Verifier: ⑤③と④のハッシュ値を比較
+```
 
 メッセージを直接暗号化せずハッシュを挟む理由は2つ。
 
