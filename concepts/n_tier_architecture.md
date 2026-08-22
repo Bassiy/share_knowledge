@@ -26,6 +26,31 @@ Solution
     └── UserRepository.cs         # IUserRepositoryを実装
 ```
 
+フロントエンドの`useApiRequest('/api/users')`のようなリクエストは、`[HttpPost]`などの属性が付いたControllerのメソッドに届く。
+
+```csharp
+[ApiController]
+[Route("api/[controller]")]
+public class UserController : ControllerBase
+{
+    private readonly IUserService _userService;
+
+    public UserController(IUserService userService)
+    {
+        this._userService = userService;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> GetUsers()
+    {
+        var users = await _userService.GetAllAsync();
+        return Ok(users);
+    }
+}
+```
+
+---
+
 Business層は「目的（ドメイン）ごとに1ファイル」で分割され（UserService.cs、OrderService.csなど）、必要なDataAccessのインターフェースをコンストラクタで受け取ってメソッドを使う。
 
 ```csharp
