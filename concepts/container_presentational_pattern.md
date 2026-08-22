@@ -22,7 +22,7 @@ frontend/
     │       └── UserForm.jsx
     │
     └── hooks/
-        └── useFetch.js          # 汎用フック
+        └── useApiRequest.js     # 汎用フック
 ```
 
 ---
