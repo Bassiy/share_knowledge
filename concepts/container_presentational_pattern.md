@@ -37,7 +37,11 @@ frontend/
 
 ```javascript
 function UserPage() {
-  const { data: users } = useApiRequest('/api/users');
+  const [users, setUsers] = useState(null);
+
+  useEffect(() => {
+    useApiRequest('/api/users').then(setUsers);
+  }, []);
 
   return <UserList users={users} />; // データはpropsで渡すだけ
 }
