@@ -48,8 +48,8 @@ function UserPage() {
 ```
 
 ## 関連概念
-- react_use_effect.md（Pageマウント時の一括fetchに使われるフックの挙動）
-- n_tier_architecture.md（同じプロジェクトのバックエンド側の構成）
+- [react_use_effect.md](react_use_effect.md)（Pageマウント時の一括fetchに使われるフックの挙動）
+- [n_tier_architecture.md](n_tier_architecture.md)（同じプロジェクトのバックエンド側の構成）
 
 ## ソース
 - 2026-08-22・会話ベース（実務で見たReactプロジェクトの言語化）
