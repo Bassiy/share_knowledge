@@ -81,9 +81,9 @@ public class UserService : IUserService
 ---
 
 ## 関連概念
-- solid_principles.md（DIP＝依存性逆転の原則が、Clean Architecture側の「インターフェースを中心が持つ」の理論的根拠）
-- asp_net_mvc.md（同じくController/Model分割を持つが、SSRのRazor構文・View層まで含む別の実装パターン）
-- container_presentational_pattern.md（同じプロジェクトのフロントエンド側の構成）
+- [solid_principles.md](solid_principles.md)（DIP＝依存性逆転の原則が、Clean Architecture側の「インターフェースを中心が持つ」の理論的根拠）
+- [asp_net_mvc.md](asp_net_mvc.md)（同じくController/Model分割を持つが、SSRのRazor構文・View層まで含む別の実装パターン）
+- [container_presentational_pattern.md](container_presentational_pattern.md)（同じプロジェクトのフロントエンド側の構成）
 
 ## ソース
 - 2026-08-22・会話ベース（実務で見たC#.NETプロジェクトの言語化）
