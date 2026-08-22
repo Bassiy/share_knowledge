@@ -1,16 +1,33 @@
+from __future__ import annotations
+
 import base64
 import hashlib
 import hmac
 import time
 
 
+
+#
+# 以下で実行をして作成したdemoを確かめる
+# Google Authenticaterで試した。
+#
+# python3 -c "
+# from totp import totp
+# secret = '4VMKBZFLMBEV6HE6FJIRXLBSMQ6QWW6U'
+# print(totp(secret))
+# "
+#
+
+
+# utf-8のbase32文字列で、秘密鍵を生成
 def generate_secret(num_byte: int = 20) -> str:
     import secrets
 
     raw = secrets.token_bytes(num_byte)
-    return base64.b32decode(raw).decode("utf-8")
+    return base64.b32encode(raw).decode("utf-8")
 
 
+# 
 def _hope(secret_bytes: bytes, counter: int) -> str:
 
     counter_bytes = counter.to_bytes(8,byteorder="big")
