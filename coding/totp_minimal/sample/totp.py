@@ -4,6 +4,10 @@ Google Authenticator などのアプリと相互運用するため、
 秘密鍵は base32 でやり取りする(otpauth:// URI の仕様に合わせるため)。
 """
 
+# ← `float | None` のような書き方(PEP 604)はPython 3.10からの機能。
+#   3.9以下でも動かすためにこの一行を入れておく(型ヒントが文字列扱いになり実行時evalされない)。
+from __future__ import annotations
+
 import base64
 import hashlib
 import hmac
