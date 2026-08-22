@@ -71,6 +71,7 @@ flowchart LR
 ## 関連概念
 - [digital_signature.md](digital_signature.md)（ハッシュ〈完全性〉に秘密鍵での署名を組み合わせることで真正性を担保する仕組み）
 - [information_security_properties.md](information_security_properties.md)（完全性と真正性の違い、署名の内部処理の詳細）
+- [totp.md](totp.md)（HMACの具体的な利用例。秘密鍵+時刻カウンタで6桁コードを生成する）
 
 ## 関連実装
 - [hash_and_signature_basics](../coding/hash_and_signature_basics/) — ハッシュの決定論性・雪崩効果を実装して確認
