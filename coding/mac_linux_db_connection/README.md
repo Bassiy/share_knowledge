@@ -35,6 +35,7 @@ mac_linux_db_connection/
 - Oracleでは「接続ユーザー＝スキーマ」。`SYSTEM`ユーザーで接続したまま`CREATE TABLE`すると、意図せず`SYSTEM`スキーマにテーブルができてしまう。原因はこの仕様の理解不足で、`data_schema`専用の接続に切り替えて解決した
 - Oracleの識別子はクォートなしだと自動大文字化される。SQL Developerの接続ユーザー名欄は識別子解釈なので小文字でも通るが、スキーマフィルタの検索欄は単純文字列一致のため大文字で検索しないとヒットしない
 - スキーマ分離（実テーブルは`data_schema`、アプリ接続は`app_schema`のシノニム経由）を実際に手を動かして構築すると、「アプリ側の接続情報を変えずに実データの配置を変更できる」という設計意図が体感として腑に落ちた
+- `gvenzl/oracle-free`は2024年9月以降マルチプラットフォーム対応済みで、Apple Silicon（arm64）でもエミュレーションなしでネイティブ動作する。`docker run`のコマンドはLinux/Mac間で変更不要（`docker info`の`Architecture`で確認可能）
 
 ## 関連概念
 - [oracle_cdb_pdb](../../concepts/oracle_cdb_pdb.md) — `FREE`（CDB）と`FREEPDB1`（PDB）の違い、接続先を誤ると`ORA-65096`になる理由
