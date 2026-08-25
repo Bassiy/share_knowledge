@@ -5,6 +5,36 @@ Macでアプリを起動し、別のLinux PCで動かしたOracle DB（Docker）
 
 その後Linux PCが不調になったため、同じ手順がMac単体（Docker Desktop on Apple Silicon）でも再現できるか確認した。結果、`docker_setup.sh`・`schema_setup.sql`とも無変更で通り、接続先を`localhost`に変えるだけで完全に同じ手順が使えた。
 
+## プロジェクト全体像・ロードマップ（Notion模倣アプリ）
+
+本実験（DB接続・スキーマ分離）は、Notion模倣アプリ構築プロジェクトのPhase 0にあたる。
+
+### 技術構成
+- フロント：React（Mac、ブラウザ）
+- API層：C# ASP.NET Core Web API
+- DB：Oracle Database Free（Docker。当初Linux PC想定、現在はMac単体でも代替可能と確認済み）
+- 接続：まずは同一LAN内（またはローカル）で疎通確認。外出先アクセスが必要になった場合はTailscale（無料のWireGuardベースVPN）を使う方針
+
+### 模倣対象
+Notionの一部機能を模倣する。
+
+### ロードマップ
+- **Phase 0（完了）**：Oracleセットアップ＋スキーマ分離設計（`data_schema`/`app_schema`作成、シノニム、権限付与）。本ディレクトリがその実験記録
+- **Phase 1（未着手）**：疎通確認（React → C# API → Oracle DB、`Pages`テーブルをフラットな一覧で読み取り表示・読み取り専用）。サンプルデータは投入済み（`sample_data.sql`、親子3階層6件）
+- **Phase 2（未着手）**：階層構造（`parent_id`を使ったネスト表示、サイドバーのツリーUI）
+- **Phase 3（未着手）**：編集機能（ページの作成・更新・削除、CRUD）
+
+### 参照する設計概念（フロント/バックエンドで役割分担）
+- フロント（React側の構造）→ [container_presentational_pattern](../../concepts/container_presentational_pattern.md)
+- バックエンド（3層構成そのもの）→ [n_tier_architecture](../../concepts/n_tier_architecture.md)
+
+### 補足検討（API層の言語について）
+バックエンドをTypeScript（Node.js/Express）にする案も検討したが見送り、C#継続で決定。
+- アーキテクチャ的には言語非依存：React↔API↔DBの3層構成なら、API層の中身がC#かTSかはフロント側から見えない
+- 今回の主目的は「アーキテクチャの実践＝動くものを作ること」なので、学習コストが低いC#で確実に完走する方針
+- 将来の伸び代（優先度低）：v1が動いた後、同じAPI仕様をTypeScriptで再実装してC#版と置き換える実験をすると、「アーキテクチャの層が言語に依存しない」ことを実体験できる
+- Phase 1実装時は、React↔C# API連携の実験記録である[react_dotnet_api](../react_dotnet_api/)（CORS・JSONシリアライズ周りの学びあり）をベースにする想定
+
 ## 実行方法
 
 ### パターンA：Linux PC + Mac（LAN経由、当初の構成）
