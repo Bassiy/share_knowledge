@@ -73,3 +73,4 @@ mac_linux_db_connection/
 - [oracle_cdb_pdb](../../concepts/oracle_cdb_pdb.md) — `FREE`（CDB）と`FREEPDB1`（PDB）の違い、接続先を誤ると`ORA-65096`になる理由
 - [oracle_schema_separation](../../concepts/oracle_schema_separation.md) — `data_schema`/`app_schema`をシノニムで分離する設計
 - [n_tier_architecture](../../concepts/n_tier_architecture.md) — React → C# API → Oracle DBの3層構成の一部としての本実験の位置付け
+- [container_presentational_pattern](../../concepts/container_presentational_pattern.md) — Phase 1以降のReact側実装で参照する設計パターン
