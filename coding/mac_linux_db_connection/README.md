@@ -3,10 +3,20 @@
 ## 目的
 Macでアプリを起動し、別のLinux PCで動かしたOracle DB（Docker）に接続する構成を実際に組んで疎通確認する。Notion模倣アプリ（React → C# API → Oracle DB）の Phase 0 として、スキーマ分離（`data_schema`/`app_schema` + シノニム）まで実施。
 
+その後Linux PCが不調になったため、同じ手順がMac単体（Docker Desktop on Apple Silicon）でも再現できるか確認した。結果、`docker_setup.sh`・`schema_setup.sql`とも無変更で通り、接続先を`localhost`に変えるだけで完全に同じ手順が使えた。
+
 ## 実行方法
+
+### パターンA：Linux PC + Mac（LAN経由、当初の構成）
 1. Linux PC側で `docker_setup.sh` を実行し、Oracle Database Free（`FREEPDB1`）を起動
 2. Mac側のSQL Developerから `connection_info.md` の接続情報でLAN経由接続
 3. `schema_setup.sql` を上から順に実行（Step 1〜3は接続ユーザーを切り替えながら実行する必要あり。詳細はファイル内コメント参照）
+4. 最後の `SELECT * FROM Pages;` が通れば疎通確認完了
+
+### パターンB：Mac単体（Linux PC不調時の代替。手順は同一）
+1. Mac上のDocker Desktopで `docker_setup.sh` をそのまま実行
+2. 接続先は`localhost:1521/FREEPDB1`（LAN内IP不要）
+3. `schema_setup.sql` を上から順に実行
 4. 最後の `SELECT * FROM Pages;` が通れば疎通確認完了
 
 ## ファイル構成
