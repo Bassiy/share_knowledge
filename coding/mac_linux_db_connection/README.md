@@ -18,6 +18,7 @@ Macでアプリを起動し、別のLinux PCで動かしたOracle DB（Docker）
 2. 接続先は`localhost:1521/FREEPDB1`（LAN内IP不要）
 3. `schema_setup.sql` を上から順に実行
 4. 最後の `SELECT * FROM Pages;` が通れば疎通確認完了
+5. `sample_data.sql` を`data_schema`で実行し、Pagesにサンプルデータ（親子3階層、計6件）を投入。`app_schema`側から`SELECT`しても同じ内容が見えることを確認済み
 
 ## ファイル構成
 ```
