@@ -85,6 +85,9 @@ Oracleの識別子（ユーザー名・テーブル名など）はクォート�
 - three_layer_schema（概念スキーマ内でビューによって別名を与える発想と近いが、3層スキーマがDBMS管理の自動マッピングなのに対し、スキーマ分離は人間が明示的にGRANT/SYNONYMを設定する点が異なる）
 - dbms（GRANTなどの権限管理はDBMSが担う機能の一部）
 
+## 関連実装
+- [mac_linux_db_connection](../coding/mac_linux_db_connection/) — `data_schema`/`app_schema`の作成・GRANT・シノニム作成を実際に構築した実験
+
 ## ソース
 - 2026-08-22〜2026-08-24・Mac↔Linux DB接続実験（Phase 0: スキーマ分離、note/2026-08-22.md, note/2026-08-24.md）
 

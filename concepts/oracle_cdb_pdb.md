@@ -41,6 +41,9 @@ CDB rootに直接繋いだ状態で通常の名前（`data_schema`など）の`C
 ## 関連概念
 - dbms（DBMSインスタンスとデータベースの管理単位という文脈で繋がる）
 
+## 関連実装
+- [mac_linux_db_connection](../coding/mac_linux_db_connection/) — `FREEPDB1`指定・`ORA-65096`回避を含むDocker上でのOracle接続実験
+
 ## ソース
 - 2026-08-22〜2026-08-24・Mac↔Linux DB接続実験（Oracle Database Free on Docker, note/2026-08-22.md, note/2026-08-24.md）
 
