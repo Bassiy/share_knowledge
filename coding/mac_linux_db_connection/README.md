@@ -25,7 +25,8 @@ mac_linux_db_connection/
 ├── README.md
 ├── connection_info.md   # 接続情報一覧
 ├── docker_setup.sh       # Linux側：Oracleコンテナ起動コマンド
-└── schema_setup.sql      # ユーザー作成〜シノニム作成〜疎通確認のSQL
+├── schema_setup.sql      # ユーザー作成〜シノニム作成〜疎通確認のSQL
+└── sample_data.sql       # Pagesテーブルへのサンプルデータ投入（親子3階層）
 ```
 
 ## 学び
