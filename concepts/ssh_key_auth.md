@@ -49,9 +49,9 @@ sequenceDiagram
 ---
 
 ## 関連概念
-- personal_access_token.md（HTTPS認証との比較）
-- challenge_response_auth.md（署名がなぜ安全かの仕組み）
-- passkey.md（同じ公開鍵・秘密鍵の考え方を使う認証方式。オリジン紐付けと同期がパスキー固有の差分）
+- [personal_access_token.md](personal_access_token.md)（HTTPS認証との比較）
+- [challenge_response_auth.md](challenge_response_auth.md)（署名がなぜ安全かの仕組み）
+- [passkey.md](passkey.md)（同じ公開鍵・秘密鍵の考え方を使う認証方式。オリジン紐付けと同期がパスキー固有の差分）
 
 ## ソース
 - 2026-03-06・Qiita「AI時代にすべてをGitHubで管理するあなたへ──HTTPS接続、今すぐやめてください」

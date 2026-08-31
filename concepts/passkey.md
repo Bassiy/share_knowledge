@@ -65,8 +65,8 @@ sequenceDiagram
 ---
 
 ## 関連概念
-- challenge_response_auth.md（署名がなぜ安全かの土台となる仕組み）
-- ssh_key_auth.md（同じ公開鍵・秘密鍵の考え方を使う認証方式。オリジン紐付けと同期がパスキー固有の差分）
+- [challenge_response_auth.md](challenge_response_auth.md)（署名がなぜ安全かの土台となる仕組み）
+- [ssh_key_auth.md](ssh_key_auth.md)（同じ公開鍵・秘密鍵の考え方を使う認証方式。オリジン紐付けと同期がパスキー固有の差分）
 
 ## ソース
 - 2026-08-24・イラスト図解式セキュリティの基本 第2章

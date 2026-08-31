@@ -24,9 +24,9 @@
 ---
 
 ## 関連概念
-- ssh_key_auth.md（チャレンジ・レスポンスを使う認証方式）
-- passkey.md（同じ仕組みをWebAuthn/FIDO2として応用した認証方式）
-- personal_access_token.md（チャレンジ・レスポンスを使わない認証との比較）
+- [ssh_key_auth.md](ssh_key_auth.md)（チャレンジ・レスポンスを使う認証方式）
+- [passkey.md](passkey.md)（同じ仕組みをWebAuthn/FIDO2として応用した認証方式）
+- [personal_access_token.md](personal_access_token.md)（チャレンジ・レスポンスを使わない認証との比較）
 
 ## ソース
 - 2026-03-06・Qiita「AI時代にすべてをGitHubで管理するあなたへ──HTTPS接続、今すぐやめてください」
