@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>Passkey Demo</title>
+  <!-- @simplewebauthn/browser のUMDバンドル。navigator.credentials.create/get のラッパー -->
+  <script src="https://unpkg.com/@simplewebauthn/browser/dist/bundle/index.umd.min.js"></script>
+</head>
+<body>
+  <h1>Passkey Demo</h1>
+  <button id="register">登録</button>
+  <button id="login">ログイン</button>
+  <pre id="log"></pre>
+  <script src="app.js"></script>
+</body>
+</html>
