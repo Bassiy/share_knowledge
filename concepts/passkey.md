@@ -19,16 +19,21 @@ sequenceDiagram
     end
 
     Note over Device,Server: 登録
-    Device->>Device: 鍵ペア生成<br/>秘密鍵はサービスのオリジンと紐付けて保存
+    Device->>Device: 鍵ペア生成
+    Device->>Device: 端末内に保存<br/>{秘密鍵, RP ID: サービスのオリジン}
     Device->>Server: 公開鍵を送付
     Server->>Server: 公開鍵をユーザに紐付けて保存
 
     Note over Device,Server: 認証
-    Server-->>Device: チャレンジ（乱数）を送付
-    Device->>Device: 現在のオリジンに一致する鍵があるか確認
-    Device->>Device: 生体認証/PINで本人確認 → 秘密鍵で署名
-    Device->>Server: 署名を送付
-    Server->>Server: 公開鍵で署名を検証
+    Server-->>Device: チャレンジ（乱数）+ RP IDを送付
+    Device->>Device: 保存済みの{秘密鍵, RP ID}から<br/>現在のオリジンと一致するRP IDの鍵を検索
+    alt 一致する鍵なし
+        Device--xDevice: 候補ゼロ、ここで終了<br/>（フィッシングサイトはここで弾かれる）
+    else 一致する鍵あり
+        Device->>Device: 生体認証/PINで本人確認 → 秘密鍵で署名
+        Device->>Server: 署名を送付
+        Server->>Server: 公開鍵で署名を検証
+    end
 ```
 
 ---
