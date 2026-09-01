@@ -43,6 +43,26 @@ sequenceDiagram
 
 ---
 
+### 署名の抽象契約（Sign/Verify関数）
+
+署名の本質は、アルゴリズムに依存しない共通インターフェースとして捉えられる。
+
+| 関数 | 入力 | 出力 |
+|---|---|---|
+| Sign | ハッシュ値, 秘密鍵 | 署名値 |
+| Verify | ハッシュ値, 署名値, 公開鍵 | 真 or 偽 |
+
+「秘密鍵でハッシュ値を暗号化する」という説明は、この`Sign`関数をRSAが実装するときにたまたま暗号化と同じ数式を流用しているだけであり、署名という概念そのものの定義ではない。
+
+| | Signの中身 | Verifyの中身 |
+|---|---|---|
+| RSA | ハッシュ値に秘密鍵で指数演算（暗号化と同じ数式） | 署名値に公開鍵で指数演算 → ハッシュ値を復元して比較（復号と同じ数式） |
+| ECDSA/DSA | 乱数＋秘密鍵＋ハッシュ値から`(r, s)`を計算 | 楕円曲線上の等式が成り立つか直接判定（復号という概念自体が存在しない） |
+
+パスキー（WebAuthn）が主に使うのはECDSA/Ed25519であり、「暗号化」のイメージを持ち込むと実装の理解を誤る。
+
+---
+
 ### 電子証明書との関係
 電子証明書は、この署名の仕組みをCAが使った実例。証明書の中身・CAによる信頼チェーンの詳細は [pki.md](pki.md) を参照。
 
@@ -50,11 +70,16 @@ sequenceDiagram
 - [pki.md](pki.md)（電子証明書という形でデジタル署名を実利用する仕組み）
 - [encryption_methods.md](encryption_methods.md)（同じ鍵ペアを暗号化に使う場合との対比）
 - [ssl_tls.md](ssl_tls.md)（証明書の検証にデジタル署名の仕組みが使われる）
+- [passkey.md](passkey.md)（ECDSA/Ed25519による署名を実際に使う認証方式）
+
+## 関連実装
+- [passkey_webauthn](../coding/passkey_webauthn/) — 実際の署名データ（clientDataJSON・signature）を見て、暗号化ではなく署名であることを確認した
 
 ## ソース
 - 書籍：イラスト図解式ネットワークの基礎　第6章（2026-05-15）
 - https://shikaku-dou.com/fe-lesson-20/（2026-05-15）
 - https://www.kagoya.jp/howto/it-glossary/security/ssl/（2026-05-15）
+- 2026-09-01・Qiita「デジタル署名アルゴリズム(DSA/ECDSA)」 https://qiita.com/lemiyachi/items/628576b16e8f490de17c
 
 ## タグ
-デジタル署名, 公開鍵暗号, 本人証明, セキュリティ, PKI, 改ざん検出
+デジタル署名, 公開鍵暗号, 本人証明, セキュリティ, PKI, 改ざん検出, ECDSA, RSA, Sign/Verify
