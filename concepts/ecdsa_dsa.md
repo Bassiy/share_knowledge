@@ -20,7 +20,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[M と 署名値(r,s) と 公開鍵 Q を取得] --> B[Mからダイジェスト e を再計算]
+    A["M と 署名値(r,s) と 公開鍵 Q を取得"] --> B[Mからダイジェスト e を再計算]
     B --> C["Verify(e, (r,s), Q) を計算<br/>→ 真 or 偽"]
 ```
 
