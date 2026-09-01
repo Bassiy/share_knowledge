@@ -10,24 +10,24 @@
 ```mermaid
 sequenceDiagram
     box ユーザ側
-    participant Device as 端末<br/>（秘密鍵 d を保持）
+    participant Device as 端末<br/>（秘密鍵を保持）
     end
     box サーバ側
-    participant Server as サーバ<br/>（公開鍵 Q を保持）
+    participant Server as サーバ<br/>（公開鍵を保持）
     end
 
-    Note over Device: 対象データ M を用意
-    Device->>Device: ハッシュ関数でダイジェスト e を計算
-    Device->>Device: 乱数 k を生成<br/>（毎回必ず異なる値）
-    Device->>Device: Sign(e, d, k) を計算<br/>→ 署名値 (r, s)
-    Device->>Server: M と 署名値 (r, s) を送付
+    Note over Device: 対象データ（メッセージ）を用意
+    Device->>Device: ハッシュ関数でハッシュ値を計算
+    Device->>Device: 乱数を生成<br/>（毎回必ず異なる値）
+    Device->>Device: 署名関数（ハッシュ値, 秘密鍵, 乱数）を計算<br/>→ 署名値
+    Device->>Server: メッセージと署名値を送付
 
-    Server->>Server: 受け取ったMからダイジェスト e を再計算
-    Server->>Server: Verify(e, (r,s), Q) を計算<br/>→ 真 or 偽
+    Server->>Server: 受け取ったメッセージからハッシュ値を再計算
+    Server->>Server: 検証関数（ハッシュ値, 署名値, 公開鍵）を計算<br/>→ 真 or 偽
     Server-->>Device: 検証結果を返す
 ```
 
-RSAの検証のように「署名を復号してeを取り出し比較する」のではなく、`(r, s)`と`e`と`Q`を使った等式が成り立つかを直接判定する。復号という操作自体が存在しない。
+RSAの検証のように「署名を復号してハッシュ値を取り出し比較する」のではなく、ハッシュ値・署名値・公開鍵を使った等式が成り立つかを直接判定する。復号という操作自体が存在しない。
 
 ---
 
