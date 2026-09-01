@@ -71,6 +71,7 @@ sequenceDiagram
 - [encryption_methods.md](encryption_methods.md)（同じ鍵ペアを暗号化に使う場合との対比）
 - [ssl_tls.md](ssl_tls.md)（証明書の検証にデジタル署名の仕組みが使われる）
 - [passkey.md](passkey.md)（ECDSA/Ed25519による署名を実際に使う認証方式）
+- [ecdsa_dsa.md](ecdsa_dsa.md)（Sign/Verify抽象契約の具体的な実装。署名・検証のフローの詳細はこちら）
 
 ## 関連実装
 - [passkey_webauthn](../coding/passkey_webauthn/) — 実際の署名データ（clientDataJSON・signature）を見て、暗号化ではなく署名であることを確認した
