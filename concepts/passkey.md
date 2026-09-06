@@ -19,9 +19,11 @@ sequenceDiagram
     end
 
     Note over Device,Server: 登録
+    Server-->>Device: チャレンジ（使い捨ての乱数）を送付
     Device->>Device: 鍵ペア生成
     Device->>Device: 端末内に保存<br/>{秘密鍵, RP ID: サービスのオリジン}
-    Device->>Server: 公開鍵を送付
+    Device->>Server: 公開鍵 + チャレンジの写しを送付
+    Server->>Server: チャレンジが一致するか検証<br/>（リプレイ防止・鮮度保証）
     Server->>Server: 公開鍵をユーザに紐付けて保存
 
     Note over Device,Server: 認証
@@ -35,6 +37,17 @@ sequenceDiagram
         Server->>Server: 公開鍵で署名を検証
     end
 ```
+
+---
+
+### 登録時と認証時、チャレンジの役割の違い
+
+登録時にもチャレンジが発行される点は概略図では省略されがちだが、認証時とは検証している対象が異なる。
+
+| | 登録時のチャレンジ | 認証時のチャレンジ |
+|--|--|--|
+| 検証対象 | このレスポンスが今発行した使い捨てチャレンジへの返答か（リプレイ防止・鮮度保証） | 秘密鍵の所持証明（署名の対象そのもの） |
+| サーバーの手持ち | まだ公開鍵はない（これから登録する） | 保存済みの公開鍵で署名を検証できる |
 
 ---
 
@@ -67,6 +80,9 @@ sequenceDiagram
 ## 関連概念
 - [challenge_response_auth.md](challenge_response_auth.md)（署名がなぜ安全かの土台となる仕組み）
 - [ssh_key_auth.md](ssh_key_auth.md)（同じ公開鍵・秘密鍵の考え方を使う認証方式。オリジン紐付けと同期がパスキー固有の差分）
+
+## 関連実装
+- [passkey_webauthn](../coding/passkey_webauthn/) — 登録・認証フローの最小実装。サーバー側でのチャレンジ発行・検証を書いて、登録側にもチャレンジ・レスポンスがあることに気づいた
 
 ## ソース
 - 2026-08-24・イラスト図解式セキュリティの基本 第2章
