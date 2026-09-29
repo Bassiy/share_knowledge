@@ -13,16 +13,21 @@ AWS上に作る自分専用のネットワーク。Region → VPC → AZ → Sub
 flowchart TB
     subgraph Region["Region（東京など）"]
         subgraph VPC["VPC（自分専用のネットワーク＝設定）"]
+            IGW["IGW<br/>（インターネットの出入口）"]
             subgraph AZa["AZ-a"]
-                subgraph SNa["Subnet-a"]
+                subgraph PubA["Public Subnet-a<br/>（IGWへのルートあり）"]
                     ALBa["ALBの窓口(ENI)"]
+                end
+                subgraph PriA["Private Subnet-a<br/>（外から直接届かない）"]
                     EC2a["EC2 ①"]
                     RDSp["RDS Primary"]
                 end
             end
             subgraph AZc["AZ-c"]
-                subgraph SNc["Subnet-c"]
+                subgraph PubC["Public Subnet-c<br/>（IGWへのルートあり）"]
                     ALBc["ALBの窓口(ENI)"]
+                end
+                subgraph PriC["Private Subnet-c<br/>（外から直接届かない）"]
                     EC2c["EC2 ②"]
                     RDSs["RDS Standby"]
                 end
