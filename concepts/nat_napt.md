@@ -116,13 +116,26 @@ PC-AとPC-Bが偶然同じ送信元ポートを使っていても、ルータが
 
 ---
 
+### AWSでの対応：IGWとNAT Gateway
+
+NAPTの「外から先に来た通信は転送先がわからない」という限界が、AWSでは「Privateに外から入られない」というセキュリティ上の利点として使われている。
+
+| 方式 | AWSでの実体 | 外から届くか | 使われ方 |
+|---|---|---|---|
+| NAT（1対1） | IGW | 届く | Public SubnetのリソースのパブリックIPを変換する |
+| NAPT（多対1） | NAT Gateway | 届かない | Private SubnetのEC2が外に出るためだけに使う |
+
+---
+
 ## 関連概念
-- ip_address（変換対象となるグローバルIP・プライベートIPの体系）
-- lan_wan（NATが境界となるLANとWANの関係）
-- router（NAT/NAPTを実行するネットワーク機器）
+- [ip_address.md](ip_address.md)（変換対象となるグローバルIP・プライベートIPの体系）
+- [lan_wan.md](lan_wan.md)（NATが境界となるLANとWANの関係）
+- [router.md](router.md)（NAT/NAPTを実行するネットワーク機器）
+- [aws_vpc.md](aws_vpc.md)（IGWが1対1のNAT、NAT GatewayがNAPTとして動く）
 
 ## ソース
 - 2026-04-17：イラスト図解式ネットワークの基本 第3章
+- 2026-09-29・会話による学習（AWSのIGW / NAT Gateway との対応）
 
 ## タグ
-NAT, NAPT, アドレス変換, グローバルIP, プライベートIP, ポートフォワーディング, ルータ
+NAT, NAPT, アドレス変換, グローバルIP, プライベートIP, ポートフォワーディング, ルータ, AWS, IGW, NAT Gateway

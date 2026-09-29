@@ -63,6 +63,50 @@ S3はVPCとは別の管轄。VPCの中に置くのは「IPアドレスを持っ�
 
 ---
 
+### IGWとNAT Gateway：PublicとPrivateの違いはルートテーブルの1行
+
+Subnetに「Public / Private」という設定項目はない。そのSubnetのルートテーブルで `0.0.0.0/0`（デフォルトルート）をどこに向けるかで決まる。
+
+```
+Public Subnet                     Private Subnet
+10.0.0.0/16 → local               10.0.0.0/16 → local
+0.0.0.0/0   → IGW                 0.0.0.0/0   → NAT Gateway
+```
+
+| | IGW | NAT Gateway |
+|---|---|---|
+| 役割 | VPCとインターネットをつなぐ扉 | Privateから外に出るためだけの出口 |
+| 置く場所 | VPCに1つ取り付ける（Subnetの外） | Public Subnetの中 |
+| 通信の向き | 内→外・外→内の両方 | 内→外のみ |
+| 変換方式 | 1対1のNAT（パブリックIP ↔ プライベートIP） | NAPT（複数EC2で1つのIPを共有） |
+| 料金 | 無料 | 時間＋データ処理量で課金 |
+
+Private SubnetのEC2から外へは、NAPTと1対1のNATの2段階で変換される。
+
+```mermaid
+flowchart LR
+    Net["インターネット"]
+    subgraph VPC
+        IGW["IGW<br/>1対1のNAT"]
+        subgraph Pub["Public Subnet"]
+            ALB["ALB"]
+            NAT["NAT Gateway<br/>NAPT"]
+        end
+        subgraph Pri["Private Subnet"]
+            EC2["EC2"]
+        end
+    end
+    Net <-->|"双方向"| IGW
+    IGW <--> ALB
+    ALB -->|"リクエスト"| EC2
+    EC2 -->|"OSアップデート等<br/>（内→外のみ）"| NAT
+    NAT --> IGW
+```
+
+NAT Gatewayはデータ量で課金されるので、S3などへはVPC Endpoint（Gateway型は無料）を使い、NAT Gatewayを通さないのが定石。
+
+---
+
 ### 停止と削除は別物
 
 「子から順に」の縛りがあるのは削除のほう。VPC・Subnetは「このIP範囲をこう区切る」という設定なので、そもそも停止がない。
@@ -104,10 +148,13 @@ ENI（Elastic Network Interface）は仮想のLANカード。
 - [cloud_infrastructure.md](cloud_infrastructure.md)（プライベートサブネット配置などのセキュリティ設計の実例）
 - [aws_web_three_tier.md](aws_web_three_tier.md)（この入れ子の上に組む代表的な構成）
 - [load_balancer.md](load_balancer.md)（ALBが複数Subnetにまたがる理由＝冗長化）
+- [nat_napt.md](nat_napt.md)（IGWは1対1のNAT、NAT GatewayはNAPTとして動く）
+- [routing.md](routing.md)（Public/Privateの違いは0.0.0.0/0の向け先＝デフォルトゲートウェイの1行）
 
 ## ソース
 - 2026-09-29・https://www.c3index.co.jp/blog/blog_3145/
 - 2026-09-29・https://note.com/ren_webstep/n/n22b2b94971fb
+- 2026-09-29・会話による学習（IGW / NAT Gateway）
 
 ## タグ
-AWS, VPC, Subnet, AZ, ENI, ALB, RDS, S3, 構成図, インフラ, ネットワーク
+AWS, VPC, Subnet, AZ, ENI, ALB, RDS, S3, 構成図, インフラ, ネットワーク, IGW, NAT Gateway, ルートテーブル, VPC Endpoint
