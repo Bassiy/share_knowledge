@@ -14,16 +14,18 @@ flowchart TB
     subgraph Region["Region（東京など）"]
         subgraph VPC["VPC（自分専用のネットワーク＝設定）"]
             subgraph AZa["AZ-a"]
-                SNa["Subnet-a"]
-                EC2a["EC2 ①"]
-                ALBa["ALBの窓口(ENI)"]
-                RDSp["RDS Primary"]
+                subgraph SNa["Subnet-a"]
+                    ALBa["ALBの窓口(ENI)"]
+                    EC2a["EC2 ①"]
+                    RDSp["RDS Primary"]
+                end
             end
             subgraph AZc["AZ-c"]
-                SNc["Subnet-c"]
-                EC2c["EC2 ②"]
-                ALBc["ALBの窓口(ENI)"]
-                RDSs["RDS Standby"]
+                subgraph SNc["Subnet-c"]
+                    ALBc["ALBの窓口(ENI)"]
+                    EC2c["EC2 ②"]
+                    RDSs["RDS Standby"]
+                end
             end
         end
         subgraph Outside["VPCの外（別の管轄）"]
