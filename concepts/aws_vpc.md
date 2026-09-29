@@ -36,8 +36,6 @@ flowchart TB
         end
     end
 
-    EC2a -->|"1つのSubnetだけに属する"| SNa
-    EC2c -->|"1つのSubnetだけに属する"| SNc
     ALBa -.->|"2つで1台のALB<br/>（複数Subnetにまたがる）"| ALBc
     RDSp -.->|"Multi-AZで同期<br/>（DBサブネットグループ）"| RDSs
     EC2a -->|"VPC Endpoint等で<br/>VPCの外にアクセス"| S3
