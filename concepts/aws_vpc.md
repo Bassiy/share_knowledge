@@ -41,7 +41,11 @@ flowchart TB
         end
     end
 
+    IGW -->|"インターネットから"| ALBa
+    IGW --> ALBc
     ALBa -.->|"2つで1台のALB<br/>（複数Subnetにまたがる）"| ALBc
+    ALBa -->|"転送"| EC2a
+    ALBc -->|"転送"| EC2c
     RDSp -.->|"Multi-AZで同期<br/>（DBサブネットグループ）"| RDSs
     EC2a -->|"VPC Endpoint等で<br/>VPCの外にアクセス"| S3
 ```
