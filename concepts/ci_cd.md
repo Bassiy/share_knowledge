@@ -31,12 +31,36 @@ graph TD
 
 ---
 
+### 手動デプロイからの変化
+
+従来はEC2にWindows OSを入れ、RDPで接続してIISに手動でコピペしていた。それを自動化したのがCI/CD。コピペを置き換えるのは主にCDだが、その手前の「ちゃんと動くか」（CI）もセットで自動化する。
+
+| 工程 | 従来（手動） | CI/CD |
+|--|--|--|
+| ビルド・テスト | 手元でやる／やらない | push のたびに自動（CI） |
+| 配置 | RDPで接続 → IISにコピペ | パイプラインが自動で配置（CD） |
+
+---
+
+### イミュータブルインフラストラクチャ
+
+「動いているものは直さず、作り直して入れ替える」考え方。ECS・Lambdaではサーバーにログインする場面自体がなくなる。
+
+| | 従来 | イミュータブル |
+|--|--|--|
+| デプロイ | 動いているサーバーのファイルを上書き | 新しいイメージで丸ごと入れ替え |
+| 環境の状態 | サーバーごとにばらつく | 同じイメージから起動するので揃う |
+| ロールバック | 手で戻す | 前のイメージに戻すだけ |
+
+---
+
 ### ツール選定のポイント（GCPの例）
 
 | ツール | 特徴 |
 |--|--|
 | Cloud Build | GCP内で完結。IAM権限だけでセキュア。外部サービスに鍵を渡さなくていい |
 | GitHub Actions | 汎用的。GCPへの認証設定が必要になる |
+| CodePipeline / CodeBuild / CodeDeploy | AWSのCI/CDサービス群 |
 
 ---
 
@@ -53,15 +77,18 @@ CI/CDパイプライン自体が攻撃対象になりうる。特にキャッシ
 ---
 
 ## 関連概念
-- git（git push がCI/CDのトリガーになる）
-- cloud_infrastructure（デプロイ先のインフラ基盤）
-- harness_engineering（自動化・フィードバックループの思想が共通）
-- github_actions_security（GitHub Actions 固有のセキュリティ詳細）
-- supply_chain_attack（CI/CDが踏み台になるワーム型攻撃）
+- [git.md](git.md)（git push がCI/CDのトリガーになる）
+- [cloud_infrastructure.md](cloud_infrastructure.md)（デプロイ先のインフラ基盤）
+- [aws_compute_services.md](aws_compute_services.md)（イメージ・関数の入れ替えでデプロイする先）
+- [harness_engineering.md](harness_engineering.md)（自動化・フィードバックループの思想が共通）
+- [github_actions_security.md](github_actions_security.md)（GitHub Actions 固有のセキュリティ詳細）
+- [supply_chain_attack.md](supply_chain_attack.md)（CI/CDが踏み台になるワーム型攻撃）
 
 ## ソース
 - 2026-03-08・https://zenn.dev/so_engineer/articles/728f4336a0aac4
 - 2026-06-03・https://zenn.dev/trknhr/articles/69c01c843329d0
+- 2026-09-29・https://www.c3index.co.jp/blog/blog_3145/
+- 2026-09-29・https://note.com/ren_webstep/n/n22b2b94971fb
 
 ## タグ
-CI/CD, 自動化, デプロイ, Cloud Build, GitHub Actions, 開発フロー, セキュリティ
+CI/CD, 自動化, デプロイ, Cloud Build, GitHub Actions, 開発フロー, セキュリティ, イミュータブルインフラ, AWS, CodePipeline
