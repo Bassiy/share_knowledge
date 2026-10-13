@@ -9,29 +9,41 @@
 
 ```mermaid
 flowchart TD
-    subgraph PA["プロセスA（専用のメモリ空間）"]
-        MA["メモリ（スレッド間で共有）"]
-        A1["スレッド1"]
-        A2["スレッド2"]
-        A3["スレッド3"]
-        A1 & A2 & A3 -- 共有して読み書き --> MA
-    end
-    subgraph PB["プロセスB（専用のメモリ空間）"]
-        MB["メモリ"]
-        B1["スレッド1"]
-        B1 --> MB
-    end
-    subgraph OS["OS"]
-        SCH["スケジューラ"]
+    subgraph RAM["RAM（主記憶装置）"]
+        subgraph PA["プロセスA（専用のメモリ空間）"]
+            MA["メモリ（スレッド間で共有）"]
+            A1["スレッド1"]
+            A2["スレッド2"]
+            A3["スレッド3"]
+            A1 & A2 & A3 -- 共有して読み書き --> MA
+        end
+        subgraph PB["プロセスB（専用のメモリ空間）"]
+            MB["メモリ"]
+            B1["スレッド1"]
+            B1 --> MB
+        end
+        subgraph OS["OS（カーネル）"]
+            SCH["スケジューラ"]
+        end
     end
     subgraph CPU["CPU（cpu_topology）"]
-        L1["論理CPU1"]
-        L2["論理CPU2"]
+        subgraph L1["論理CPU1"]
+            R1["レジスタ"]
+        end
+        subgraph L2["論理CPU2"]
+            R2["レジスタ"]
+        end
     end
     PA -. メモリは分離 .- PB
     A1 & A2 & A3 & B1 -- 実行待ち --> SCH
     SCH -- 空いている論理CPUに割り当て --> L1 & L2
+    A1 -- "実行中：状態をレジスタへ展開" --> R1
+    R1 -. "切り替え時：状態をRAMへ保存" .-> A1
 ```
+
+CPUの囲み以外はすべてRAM上のプログラムとデータ。スレッドは基本RAMにいて、実行中の瞬間だけ状態がCPUのレジスタに乗る。
+
+スケジューラ自身もRAM上のプログラムなので、CPUが一瞬OSのコードを実行して、次に動かすスレッドを決めている。
 
 ---
 
