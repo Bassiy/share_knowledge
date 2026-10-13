@@ -21,7 +21,14 @@ flowchart TD
             end
         end
         subgraph S2["ソケット2（物理CPU）"]
-            C3["コア…"]
+            subgraph C3["コア3"]
+                T5["HWスレッド5"]
+                T6["HWスレッド6"]
+            end
+            subgraph C4["コア4"]
+                T7["HWスレッド7"]
+                T8["HWスレッド8"]
+            end
         end
         M1["メモリ（ソケット1に近い）"]
         M2["メモリ（ソケット2に近い）"]
